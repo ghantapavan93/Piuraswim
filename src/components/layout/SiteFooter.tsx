@@ -3,10 +3,10 @@
 import Link from "next/link";
 import { FormEvent, useState } from "react";
 
-const pillars = [
+const trustPillars = [
   {
-    title: "True to size",
-    subtitle: "Fits Small – X-Large",
+    title: "True to Size",
+    subtitle: "Fits Small through X-Large",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -16,7 +16,7 @@ const pillars = [
         strokeLinecap="round"
         strokeLinejoin="round"
         aria-hidden="true"
-        className="footer-pillar-icon"
+        className="footer-trust-icon"
       >
         <rect x="2.5" y="8.5" width="19" height="7" rx="1.2" />
         <line x1="7" y1="8.5" x2="7" y2="12" />
@@ -26,8 +26,8 @@ const pillars = [
     ),
   },
   {
-    title: "Luxury fabric",
-    subtitle: "Crafted in Peru",
+    title: "Peruvian Luxury Fabric",
+    subtitle: "Crafted in Peru for sculpt & comfort",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -37,7 +37,7 @@ const pillars = [
         strokeLinecap="round"
         strokeLinejoin="round"
         aria-hidden="true"
-        className="footer-pillar-icon"
+        className="footer-trust-icon"
       >
         <path d="M4 6 C8 3 10 9 14 6 C18 3 20 9 20 9" />
         <path d="M4 12 C8 9 10 15 14 12 C18 9 20 15 20 15" />
@@ -46,8 +46,8 @@ const pillars = [
     ),
   },
   {
-    title: "Free US shipping",
-    subtitle: "On orders over $100",
+    title: "Free US Shipping",
+    subtitle: "Complimentary on all orders over $100",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -57,7 +57,7 @@ const pillars = [
         strokeLinecap="round"
         strokeLinejoin="round"
         aria-hidden="true"
-        className="footer-pillar-icon"
+        className="footer-trust-icon"
       >
         <path d="M3 20 L21 4" />
         <path d="M21 4 L14.5 21 L11 13 L3 9.5 Z" />
@@ -65,8 +65,8 @@ const pillars = [
     ),
   },
   {
-    title: "Easy exchanges",
-    subtitle: "14-day, hassle-free",
+    title: "14-Day Easy Exchanges",
+    subtitle: "Hassle-free sizing support",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -76,7 +76,7 @@ const pillars = [
         strokeLinecap="round"
         strokeLinejoin="round"
         aria-hidden="true"
-        className="footer-pillar-icon"
+        className="footer-trust-icon"
       >
         <path d="M20 12 A8 8 0 1 1 12 4 C15 4 17.5 5.5 19 8" />
         <polyline points="19,3 19,8 14,8" />
@@ -96,130 +96,136 @@ export function SiteFooter() {
   }
 
   return (
-    <footer className="site-footer">
-      <div className="container">
-        {/* Upper Waitlist & Nav Grid */}
-        <div className="footer-top-grid">
-          <div className="footer-waitlist-col">
-            <p className="label text-ember">The waitlist</p>
-            <h2 className="font-display footer-waitlist-title">
-              First access to new drops, <em>before anyone else.</em>
-            </h2>
-
-            <form className="footer-waitlist-form" onSubmit={handleSubmit}>
-              {subscribed ? (
-                <p className="footer-subscribed-msg">
-                  You’re on the list. We’ll be in touch.
-                </p>
-              ) : (
-                <div className="footer-input-row">
-                  <label htmlFor="footer-email" className="sr-only">
-                    Email address
-                  </label>
-                  <input
-                    id="footer-email"
-                    type="email"
-                    required
-                    placeholder="Your email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="footer-input-field"
-                  />
-                  <button type="submit" className="footer-submit-btn">
-                    <span>Join</span>
-                    <svg
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path d="M5 12h14" />
-                      <path d="m12 5 7 7-7 7" />
-                    </svg>
-                  </button>
+    <footer className="luxury-footer" aria-label="Site Footer">
+      {/* Zone 1: Trust Ribbon */}
+      <div className="footer-trust-ribbon">
+        <div className="container">
+          <div className="footer-trust-grid">
+            {trustPillars.map((pillar) => (
+              <div key={pillar.title} className="footer-trust-card">
+                <div className="footer-trust-icon-box">{pillar.icon}</div>
+                <div>
+                  <h4 className="label footer-trust-heading">{pillar.title}</h4>
+                  <p className="footer-trust-sub">{pillar.subtitle}</p>
                 </div>
-              )}
-            </form>
-          </div>
-
-          <div className="footer-nav-grid">
-            <div className="footer-nav-col">
-              <p className="label text-muted">Shop</p>
-              <ul>
-                <li>
-                  <Link href="/shop">All Swim</Link>
-                </li>
-                <li>
-                  <Link href="/shop?filter=tops">Tops</Link>
-                </li>
-                <li>
-                  <Link href="/shop?filter=bottoms">Bottoms</Link>
-                </li>
-                <li>
-                  <Link href="/size-guide">Size Guide</Link>
-                </li>
-              </ul>
-            </div>
-
-            <div className="footer-nav-col">
-              <p className="label text-muted">House</p>
-              <ul>
-                <li>
-                  <Link href="/story">Our Story</Link>
-                </li>
-                <li>
-                  <Link href="/contact">Contact</Link>
-                </li>
-                <li>
-                  <Link
-                    href="https://www.instagram.com/piuraswim"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Instagram
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            <div className="footer-nav-col">
-              <p className="label text-muted">Legal</p>
-              <ul>
-                <li>
-                  <Link href="/privacy">Privacy</Link>
-                </li>
-                <li>
-                  <Link href="/terms">Terms</Link>
-                </li>
-              </ul>
-            </div>
+              </div>
+            ))}
           </div>
         </div>
+      </div>
 
-        {/* 4 Brand Pillars */}
-        <div className="footer-pillars-grid">
-          {pillars.map((item) => (
-            <div key={item.title} className="footer-pillar-card">
-              {item.icon}
-              <div>
-                <p className="label text-ink">{item.title}</p>
-                <p className="footer-pillar-sub">{item.subtitle}</p>
+      {/* Zone 2: Main Directory & VIP Newsletter */}
+      <div className="footer-main-section">
+        <div className="container">
+          <div className="footer-main-grid">
+            {/* VIP Club Signup Column */}
+            <div className="footer-vip-box">
+              <p className="label text-ember">VIP Access Club</p>
+              <h3 className="font-display footer-vip-heading">
+                First access to new drops, <em>before anyone else.</em>
+              </h3>
+              <p className="footer-vip-sub">
+                Join our private list for 24-hour early drop access, private sales, and Miami Swim Week invitations. No noise.
+              </p>
+
+              <form className="footer-vip-form" onSubmit={handleSubmit}>
+                {subscribed ? (
+                  <div className="footer-vip-success">
+                    <span className="label text-ember">✓ You’re on the list</span>
+                    <p>We’ll notify you 24 hours before our next collection goes live.</p>
+                  </div>
+                ) : (
+                  <div className="footer-input-wrapper">
+                    <label htmlFor="footer-vip-email" className="sr-only">
+                      Email address
+                    </label>
+                    <input
+                      id="footer-vip-email"
+                      type="email"
+                      required
+                      placeholder="Enter your email address"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="footer-vip-input"
+                    />
+                    <button type="submit" className="footer-vip-btn">
+                      <span>Join</span>
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path d="M5 12h14" />
+                        <path d="m12 5 7 7-7 7" />
+                      </svg>
+                    </button>
+                  </div>
+                )}
+              </form>
+            </div>
+
+            {/* Nav Columns */}
+            <div className="footer-columns-group">
+              <div className="footer-nav-column">
+                <p className="label footer-col-label">Shop</p>
+                <ul>
+                  <li><Link href="/shop">All Swim</Link></li>
+                  <li><Link href="/shop?filter=sets">Signature Sets</Link></li>
+                  <li><Link href="/shop?filter=tops">Bikini Tops</Link></li>
+                  <li><Link href="/shop?filter=bottoms">Bikini Bottoms</Link></li>
+                  <li><Link href="/shop?filter=sunchild">The Sunchild Print</Link></li>
+                  <li><Link href="/shop?filter=moonchild">The Moonchild Print</Link></li>
+                </ul>
+              </div>
+
+              <div className="footer-nav-column">
+                <p className="label footer-col-label">Fit & Service</p>
+                <ul>
+                  <li><Link href="/size-guide">Size & Fit Guide</Link></li>
+                  <li><Link href="/size-guide#calculator">Fit Calculator</Link></li>
+                  <li><Link href="/contact">14-Day Exchanges</Link></li>
+                  <li><Link href="/contact">Shipping & Returns</Link></li>
+                  <li><Link href="/contact">Client Concierge</Link></li>
+                </ul>
+              </div>
+
+              <div className="footer-nav-column">
+                <p className="label footer-col-label">The House</p>
+                <ul>
+                  <li><Link href="/story">Our Story</Link></li>
+                  <li><Link href="/story#peru">Miami & Peru Heritage</Link></li>
+                  <li><Link href="/#runway-title">Miami Swim Week 2026</Link></li>
+                  <li><Link href="/waitlist">The Coastlines Drop</Link></li>
+                  <li>
+                    <Link
+                      href="https://www.instagram.com/piuraswim"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="footer-ig-link"
+                    >
+                      Instagram @piuraswim
+                    </Link>
+                  </li>
+                </ul>
               </div>
             </div>
-          ))}
+          </div>
         </div>
+      </div>
 
-        {/* Bottom Sign-off Row */}
-        <div className="footer-bottom-row">
-          <span className="footer-brand-lockup">
+      {/* Zone 3: Brand Lockup & Bottom Bar */}
+      <div className="footer-bottom-bar">
+        <div className="container footer-bottom-inner">
+          <div className="footer-brand-signature">
             <svg
               viewBox="0 0 100 100"
-              className="h-4 w-4 text-ember"
+              className="footer-sun-emblem"
               fill="none"
               stroke="currentColor"
               strokeWidth="1.3"
@@ -245,15 +251,16 @@ export function SiteFooter() {
               <line x1="71.25" y1="41.2" x2="75.87" y2="39.28" />
             </svg>
             <span className="wordmark">Piura Swim</span>
-          </span>
+            <span className="footer-origin-text">Designed in Miami · Crafted in Peru</span>
+          </div>
 
-          <p className="label footer-origin-note">
-            Designed in Miami. Crafted in Peru, the city of eternal heat.
-          </p>
-
-          <p className="footer-copyright">
-            © {new Date().getFullYear()} Piura Swim. All rights reserved.
-          </p>
+          <div className="footer-legal-links">
+            <Link href="/privacy">Privacy Policy</Link>
+            <span className="footer-dot">·</span>
+            <Link href="/terms">Terms of Service</Link>
+            <span className="footer-dot">·</span>
+            <span>© {new Date().getFullYear()} Piura Swim. All rights reserved.</span>
+          </div>
         </div>
       </div>
     </footer>
