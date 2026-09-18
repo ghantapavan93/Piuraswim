@@ -2186,14 +2186,31 @@ textarea {
 
 .story-intro-section {
   text-align: center;
-  padding-block: clamp(4.5rem, 8vw, 7.5rem);
+  padding-block: clamp(5rem, 9vw, 8rem);
+  background: var(--sand);
+  border-bottom: 1px solid var(--line);
+}
+
+.story-intro-box {
+  max-width: 50rem;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.story-intro-ornament {
+  color: var(--ember);
+  font-size: 1.15rem;
+  margin-bottom: 1.25rem;
 }
 
 .story-lead-quote {
-  font-size: clamp(1.85rem, 3.8vw, 3rem);
-  line-height: 1.15;
-  max-width: 52rem;
-  margin: 1rem auto 0;
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
+  line-height: 1.08;
+  color: var(--ink);
+  margin-top: 1.25rem;
+  text-wrap: balance;
 }
 
 .story-chapter-section {
@@ -2208,36 +2225,63 @@ textarea {
 }
 
 .story-chapter-media {
-  min-height: clamp(24rem, 50vh, 44rem);
+  min-height: clamp(26rem, 50vh, 46rem);
   overflow: hidden;
+  position: relative;
 }
 
 .story-chapter-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 1.2s var(--ease);
+}
+
+.story-chapter-section:hover .story-chapter-img {
+  transform: scale(1.02);
 }
 
 .story-chapter-text-panel {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: clamp(3.5rem, 7vw, 7rem) var(--gutter);
+  padding: clamp(4rem, 8vw, 7.5rem) var(--gutter);
   max-width: 44rem;
 }
 
+.story-chapter-tag-row {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.story-chapter-num {
+  font-family: var(--font-text);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--canvas);
+  background: var(--ink);
+  width: 1.85rem;
+  height: 1.85rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+
 .story-chapter-title {
-  font-size: clamp(2.25rem, 4.5vw, 3.75rem);
+  font-size: clamp(2.35rem, 4.8vw, 3.85rem);
   line-height: 1.02;
-  margin: 0.85rem 0 1.75rem;
+  margin: 1.25rem 0 2rem;
+  color: var(--ink);
 }
 
 .story-chapter-paragraphs {
   display: grid;
-  gap: 1.25rem;
+  gap: 1.5rem;
   color: var(--ink-soft);
-  font-size: 0.92rem;
-  line-height: 1.75;
+  font-size: 0.96rem;
+  line-height: 1.8;
 }
 
 @media (min-width: 900px) {
@@ -2253,24 +2297,143 @@ textarea {
   }
 }
 
+/* ---------- Founder's Letter Card / Finale ---------- */
 .story-close-section {
   padding-block: clamp(6rem, 10vw, 10rem);
-  text-align: center;
+  background: var(--sand);
+  border-top: 1px solid var(--line);
 }
 
 .story-close-container {
-  max-width: 54rem;
+  max-width: 58rem;
+  display: flex;
+  justify-content: center;
 }
 
-.story-close-title {
-  margin: 1rem 0 2rem;
+.story-founder-card {
+  background: var(--canvas);
+  border: 1px solid var(--line);
+  box-shadow: 0 20px 50px rgba(43, 36, 28, 0.05);
+  padding: clamp(3rem, 7vw, 5.5rem) clamp(1.75rem, 5vw, 4.5rem);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
 }
 
-.story-close-body {
-  color: rgba(253, 250, 244, 0.8);
-  font-size: 0.95rem;
+.story-founder-crest {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--sand);
+  display: grid;
+  place-items: center;
+  color: var(--ember);
+  margin-bottom: 1.5rem;
+}
+
+.story-sun-emblem {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.story-founder-eyebrow {
+  margin-bottom: 0.85rem;
+}
+
+.story-founder-title {
+  font-size: clamp(2.35rem, 5vw, 3.75rem);
+  line-height: 1.05;
+  color: var(--ink);
+  max-width: 44rem;
+  margin-bottom: 2.25rem;
+  text-wrap: balance;
+}
+
+.story-pull-quote-wrapper {
+  position: relative;
+  max-width: 44rem;
+  margin-block: 0.5rem 1.75rem;
+  padding-inline: 1.5rem;
+}
+
+.story-pull-quote-mark {
+  font-family: var(--font-display);
+  font-size: 4.5rem;
+  line-height: 0;
+  position: absolute;
+  top: 1.25rem;
+  left: -0.75rem;
+  color: rgba(184, 86, 43, 0.25);
+  pointer-events: none;
+}
+
+.story-pull-quote {
+  font-family: var(--font-text);
+  font-size: clamp(1.08rem, 2vw, 1.3rem);
+  line-height: 1.75;
+  color: var(--ink);
+  font-weight: 400;
+  text-wrap: balance;
+}
+
+.story-founder-body {
+  font-size: 1rem;
   line-height: 1.8;
-  margin-top: 1rem;
+  color: var(--ink-soft);
+  max-width: 38rem;
+  margin-bottom: 2.5rem;
+}
+
+.story-signature-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+  width: 100%;
+  max-width: 26rem;
+}
+
+.story-signature-name {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 2.25rem;
+  line-height: 1;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+
+.story-signature-title {
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+  margin-top: 0.35rem;
+  display: block;
+}
+
+.story-signature-location {
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ember);
+  margin-top: 0.2rem;
+  display: block;
+}
+
+.story-founder-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem 2rem;
+  margin-top: 3rem;
 }
 
 /* ---------- Shop Catalog Styling ---------- */
