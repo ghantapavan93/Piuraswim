@@ -6,12 +6,6 @@ import { STORY_LONGFORM } from "@/data/site";
 import { image } from "@/lib/image";
 import { Reveal } from "@/components/ui/Reveal";
 
-const storyFrames = [
-  ["stills/boat-sunset-look-back.jpg", "A look back toward the water"],
-  ["stills/boat-sunset-poster.jpg", "Piura at sunset"],
-  ["stills/boat-sunset-profile.jpg", "Piura on the boat at sunset"],
-] as const;
-
 export default function StoryPage() {
   const miami = image("lifestyle/life-01.jpg");
   const peru = image("lifestyle/life-68.jpg");
@@ -49,24 +43,6 @@ export default function StoryPage() {
               <p className="story-hero-sub">
                 Designed in Miami, crafted in Peru. The story of finding confidence, memory, and freedom by the water.
               </p>
-
-              <div className="story-hero-reel" aria-label="Three photographic frames from Piura’s story">
-                {storyFrames.map(([key, alt], index) => {
-                  const frame = image(key);
-                  return (
-                    <figure key={key} className={`story-hero-frame story-hero-frame-${index + 1}`}>
-                      <Image
-                        src={frame.src}
-                        alt={alt}
-                        width={frame.width}
-                        height={frame.height}
-                        sizes="(max-width: 620px) 31vw, 16vw"
-                      />
-                      <figcaption>0{index + 1}</figcaption>
-                    </figure>
-                  );
-                })}
-              </div>
             </Reveal>
           </div>
         </section>
