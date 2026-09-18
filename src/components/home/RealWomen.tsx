@@ -1,8 +1,63 @@
 import Image from "next/image";
 import Link from "next/link";
-import { REAL_WOMEN } from "@/data/site";
 import { image } from "@/lib/image";
 import { Reveal } from "@/components/ui/Reveal";
 
-const portraits = [["lifestyle/life-06.jpg", "Piura swimwear in golden light"], ["lifestyle/life-45.jpg", "Piura swimmer by the water"], ["lifestyle/life-64.jpg", "Piura bikini at the beach"]] as const;
-export function RealWomen() { return <section className="section real-women golden-hour"><div className="container"><Reveal className="real-women-head"><p className="label accent">Golden hour · Real women</p><blockquote className="display display-lg">{REAL_WOMEN.quote[0]}<br /><em>{REAL_WOMEN.quote[1]}</em><br />{REAL_WOMEN.quote[2]}</blockquote><p>{REAL_WOMEN.note}</p></Reveal><div className="real-women-strip">{portraits.map(([imageKey, alt], index) => { const asset = image(imageKey); return <Reveal key={imageKey} delay={index * 100}><figure className={index === 2 ? "memory-frame" : undefined}><span className="image-index" aria-hidden="true">0{index + 1}</span><Image src={asset.src} alt={alt} width={asset.width} height={asset.height} sizes="(max-width: 700px) 65vw, 27vw" /><figcaption>{index === 1 ? REAL_WOMEN.caption : index === 0 ? "At home by the water" : "Made for the memory"}</figcaption></figure></Reveal>; })}</div><Reveal><Link href="https://www.instagram.com/piuraswim" target="_blank" rel="noreferrer" className="real-women-tag">{REAL_WOMEN.tag}</Link></Reveal></div></section>; }
+const ugcPhotos = [
+  { key: "lifestyle/life-06.jpg", alt: "Real women wearing Piura Swim at golden hour", offset: "" },
+  { key: "lifestyle/life-13.jpg", alt: "Real women wearing Piura Swim at golden hour", offset: "ugc-offset-down" },
+  { key: "lifestyle/life-42.jpg", alt: "Real women wearing Piura Swim at golden hour", offset: "" },
+  { key: "lifestyle/life-52.jpg", alt: "Real women wearing Piura Swim at golden hour", offset: "ugc-offset-down" },
+  { key: "lifestyle/life-56.jpg", alt: "Real women wearing Piura Swim at golden hour", offset: "" },
+] as const;
+
+export function RealWomen() {
+  return (
+    <section className="section real-women-section" aria-labelledby="real-women-title">
+      <div className="container">
+        <Reveal className="real-women-header">
+          <p className="label text-ember">Worn by real women</p>
+          <blockquote id="real-women-title" className="font-display real-women-quote">
+            “I’ve never felt <em>this good</em> in a bikini.”
+          </blockquote>
+          <p className="label real-women-sublabel">The sentence we hear most</p>
+        </Reveal>
+
+        <div className="ugc-mosaic-grid">
+          {ugcPhotos.map((photo, index) => {
+            const asset = image(photo.key);
+            return (
+              <Reveal key={photo.key} delay={index * 80} className={photo.offset}>
+                <div className="ugc-frame">
+                  <Image
+                    src={asset.src}
+                    alt={photo.alt}
+                    width={asset.width}
+                    height={asset.height}
+                    sizes="(max-width: 640px) 50vw, 20vw"
+                    className="ugc-image"
+                  />
+                </div>
+              </Reveal>
+            );
+          })}
+        </div>
+
+        <Reveal className="ugc-footer-note" delay={200}>
+          <p>
+            Golden hour, candid, never over-edited. Tag{" "}
+            <Link
+              href="https://www.instagram.com/piuraswim"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ugc-instagram-link"
+            >
+              @piuraswim
+            </Link>{" "}
+            to be featured.
+          </p>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
