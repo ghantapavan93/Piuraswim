@@ -1,0 +1,713 @@
+[
+ {
+  "handle": "sunchild-triangle-top",
+  "title": "Sunchild Triangle Top",
+  "description": "The long-awaited addition to the Sunchild print. The signature Piura pattern you already love, reimagined in a fresh, flattering triangle cut, designed to sculpt and support while keeping that effortless beach-girl feel. Wear it under the sun, by the ocean, or wherever your summer takes you.",
+  "price": 49.0,
+  "sizes": [
+   "Small",
+   "Medium",
+   "Large",
+   "XL"
+  ],
+  "available": [
+   "Small",
+   "Medium",
+   "Large",
+   "XL"
+  ],
+  "images": [
+   "36775385-EF1D-4BDA-8879-440389DA4DA9.jpg",
+   "C6F4DE24-FB79-4617-843C-F85D1CB80541.jpg",
+   "D4CBCC8F-D4E4-48CA-AFCE-C79B6FFE8761.jpg"
+  ],
+  "category": "tops",
+  "collection": "sunchild",
+  "pairsWith": "sunchild-triangle-bottom",
+  "collectionHandles": [
+   "summer-024",
+   "top",
+   "recommended-products-seguno",
+   "just-dropped"
+  ],
+  "fitNotes": [
+   "Classic triangle silhouette with adjustable ties",
+   "Signature Sunchild print",
+   "Model wears size Small, fits true to size"
+  ],
+  "fabric": [
+   "Luxury nylon / spandex blend with a soft, sculpting stretch",
+   "Fully lined, seamless construction, no hardware against the skin",
+   "Hand wash cold, lay flat to dry in the shade"
+  ]
+ },
+ {
+  "handle": "sunchild-triangle-bottom",
+  "title": "Sunchild Triangle Bottom",
+  "description": "The Sunchild print in a flattering triangle cut. Seamless and fully lined, with minimal, cheeky coverage for effortless tan lines. Pairs with the Sunchild Triangle Top.",
+  "price": 49.0,
+  "sizes": [
+   "Small",
+   "Medium",
+   "Large",
+   "XL"
+  ],
+  "available": [
+   "Small",
+   "Medium",
+   "Large",
+   "XL"
+  ],
+  "images": [
+   "D06AC86B-4E9A-4798-8522-1C710D5F5A1F.jpg",
+   "125BE315-34FB-463C-BD82-6429732A6A23.jpg",
+   "7F5C6C89-3853-45E1-A437-C64A4D5BAAC9.jpg",
+   "60175D54-F198-4046-B998-BBCADCA692AE.jpg"
+  ],
+  "category": "bottoms",
+  "collection": "sunchild",
+  "pairsWith": "sunchild-triangle-top",
+  "collectionHandles": [
+   "summer-024",
+   "bottom",
+   "recommended-products-seguno",
+   "just-dropped"
+  ],
+  "fitNotes": [
+   "Minimal / cheeky coverage",
+   "Seamless triangle silhouette",
+   "Model wears size Small, fits true to size"
+  ],
+  "fabric": [
+   "Luxury nylon / spandex blend with a soft, sculpting stretch",
+   "Fully lined, seamless construction, no hardware against the skin",
+   "Hand wash cold, lay flat to dry in the shade"
+  ]
+ },
+ {
+  "handle": "moonchild-triangle-top",
+  "title": "Moonchild Triangle Top",
+  "description": "The long-awaited addition to the Moonchild print. The signature Piura pattern reimagined in a fresh, flattering triangle cut, designed to sculpt and support while keeping that effortless beach-girl feel. The perfect blend of statement and simplicity.",
+  "price": 49.0,
+  "sizes": [
+   "Small",
+   "Medium",
+   "Large",
+   "XL"
+  ],
+  "available": [
+   "Small",
+   "Medium",
+   "Large",
+   "XL"
+  ],
+  "images": [
+   "6F82D216-4D22-4D33-AEE3-17B5E2433A67.jpg",
+   "E908E22C-F7B9-4875-BC5B-6D8AAC20F84B.jpg",
+   "C1820555-FA2F-4177-92C0-FF19E4E6F40A.jpg"
+  ],
+  "category": "tops",
+  "collection": "moonchild",
+  "pairsWith": "moonchild-triangle-bottom",
+  "collectionHandles": [
+   "summer-024",
+   "top",
+   "recommended-products-seguno",
+   "just-dropped"
+  ],
+  "fitNotes": [
+   "Classic triangle silhouette with adjustable ties",
+   "Signature Moonchild print",
+   "Model wears size Small, fits true to size"
+  ],
+  "fabric": [
+   "Luxury nylon / spandex blend with a soft, sculpting stretch",
+   "Fully lined, seamless construction, no hardware against the skin",
+   "Hand wash cold, lay flat to dry in the shade"
+  ]
+ },
+ {
+  "handle": "moonchild-triangle-bottom",
+  "title": "Moonchild Triangle Bottom",
+  "description": "The Moonchild print in a flattering triangle cut. Seamless and fully lined, with minimal, cheeky coverage made for long days by the water. Pairs with the Moonchild Triangle Top.",
+  "price": 49.0,
+  "sizes": [
+   "Small",
+   "Medium",
+   "Large",
+   "XL"
+  ],
+  "available": [
+   "Small",
+   "Medium",
+   "Large",
+   "XL"
+  ],
+  "images": [
+   "2845632E-112F-4B1E-8BB9-D27BF02E9F23.jpg",
+   "1CB78A8B-46F7-42B2-AD8B-AE04A125A73F.jpg",
+   "C1820555-FA2F-4177-92C0-FF19E4E6F40A_2c1f4b56-d012-4127-9d6d-83d0056c6597.jpg"
+  ],
+  "category": "bottoms",
+  "collection": "moonchild",
+  "pairsWith": "moonchild-triangle-top",
+  "collectionHandles": [
+   "summer-024",
+   "bottom",
+   "recommended-products-seguno",
+   "just-dropped"
+  ],
+  "fitNotes": [
+   "Minimal / cheeky coverage",
+   "Seamless triangle silhouette",
+   "Model wears size Small, fits true to size"
+  ],
+  "fabric": [
+   "Luxury nylon / spandex blend with a soft, sculpting stretch",
+   "Fully lined, seamless construction, no hardware against the skin",
+   "Hand wash cold, lay flat to dry in the shade"
+  ]
+ },
+ {
+  "handle": "moonchild-bottom",
+  "title": "Moonchild Mesh Bottom",
+  "description": "The Moonchild print with soft mesh detailing. A smooth, seamless bottom with cheeky coverage and a clean silhouette. Pairs with the Moonchild Bandeau Top.",
+  "price": 49.0,
+  "sizes": [
+   "Small",
+   "Medium",
+   "Large",
+   "XL"
+  ],
+  "available": [
+   "Small",
+   "Medium",
+   "Large",
+   "XL"
+  ],
+  "images": [
+   "PiuraEcomm290.jpg",
+   "PiuraEcomm245.jpg",
+   "PiuraEcomm275.jpg",
+   "IMG_1530.jpg",
+   "PiuraEcomm235.jpg",
+   "PiuraEcomm250.jpg",
+   "4.png",
+   "D0A069D5-49AC-4873-8176-D4FB329B60D0.jpg"
+  ],
+  "category": "bottoms",
+  "collection": "moonchild",
+  "pairsWith": "moonchild-bandeau-top",
+  "collectionHandles": [
+   "summer-024",
+   "bottom",
+   "recommended-products-seguno"
+  ],
+  "fitNotes": [
+   "Cheeky coverage",
+   "Soft mesh detailing",
+   "Model wears size Small, fits true to size"
+  ],
+  "fabric": [
+   "Luxury nylon / spandex blend with a soft, sculpting stretch",
+   "Fully lined, seamless construction, no hardware against the skin",
+   "Hand wash cold, lay flat to dry in the shade"
+  ]
+ },
+ {
+  "handle": "moonchild-bandeau-top",
+  "title": "Moonchild Bandeau Top",
+  "description": "Bandeau bikini top featuring the Moonchild print with soft mesh detailing. A strapless silhouette designed for a smooth, flattering fit, no padding, for a natural shape. Pairs with the Moonchild Mesh Bottom.",
+  "price": 49.0,
+  "sizes": [
+   "Small",
+   "Medium",
+   "Large",
+   "XL"
+  ],
+  "available": [
+   "Small",
+   "Medium",
+   "Large",
+   "XL"
+  ],
+  "images": [
+   "PiuraEcomm240.jpg",
+   "PiuraEcomm235.jpg",
+   "PiuraEcomm250.jpg",
+   "PiuraEcomm245.jpg",
+   "PiuraEcomm287.jpg",
+   "BA1B24F3-1459-41ED-8423-CA904E115309.jpg",
+   "IMG_1701.jpg",
+   "IMG_1470.jpg",
+   "IMG_1530.jpg",
+   "IMG_1606.jpg",
+   "3.png"
+  ],
+  "category": "tops",
+  "collection": "moonchild",
+  "pairsWith": "moonchild-bottom",
+  "collectionHandles": [
+   "summer-024",
+   "top",
+   "recommended-products-seguno"
+  ],
+  "fitNotes": [
+   "Strapless bandeau silhouette",
+   "No padding, for a natural fit",
+   "Model wears size Small, fits true to size"
+  ],
+  "fabric": [
+   "Luxury nylon / spandex blend with a soft, sculpting stretch",
+   "Fully lined, seamless construction, no hardware against the skin",
+   "Hand wash cold, lay flat to dry in the shade"
+  ]
+ },
+ {
+  "handle": "lotus-bottom",
+  "title": "Sunchild Mesh Bottom",
+  "description": "The Sunchild print with soft mesh detailing. A smooth, seamless bottom with cheeky coverage and a clean silhouette. Pairs with the Sunchild Bandeau Top.",
+  "price": 49.0,
+  "sizes": [
+   "small",
+   "medium",
+   "large",
+   "XL"
+  ],
+  "available": [
+   "small",
+   "medium",
+   "large",
+   "XL"
+  ],
+  "images": [
+   "PiuraEcomm677.jpg",
+   "PiuraEcomm621_e5728d89-9e57-400a-a810-b2ea86d3e8aa.jpg",
+   "PiuraEcomm655.jpg",
+   "PiuraEcomm609.jpg",
+   "IMG_1207.jpg",
+   "IMG_1004.jpg",
+   "IMG_1441.jpg",
+   "IMG_1006.jpg",
+   "4.png"
+  ],
+  "category": "bottoms",
+  "collection": "sunchild",
+  "pairsWith": "sunchild-bandeau-top",
+  "collectionHandles": [
+   "summer-024",
+   "bottom",
+   "recommended-products-seguno"
+  ],
+  "fitNotes": [
+   "Cheeky coverage",
+   "Soft mesh detailing",
+   "Model wears size Small, fits true to size"
+  ],
+  "fabric": [
+   "Luxury nylon / spandex blend with a soft, sculpting stretch",
+   "Fully lined, seamless construction, no hardware against the skin",
+   "Hand wash cold, lay flat to dry in the shade"
+  ]
+ },
+ {
+  "handle": "sunchild-bandeau-top",
+  "title": "Sunchild Bandeau Top",
+  "description": "Bandeau bikini top featuring the Sunchild print with soft mesh detailing. A strapless silhouette designed for a smooth, flattering fit, no padding, for a natural shape. Pairs with the Sunchild Mesh Bottom.",
+  "price": 49.0,
+  "sizes": [
+   "small",
+   "medium",
+   "large",
+   "XL"
+  ],
+  "available": [
+   "small",
+   "medium",
+   "large",
+   "XL"
+  ],
+  "images": [
+   "PiuraEcomm621.jpg",
+   "PiuraEcomm629.jpg",
+   "PiuraEcomm677.jpg",
+   "IMG_1441.jpg",
+   "CF0DF318-F94C-40A0-83F5-357C4E0B0931.jpg",
+   "D2BB7E74-0BDA-4C05-9D94-DD7D2AB566BB.jpg",
+   "3.png"
+  ],
+  "category": "tops",
+  "collection": "sunchild",
+  "pairsWith": "lotus-bottom",
+  "collectionHandles": [
+   "summer-024",
+   "top",
+   "recommended-products-seguno"
+  ],
+  "fitNotes": [
+   "Strapless bandeau silhouette",
+   "No padding, for a natural fit",
+   "Model wears size Small, fits true to size"
+  ],
+  "fabric": [
+   "Luxury nylon / spandex blend with a soft, sculpting stretch",
+   "Fully lined, seamless construction, no hardware against the skin",
+   "Hand wash cold, lay flat to dry in the shade"
+  ]
+ },
+ {
+  "handle": "bella-side-tie-scrunch-bottom",
+  "title": "Bella Side-Tie Scrunch Bottom",
+  "description": "Side-tie bikini bottom with scrunch detail and contrasting ties. Minimal coverage and adjustable sides for a fit that is entirely yours. Pairs with the Bella Bikini Top.",
+  "price": 42.0,
+  "sizes": [
+   "Small",
+   "Medium",
+   "Large",
+   "X-Large"
+  ],
+  "available": [
+   "Large",
+   "X-Large"
+  ],
+  "images": [
+   "PiuraEcomm99.jpg",
+   "IMG_9072_3_c5acd4ad-9d38-44f2-ac41-03e73e4d1a98.jpg",
+   "IMG_9015.jpg",
+   "DSC01031.jpg",
+   "DSC01010_3cca2cba-c53c-481f-ba60-e85f489d389d.jpg",
+   "pinkfront1_5cf865d7-7ecd-4c85-bf19-4cb0aba550db.jpg",
+   "2_2.png"
+  ],
+  "category": "bottoms",
+  "collection": "classics",
+  "pairsWith": "bella-bikini-top",
+  "collectionHandles": [
+   "summer-024",
+   "bottom",
+   "recommended-products-seguno"
+  ],
+  "fitNotes": [
+   "Minimal / cheeky coverage",
+   "Adjustable side ties with scrunch-back detail",
+   "Model wears size Small, fits true to size"
+  ],
+  "fabric": [
+   "Luxury nylon / spandex blend with a soft, sculpting stretch",
+   "Fully lined, seamless construction, no hardware against the skin",
+   "Hand wash cold, lay flat to dry in the shade"
+  ]
+ },
+ {
+  "handle": "bella-bikini-top",
+  "title": "Bella Bikini Top",
+  "description": "Minimal triangle bikini top in soft baby pink with adjustable neck and back ties. Designed for a customizable, flattering fit and effortless support. Pairs with the Bella Side-Tie Scrunch Bottom.",
+  "price": 42.0,
+  "sizes": [
+   "Small",
+   "Medium",
+   "Large",
+   "X-Large"
+  ],
+  "available": [
+   "Large",
+   "X-Large"
+  ],
+  "images": [
+   "IMG_9015.jpg",
+   "PiuraEcomm112.jpg",
+   "IMG_9072_3_c5acd4ad-9d38-44f2-ac41-03e73e4d1a98.jpg",
+   "pinkfront.jpg",
+   "PiuraEcomm105_8d41b75f-695b-44fb-b745-f082d6c838d9.jpg",
+   "tempImagewuRDbJ.heic",
+   "tempImage3KLZft.heic",
+   "DSC00984.jpg",
+   "1_2.png"
+  ],
+  "category": "tops",
+  "collection": "classics",
+  "pairsWith": "bella-side-tie-scrunch-bottom",
+  "collectionHandles": [
+   "summer-024",
+   "top",
+   "recommended-products-seguno"
+  ],
+  "fitNotes": [
+   "Classic triangle silhouette",
+   "Adjustable neck and back ties",
+   "Model wears size Small, fits true to size"
+  ],
+  "fabric": [
+   "Luxury nylon / spandex blend with a soft, sculpting stretch",
+   "Fully lined, seamless construction, no hardware against the skin",
+   "Hand wash cold, lay flat to dry in the shade"
+  ]
+ },
+ {
+  "handle": "bali-side-tie-bikini-scrunch-bottom",
+  "title": "Bali Side-Tie Bikini Scrunch Bottom",
+  "description": "Cheeky side-tie bikini bottom with scrunch detail and contrasting ties. Minimal coverage and adjustable sides for the perfect fit. Pairs with the Bali Bikini Top.",
+  "price": 42.0,
+  "sizes": [
+   "Small",
+   "Medium",
+   "Large",
+   "X-Large"
+  ],
+  "available": [
+   "Medium",
+   "Large",
+   "X-Large"
+  ],
+  "images": [
+   "PiuraEcomm850.jpg",
+   "PiuraEcomm788.jpg",
+   "PiuraEcomm810.jpg",
+   "PiuraEcomm801.jpg",
+   "greenfront1.jpg",
+   "2_2.png"
+  ],
+  "category": "bottoms",
+  "collection": "classics",
+  "pairsWith": "bali-bikini-top",
+  "collectionHandles": [
+   "summer-024",
+   "bottom",
+   "recommended-products-seguno"
+  ],
+  "fitNotes": [
+   "Minimal / cheeky coverage",
+   "Adjustable side ties with scrunch-back detail",
+   "Model wears size Small, fits true to size"
+  ],
+  "fabric": [
+   "Luxury nylon / spandex blend with a soft, sculpting stretch",
+   "Fully lined, seamless construction, no hardware against the skin",
+   "Hand wash cold, lay flat to dry in the shade"
+  ]
+ },
+ {
+  "handle": "bali-bikini-top",
+  "title": "Bali Bikini Top",
+  "description": "Minimal triangle bikini top with contrasting edges and adjustable neck and back ties. Designed for a customizable fit and effortless support. Pairs with the Bali Side-Tie Scrunch Bottom.",
+  "price": 42.0,
+  "sizes": [
+   "Small",
+   "Medium",
+   "Large",
+   "X-Large"
+  ],
+  "available": [
+   "Small",
+   "Medium",
+   "Large",
+   "X-Large"
+  ],
+  "images": [
+   "PiuraEcomm798.jpg",
+   "PiuraEcomm822.jpg",
+   "PiuraEcomm850.jpg",
+   "greenfront.jpg",
+   "DSCF1901.jpg",
+   "DSC00942_3537271f-1d6b-4a00-b8e5-817f2179ef03.jpg",
+   "1_2.png"
+  ],
+  "category": "tops",
+  "collection": "classics",
+  "pairsWith": "bali-side-tie-bikini-scrunch-bottom",
+  "collectionHandles": [
+   "summer-024",
+   "top",
+   "recommended-products-seguno"
+  ],
+  "fitNotes": [
+   "Classic triangle silhouette",
+   "Adjustable neck and back ties",
+   "Model wears size Small, fits true to size"
+  ],
+  "fabric": [
+   "Luxury nylon / spandex blend with a soft, sculpting stretch",
+   "Fully lined, seamless construction, no hardware against the skin",
+   "Hand wash cold, lay flat to dry in the shade"
+  ]
+ },
+ {
+  "handle": "sara-side-tie-scrunch-bottom",
+  "title": "Sara Side-Tie Scrunch Bottom",
+  "description": "Minimal bikini bottom designed for a flattering, comfortable fit. A clean silhouette with cheeky coverage for effortless tan lines. Pairs with the Sara Bikini Top.",
+  "price": 42.0,
+  "sizes": [
+   "Small",
+   "Medium",
+   "Large",
+   "X-Large"
+  ],
+  "available": [
+   "Large",
+   "X-Large"
+  ],
+  "images": [
+   "PiuraEcomm750.jpg",
+   "PiuraEcomm698.jpg",
+   "PiuraEcomm778.jpg",
+   "DSCF2068.jpg",
+   "DSCF2067_3e1843d1-a129-4f8e-9df5-820867d307ce.jpg",
+   "yellowback.jpg",
+   "yellowfront1_93ae48be-93b3-412f-b0f2-28671afab5fb.jpg",
+   "2_2.png"
+  ],
+  "category": "bottoms",
+  "collection": "classics",
+  "pairsWith": "sara-bikini-top",
+  "collectionHandles": [
+   "summer-024",
+   "bottom",
+   "recommended-products-seguno"
+  ],
+  "fitNotes": [
+   "Cheeky coverage for effortless tan lines",
+   "Clean, seamless silhouette",
+   "Model wears size Small, fits true to size"
+  ],
+  "fabric": [
+   "Luxury nylon / spandex blend with a soft, sculpting stretch",
+   "Fully lined, seamless construction, no hardware against the skin",
+   "Hand wash cold, lay flat to dry in the shade"
+  ]
+ },
+ {
+  "handle": "sara-bikini-top",
+  "title": "Sara Bikini Top",
+  "description": "Minimal bikini top designed for a clean, flattering fit. Adjustable straps allow for a customizable, comfortable feel. Pairs with the Sara Side-Tie Scrunch Bottom.",
+  "price": 42.0,
+  "sizes": [
+   "Small",
+   "Medium",
+   "Large",
+   "X-Large"
+  ],
+  "available": [
+   "Small",
+   "Large",
+   "X-Large"
+  ],
+  "images": [
+   "PiuraEcomm688.jpg",
+   "PiuraEcomm778.jpg",
+   "PiuraEcomm725.jpg",
+   "yellowfront-3_6f11b801-b3ce-4e50-8c2d-acd5e3eb9a04.jpg",
+   "DSCF2025.jpg",
+   "DSCF2067.jpg",
+   "1_2.png"
+  ],
+  "category": "tops",
+  "collection": "classics",
+  "pairsWith": "sara-side-tie-scrunch-bottom",
+  "collectionHandles": [
+   "summer-024",
+   "top",
+   "recommended-products-seguno"
+  ],
+  "fitNotes": [
+   "Minimal silhouette with adjustable straps",
+   "Seamless, hardware-free design",
+   "Model wears size Small, fits true to size"
+  ],
+  "fabric": [
+   "Luxury nylon / spandex blend with a soft, sculpting stretch",
+   "Fully lined, seamless construction, no hardware against the skin",
+   "Hand wash cold, lay flat to dry in the shade"
+  ]
+ },
+ {
+  "handle": "marina-tri-bandeau-bottom",
+  "title": "Marina Tri Bandeau Bottom",
+  "description": "Bikini bottom featuring a flattering V-cut silhouette with breathable mesh detailing. Designed to elongate the legs while offering comfortable, cheeky coverage. Pairs with the Marina Tri Bandeau Top.",
+  "price": 49.0,
+  "sizes": [
+   "Small",
+   "Medium",
+   "Large",
+   "X-Large"
+  ],
+  "available": [
+   "Small",
+   "Medium",
+   "Large",
+   "X-Large"
+  ],
+  "images": [
+   "PiuraEcomm214.jpg",
+   "PiuraEcomm145.jpg",
+   "PiuraEcomm171.jpg",
+   "czM6Ly9tZWRpYS1wcml2YXRlLmNhbnZhLmNvbS9QV2xxOC9NQUZfOTFQV2xxOC8xL3AucG5n_1.png",
+   "PiuraEcomm206.jpg",
+   "PiuraEcomm208.jpg",
+   "4.png"
+  ],
+  "category": "bottoms",
+  "collection": "classics",
+  "pairsWith": "marina-tri-bandeau-top",
+  "collectionHandles": [
+   "summer-024",
+   "bottom",
+   "recommended-products-seguno"
+  ],
+  "fitNotes": [
+   "V-cut waist silhouette, designed to elongate",
+   "Cheeky coverage with mesh detailing",
+   "Model wears size Small, fits true to size"
+  ],
+  "fabric": [
+   "Luxury nylon / spandex blend with a soft, sculpting stretch",
+   "Fully lined, seamless construction, no hardware against the skin",
+   "Hand wash cold, lay flat to dry in the shade"
+  ]
+ },
+ {
+  "handle": "marina-tri-bandeau-top",
+  "title": "Marina Tri Bandeau Top",
+  "description": "A curved bandeau top designed to accentuate and flatter, with breathable mesh detailing and discreet side support for lift and shape. Pairs with the Marina Tri Bandeau Bottom.",
+  "price": 49.0,
+  "sizes": [
+   "Small",
+   "Medium",
+   "Large",
+   "X-Large"
+  ],
+  "available": [
+   "Small",
+   "Medium",
+   "Large",
+   "X-Large"
+  ],
+  "images": [
+   "PiuraEcomm148.jpg",
+   "PiuraEcomm186.jpg",
+   "PiuraEcomm214.jpg",
+   "PiuraEcomm171.jpg",
+   "czM6Ly9tZWRpYS1wcml2YXRlLmNhbnZhLmNvbS9QV2xxOC9NQUZfOTFQV2xxOC8xL3AucG5n.png",
+   "IMG_1909_0c6e6002-0c4f-4566-b7c6-c3115f6f74a9.jpg",
+   "3.png"
+  ],
+  "category": "tops",
+  "collection": "classics",
+  "pairsWith": "marina-tri-bandeau-bottom",
+  "collectionHandles": [
+   "summer-024",
+   "top",
+   "recommended-products-seguno"
+  ],
+  "fitNotes": [
+   "Curved bandeau silhouette with side support",
+   "Breathable mesh cutout detailing",
+   "Model wears size Small, fits true to size"
+  ],
+  "fabric": [
+   "Luxury nylon / spandex blend with breathable mesh detailing",
+   "Side support engineered for lift, shape, and stability",
+   "Fully lined, pull-on seamless construction",
+   "Hand wash cold, lay flat to dry in the shade"
+  ]
+ }
+]

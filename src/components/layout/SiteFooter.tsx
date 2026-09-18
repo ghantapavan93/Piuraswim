@@ -1,0 +1,6 @@
+import Link from "next/link";
+import { BRAND, SERVICE } from "@/data/site";
+
+export function SiteFooter() {
+  return <footer className="site-footer on-dark"><div className="container footer-grid"><div><p className="label accent">The waitlist</p><h2 className="display display-md">First access.<br /><em>Before anyone else.</em></h2></div><form className="footer-form" action="#"><label htmlFor="footer-email">Email address</label><div><input id="footer-email" name="email" type="email" placeholder="you@email.com" required /><button type="submit">Join</button></div><p>Private access to new Piura drops. No noise.</p></form></div><div className="container footer-lower"><div className="wordmark wordmark-footer"><span>{BRAND.wordmark}</span><small>{BRAND.descriptor}</small></div><div className="footer-links"><div><span className="label">Shop</span><Link href="/shop">All swim</Link><Link href="/shop?filter=tops">Tops</Link><Link href="/shop?filter=bottoms">Bottoms</Link></div><div><span className="label">House</span><Link href="/story">Our story</Link><Link href="/size-guide">Size guide</Link><Link href="/contact">Contact</Link></div><div><span className="label">Service</span><p>{SERVICE.shipping}</p><p>{SERVICE.exchanges}</p></div></div><p className="footer-signoff">Miami in the energy.<br />Peru in the soul.</p></div></footer>;
+}

@@ -1,0 +1,7 @@
+"use client";
+import Image from "next/image";
+import { FormEvent, useState } from "react";
+import { COASTLINES, MANIFESTO } from "@/data/site";
+import { image } from "@/lib/image";
+import { Icon } from "@/components/ui/Icon";
+export function CoastlinesWaitlist() { const [sent, setSent] = useState(false); const visual = image("stills/sunset-water-portrait.jpg"); function submit(event: FormEvent<HTMLFormElement>) { event.preventDefault(); setSent(true); } return <section className="coastlines dawn-coastlines"><div className="coastlines-image"><Image src={visual.src} alt="Piura at sunset by the water" width={visual.width} height={visual.height} sizes="100vw" /></div><div className="coastlines-shade" /><p className="coastlines-manifesto display display-sm">{MANIFESTO.title[0]}<br /><em>{MANIFESTO.title[1]}</em></p><div className="coastlines-content container"><p className="label">Dawn · {COASTLINES.eyebrow}</p><h2 className="display display-xl">{COASTLINES.name}</h2><p>{COASTLINES.body}</p><form onSubmit={submit}>{sent ? <p className="form-success">You’re on the list. We’ll be in touch.</p> : <><label className="visually-hidden" htmlFor="waitlist-email">Email address</label><input id="waitlist-email" name="email" type="email" required placeholder="Your email address" /><button type="submit" aria-label="Join waitlist"><Icon name="arrow" /></button></>}</form><small>{COASTLINES.access}</small></div></section>; }
