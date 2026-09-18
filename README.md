@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Piura Swim — Luxury Swimwear Commerce Concept
 
-## Getting Started
+> **Designed in Miami. Crafted in Peru, the city of eternal heat.**
 
-First, run the development server:
+Live Deployment: [https://piuraswim.vercel.app](https://piuraswim.vercel.app)
+
+---
+
+## Brand Thesis & Architecture
+
+Built with **Next.js 16 (Turbopack)**, **React 19**, and modern CSS design tokens directly mirroring the official brand identity of **[piuraswim.com](https://piuraswim.com)**.
+
+### Features
+- **Cinematic Looping Video Hero & Runway Split** (`/video/piura-water-wide.mp4`, `/video/runway.mp4`) with poster fallbacks and mobile art direction.
+- **Single-Line Editorial Headline Typography** with sweeping Archivo & Instrument Sans scale.
+- **5-Column UGC Lifestyle Mosaic** with alternate vertical offsets.
+- **Rotating Announcement Ticker** with smooth fade transitions on mobile and dot-separated desktop layout.
+- **Dedicated Sun Emblem Manifesto Section** with custom brand vectors.
+- **4 Minimalist Value Pillars** (True to size, Luxury fabric, Free US shipping, Easy exchanges) in footer.
+- **Interactive Signature Triangle Set Builder** with real-time size resolution and state transitions.
+
+---
+
+## Local Development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Production Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run build
+```
