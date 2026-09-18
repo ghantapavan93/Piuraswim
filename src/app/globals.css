@@ -510,6 +510,64 @@ textarea {
 .product-gallery-label strong { grid-column: 2; font-weight: 600; }
 .product-gallery-label small { grid-column: 1 / -1; margin-top: .15rem; color: var(--color-muted); font-size: .57rem; letter-spacing: .12em; }
 
+/* ---------- Frames: real Piura imagery, restrained motion ---------- */
+.real-women-strip figure { position: relative; aspect-ratio: 3 / 4; background: rgba(80,47,24,.12); }
+.real-women-strip img { width: 100%; height: 100%; object-fit: cover; }
+.real-women-strip .image-index { position: absolute; z-index: 1; top: .75rem; left: .75rem; color: var(--color-ivory); font-size: .6rem; font-variant-numeric: tabular-nums; letter-spacing: .12em; }
+.real-women-strip .memory-frame { outline: 1px solid rgba(50,31,18,.35); outline-offset: .45rem; }
+
+.string-thread span, .string-thread i { transition: transform 360ms var(--ease-out), opacity 240ms var(--ease-out), box-shadow 360ms var(--ease-out); }
+.string-thread span { transform: scaleX(.18); transform-origin: center; opacity: .25; }
+.string-thread i { transform: rotate(45deg) scale(.35); opacity: .35; }
+.string-thread.is-started span { transform: scaleX(.56); opacity: .64; }
+.string-thread.is-started i { transform: rotate(45deg) scale(.7); opacity: .72; }
+.string-thread.is-resolved span { transform: scaleX(1); opacity: 1; }
+.string-thread.is-resolved i { transform: rotate(45deg) scale(1); opacity: 1; box-shadow: 0 0 0 .3rem var(--color-ivory); }
+.signature-add:disabled { cursor: not-allowed; background: var(--color-sand-deep); color: var(--color-muted); }
+
+.runway-grid { grid-template-columns: minmax(15rem,.58fr) minmax(0,1.42fr); min-height: 0; padding-block: clamp(5rem, 9vw, 9rem); }
+.runway-montage { min-width: 0; }
+.runway-film { display: grid; grid-template-columns: 1.14fr .86fr .86fr; grid-template-rows: repeat(2, minmax(9rem, 1fr)); gap: .75rem; }
+.runway-frame { position: relative; min-height: 0; overflow: hidden; background: var(--color-tide); }
+.runway-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center; animation: runway-frame-breathe 9s var(--ease-out) infinite; }
+.runway-frame-1 { grid-row: 1 / span 2; min-height: clamp(27rem, 48vw, 43rem); }
+.runway-frame-2 { grid-column: 2; grid-row: 1; }
+.runway-frame-3 { grid-column: 3; grid-row: 1; }
+.runway-frame-4 { grid-column: 2 / span 2; grid-row: 2; }
+.runway-frame-2 img { animation-delay: -2.25s; }
+.runway-frame-3 img { animation-delay: -4.5s; }
+.runway-frame-4 img { animation-delay: -6.75s; }
+.runway-frame figcaption { position: absolute; right: .6rem; bottom: .6rem; color: var(--color-foam-strong); font-size: .56rem; font-variant-numeric: tabular-nums; letter-spacing: .12em; text-transform: uppercase; writing-mode: vertical-rl; }
+.runway-film-note { margin-top: .9rem; color: rgba(250,246,238,.66); font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; }
+@keyframes runway-frame-breathe { 0%, 100% { transform: scale(1.015); } 45%, 68% { transform: scale(1); } }
+
+.story-hero .container { width: 100%; }
+.story-hero h1 { max-width: 11ch; }
+.story-hero-reel { position: absolute; right: 0; bottom: 0; display: grid; grid-template-columns: repeat(3, minmax(4.2rem, 1fr)); width: min(31vw, 28rem); gap: .45rem; transform: translateY(1.9rem); }
+.story-hero-frame { position: relative; aspect-ratio: 3 / 4; overflow: hidden; border: 1px solid rgba(250,246,238,.34); background: rgba(9,15,15,.3); }
+.story-hero-frame img { width: 100%; height: 100%; object-fit: cover; animation: runway-frame-breathe 9s var(--ease-out) infinite; }
+.story-hero-frame-2 img { animation-delay: -3s; }
+.story-hero-frame-3 img { animation-delay: -6s; }
+.story-hero-frame figcaption { position: absolute; right: .45rem; bottom: .4rem; color: var(--color-foam-strong); font-size: .54rem; font-variant-numeric: tabular-nums; letter-spacing: .1em; }
+
+.guide-fit-reference { display: grid; grid-template-columns: minmax(0, 1fr) minmax(18rem, .8fr); gap: 0; margin-top: clamp(3.5rem, 7vw, 7rem); background: var(--color-sand); }
+.guide-fit-image { position: relative; min-height: 34rem; overflow: hidden; background: var(--color-sand-deep); }
+.guide-fit-image img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.guide-fit-image > span { position: absolute; right: 1rem; bottom: 1rem; color: var(--color-foam-strong); writing-mode: vertical-rl; }
+.guide-fit-copy { align-self: center; padding: clamp(2rem, 5vw, 5rem); }
+.guide-fit-copy h2 { margin-top: .75rem; }
+.guide-fit-copy dl { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem 1rem; margin-top: 2rem; border-top: 1px solid var(--color-line-strong); }
+.guide-fit-copy dl div { padding-top: .8rem; border-bottom: 1px solid var(--color-line); }
+.guide-fit-copy dt { color: var(--color-muted); font-size: .58rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+.guide-fit-copy dd { margin-top: .25rem; font-size: .78rem; line-height: 1.4; }
+.guide-fit-copy > p:last-child { max-width: 27rem; margin-top: 1.5rem; color: var(--color-ink-soft); font-size: .78rem; line-height: 1.6; }
+.guide-fit-reference + .guide-table { margin-top: clamp(3.5rem, 7vw, 7rem); }
+
+@media (prefers-reduced-motion: reduce) {
+  .runway-frame img, .story-hero-frame img { animation: none; }
+  .string-thread span, .string-thread i { transition: none; }
+}
+
 @media (max-width: 900px) {
   .print-atmospheres-inner { grid-template-columns: 1fr; gap: 2.5rem; min-height: 0; }
   .print-intro { max-width: 31rem; }
@@ -525,6 +583,11 @@ textarea {
   .heritage-water-transition { min-height: 5rem; }
   .heritage-piura-copy { max-width: none; }
   .dawn-coastlines { min-height: 48rem; }
+  .runway-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .runway-montage { max-width: 46rem; }
+  .story-hero-reel { width: min(43vw, 22rem); }
+  .guide-fit-reference { grid-template-columns: 1fr; }
+  .guide-fit-image { min-height: 32rem; }
 }
 
 @media (max-width: 620px) {
@@ -557,4 +620,14 @@ textarea {
   .after-dark .runway-primary img { box-shadow: .75rem .75rem 0 rgba(183,86,43,.7); }
   .coastlines-manifesto { right: var(--gutter); bottom: 1.5rem; max-width: 13rem; font-size: 2rem; }
   .dawn-coastlines .coastlines-content { padding-top: 4rem; }
+  .real-women-strip figure { aspect-ratio: 3 / 4; }
+  .runway-film { grid-template-columns: 1.08fr .92fr; grid-template-rows: repeat(3, 10rem); gap: .5rem; }
+  .runway-frame-1 { grid-row: 1 / span 2; min-height: 0; }
+  .runway-frame-2 { grid-column: 2; grid-row: 1; }
+  .runway-frame-3 { grid-column: 2; grid-row: 2; }
+  .runway-frame-4 { grid-column: 1 / span 2; grid-row: 3; }
+  .story-hero .container { padding-bottom: 7.5rem; }
+  .story-hero-reel { right: var(--gutter); bottom: 1.5rem; width: min(59vw, 17rem); transform: none; }
+  .guide-fit-image { min-height: 27rem; }
+  .guide-fit-copy { padding: 2rem var(--gutter) 2.5rem; }
 }
