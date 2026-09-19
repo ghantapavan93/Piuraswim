@@ -22,7 +22,7 @@ export function RelatedPieces({ product }: { product: Product }) {
       </header>
       <div className={styles.grid}>
         {related.map((item, index) => (
-          <ProductCard key={item.handle} product={item} delay={index * 80} />
+          <ProductCard key={item.handle} product={item} stagger={index} />
         ))}
       </div>
     </section>

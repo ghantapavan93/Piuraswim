@@ -33,20 +33,27 @@ npm run lint && npx tsc --noEmit && npm run build
 ## Structure
 
 ```
-src/app/                 routes (server components) and globals.css (tokens, base, primitives)
+src/app/
+  layout.tsx             fonts, metadata, providers, drawers, reveal observer, Organization JSON-LD
+  (editorial)/           home, story, waitlist, contact: header floats over a photographic hero
+  (commerce)/            shop, product/[handle], size-guide: solid header
+  sitemap.ts, robots.ts  generated from the catalog
+  globals.css            tokens, base, primitives (label, display, button, reveal states)
 src/components/home/     one component per home section
-src/components/product/  gallery, purchase panel, complete-the-set, cards
+src/components/product/  gallery, purchase panel, complete-the-set, cards, quick add
 src/components/fit/      fit guide drawer, size chart, measurement matcher
 src/components/commerce/ bag provider and drawer, waitlist and contact forms
 src/components/layout/   announcement bar, header, mobile menu, footer, page hero
-src/components/ui/       icon, sun mark, reveal, ambient video, size chips
+src/components/ui/       icon, sun mark, reveal observer, ambient video, size chips
+src/components/seo/      JSON-LD script
 src/data/                products.ts and image-manifest.ts (generated), fit.ts and site.ts (curated, verified copy)
+src/lib/                 bag store, structured data, image lookup, utils
 scripts/                 generators: catalog snapshot -> products.ts, public images -> image-manifest.ts
 docs/                    design thesis, source notes, raw reference research
 public/images/piura/     product, lifestyle and still photography; public/video/ the two hero loops and the runway film
 ```
 
-Component styles are CSS Modules next to each component; design tokens live once in `globals.css`.
+Component styles are CSS Modules next to each component; design tokens live once in `globals.css`. Scroll reveals are a `data-reveal` attribute on the semantic element itself, observed once from the layout: no wrapper elements, no inline styles, and nothing is hidden when JavaScript is off.
 
 ## Data
 

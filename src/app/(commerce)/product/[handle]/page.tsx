@@ -1,12 +1,12 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { SiteFooter } from '@/components/layout/SiteFooter';
-import { SiteHeader } from '@/components/layout/SiteHeader';
 import { ProductGallery } from '@/components/product/ProductGallery';
 import { ProductPurchasePanel } from '@/components/product/ProductPurchasePanel';
 import { RelatedPieces } from '@/components/product/RelatedPieces';
+import { JsonLd } from '@/components/seo/JsonLd';
 import { ALL_PRODUCTS, getProduct } from '@/data/catalog';
 import { image } from '@/lib/image';
+import { productJsonLd } from '@/lib/structured-data';
 import styles from './page.module.css';
 
 export function generateStaticParams() {
@@ -35,20 +35,17 @@ export default async function ProductPage({ params }: PageProps<'/product/[handl
   if (!product) notFound();
 
   return (
-    <>
-      <SiteHeader />
-      <main id="main" className={styles.main}>
-        <div className={`${styles.layout} container`}>
-          <div className={styles.gallery}>
-            <ProductGallery product={product} />
-          </div>
-          <div className={styles.panel}>
-            <ProductPurchasePanel product={product} />
-          </div>
+    <main id="main" className={styles.main}>
+      <div className={`${styles.layout} container`}>
+        <div className={styles.gallery}>
+          <ProductGallery product={product} />
         </div>
-        <RelatedPieces product={product} />
-      </main>
-      <SiteFooter />
-    </>
+        <div className={styles.panel}>
+          <ProductPurchasePanel product={product} />
+        </div>
+      </div>
+      <RelatedPieces product={product} />
+      <JsonLd data={productJsonLd(product)} />
+    </main>
   );
 }

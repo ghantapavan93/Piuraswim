@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import { AmbientVideo } from '@/components/ui/AmbientVideo';
 import { Icon } from '@/components/ui/Icon';
-import { Reveal } from '@/components/ui/Reveal';
 import { BRAND, HERO } from '@/data/site';
 import { image } from '@/lib/image';
 import styles from './CampaignHero.module.css';
 
+/** The first screen. Nothing here waits for a scroll reveal: it is the largest contentful paint. */
 export function CampaignHero() {
   return (
     <section className={`${styles.hero} under-header`} aria-labelledby="hero-title">
@@ -22,24 +22,22 @@ export function CampaignHero() {
       </div>
 
       <div className={`${styles.content} container`}>
-        <Reveal>
-          <h1 id="hero-title" className={`${styles.title} display display-xl`}>
-            {HERO.title[0]}
-            <br />
-            <em>{HERO.title[1]}</em>
-          </h1>
-          <p className={styles.body}>{HERO.body}</p>
-          <div className={styles.actions}>
-            <Link href={HERO.primary.href} className="button button-light">
-              {HERO.primary.label}
-              <Icon name="arrow" />
-            </Link>
-            <Link href={HERO.secondary.href} className={`${styles.secondary} text-link`}>
-              {HERO.secondary.label}
-              <Icon name="arrow" />
-            </Link>
-          </div>
-        </Reveal>
+        <h1 id="hero-title" className={`${styles.title} display display-xl`}>
+          {HERO.title[0]}
+          <br />
+          <em>{HERO.title[1]}</em>
+        </h1>
+        <p className={styles.body}>{HERO.body}</p>
+        <div className={styles.actions}>
+          <Link href={HERO.primary.href} className="button button-light">
+            {HERO.primary.label}
+            <Icon name="arrow" />
+          </Link>
+          <Link href={HERO.secondary.href} className={`${styles.secondary} text-link`}>
+            {HERO.secondary.label}
+            <Icon name="arrow" />
+          </Link>
+        </div>
       </div>
 
       <p className={styles.scrollHint} aria-hidden="true">

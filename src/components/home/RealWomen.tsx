@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import { Reveal } from '@/components/ui/Reveal';
 import { BRAND, REAL_WOMEN } from '@/data/site';
 import { image, type ImageKey } from '@/lib/image';
 import styles from './RealWomen.module.css';
@@ -16,19 +15,19 @@ export function RealWomen() {
   return (
     <section className="section" aria-labelledby="real-women-title">
       <div className="container">
-        <Reveal className={styles.head}>
+        <div className={styles.head} data-reveal="fade">
           <p className="label accent">{REAL_WOMEN.eyebrow}</p>
           <blockquote id="real-women-title" className={`${styles.quote} display display-lg`}>
             &ldquo;{REAL_WOMEN.quote[0]} <em>{REAL_WOMEN.quote[1]}</em> {REAL_WOMEN.quote[2]}&rdquo;
           </blockquote>
           <p className={`${styles.caption} label`}>{REAL_WOMEN.caption}</p>
-        </Reveal>
+        </div>
 
         <ul className={styles.strip}>
           {FRAMES.map((frame, index) => {
             const asset = image(frame.key);
             return (
-              <Reveal key={frame.key} as="li" variant="mask" delay={index * 90} className={styles.item}>
+              <li key={frame.key} className={styles.item} data-reveal="mask" data-reveal-delay={index}>
                 <div className={`${styles.frame} frame`}>
                   <Image
                     src={asset.src}
@@ -38,20 +37,18 @@ export function RealWomen() {
                     sizes="(max-width: 719px) 60vw, 22vw"
                   />
                 </div>
-              </Reveal>
+              </li>
             );
           })}
         </ul>
 
-        <Reveal className={styles.note}>
-          <p>
-            {REAL_WOMEN.note} Tag{' '}
-            <a href={BRAND.instagram} target="_blank" rel="noopener noreferrer" className="inline-link">
-              {BRAND.instagramHandle}
-            </a>{' '}
-            {REAL_WOMEN.tag}
-          </p>
-        </Reveal>
+        <p className={styles.note} data-reveal="fade">
+          {REAL_WOMEN.note} Tag{' '}
+          <a href={BRAND.instagram} target="_blank" rel="noopener noreferrer" className="inline-link">
+            {BRAND.instagramHandle}
+          </a>{' '}
+          {REAL_WOMEN.tag}
+        </p>
       </div>
     </section>
   );

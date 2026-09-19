@@ -1,14 +1,23 @@
 .section {
   display: grid;
+  overflow: hidden;
 }
 
 .copy {
+  position: relative;
+  z-index: 1;
   display: grid;
   align-content: center;
   padding: clamp(3.5rem, 7vw, 6rem) var(--gutter);
 }
 
-.copy h2 {
+.index {
+  display: flex;
+  gap: 1rem;
+  color: var(--color-foam);
+}
+
+.title {
   margin-block: 1rem 1.5rem;
 }
 
@@ -56,7 +65,14 @@
   }
 
   .copy {
-    padding-inline: clamp(2.5rem, 5vw, 5rem);
+    padding-inline: clamp(2.5rem, 5vw, 5rem) 0;
+  }
+
+  /* The drop name crosses into the photograph. */
+  .title {
+    width: max-content;
+    max-width: 150%;
+    text-shadow: 0 2px 40px rgba(17, 27, 30, 0.45);
   }
 
   .media {

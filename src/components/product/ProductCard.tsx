@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Reveal } from '@/components/ui/Reveal';
 import { printLabel, type Product } from '@/data/catalog';
 import { image } from '@/lib/image';
 import { money } from '@/lib/utils';
@@ -9,14 +8,15 @@ import styles from './ProductCard.module.css';
 
 type ProductCardProps = {
   product: Product;
-  delay?: number;
+  /** Reveal stagger step within a row, 0 to 5. */
+  stagger?: number;
   priority?: boolean;
   sizes?: string;
 };
 
 export function ProductCard({
   product,
-  delay = 0,
+  stagger = 0,
   priority = false,
   sizes = '(max-width: 719px) 50vw, (max-width: 1099px) 33vw, 25vw',
 }: ProductCardProps) {
@@ -25,7 +25,7 @@ export function ProductCard({
   const href = `/product/${product.handle}`;
 
   return (
-    <Reveal as="article" delay={delay} className={styles.card}>
+    <article className={styles.card} data-reveal="fade" data-reveal-delay={stagger || undefined}>
       <div className={styles.media}>
         <Link href={href} className={`${styles.link} frame`} aria-label={product.title}>
           <Image
@@ -60,6 +60,6 @@ export function ProductCard({
           <span className={styles.price}>{money(product.price)}</span>
         </div>
       </div>
-    </Reveal>
+    </article>
   );
 }

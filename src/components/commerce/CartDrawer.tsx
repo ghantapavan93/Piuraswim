@@ -105,9 +105,7 @@ export function CartDrawer() {
                   ? `${money(remaining)} away from free US shipping.`
                   : 'Free US shipping on this order.'}
               </p>
-              <div className={styles.meter} aria-hidden="true">
-                <span style={{ width: `${progress}%` }} />
-              </div>
+              <progress className={styles.meter} value={Math.round(progress)} max={100} aria-hidden="true" />
               <div className={styles.subtotal}>
                 <span className="label">Subtotal</span>
                 <strong>{money(subtotal)}</strong>

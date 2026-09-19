@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Icon } from '@/components/ui/Icon';
-import { Reveal } from '@/components/ui/Reveal';
 import { RUNWAY } from '@/data/site';
 import { image, type ImageKey } from '@/lib/image';
 import { RunwayFilm } from './RunwayFilm';
@@ -18,16 +17,16 @@ export function RunwayEditorial() {
   return (
     <section className="section" aria-labelledby="runway-title">
       <div className={`${styles.grid} container`}>
-        <Reveal variant="mask" className={styles.film}>
+        <div className={styles.film} data-reveal="mask">
           <RunwayFilm
             poster={image('stills/runway-backdrop.jpg')}
             src="/video/runway.mp4"
             alt="A model pauses in front of the Piura Swim backdrop at Miami Swim Week"
           />
-        </Reveal>
+        </div>
 
         <div className={styles.copy}>
-          <Reveal>
+          <div data-reveal="fade">
             <p className="label accent">{RUNWAY.eyebrow}</p>
             <h2 id="runway-title" className="display display-xl">
               {RUNWAY.title[0]}
@@ -39,9 +38,9 @@ export function RunwayEditorial() {
               Join the Coastlines waitlist
               <Icon name="arrow" />
             </Link>
-          </Reveal>
+          </div>
 
-          <Reveal delay={120}>
+          <div data-reveal="fade" data-reveal-delay="1">
             <ol className={styles.filmstrip} aria-label="Frames from the runway film">
               {FRAMES.map((frame) => {
                 const asset = image(frame.key);
@@ -56,7 +55,7 @@ export function RunwayEditorial() {
               })}
             </ol>
             <p className={`${styles.caption} label`}>{RUNWAY.caption}</p>
-          </Reveal>
+          </div>
         </div>
       </div>
     </section>

@@ -6,6 +6,8 @@
 
 import type { CollectionKey } from './products';
 
+export const SITE_URL = 'https://piuraswim.vercel.app';
+
 export const BRAND = {
   name: 'Piura Swim',
   wordmark: 'Piura',
@@ -57,9 +59,11 @@ export const HERO = {
 } as const;
 
 export const NEW_ARRIVALS = {
-  eyebrow: 'Nº 02 · New arrivals',
+  index: 'Nº 02',
+  eyebrow: 'New arrivals',
   title: ['Just', 'dropped.'],
-  body: 'The Sunchild and Moonchild prints, in the triangle cut. Four pieces, two sets, sold as separates so top and bottom can each be your size.',
+  count: 'Four pieces · two sets',
+  note: 'The Sunchild and Moonchild prints in the triangle cut, sold as separates so top and bottom can each be your size.',
 } as const;
 
 export const COLLECTIONS: Record<CollectionKey, { title: string; short: string; blurb: string }> = {
@@ -166,6 +170,7 @@ export const MANIFESTO = {
 } as const;
 
 export const COASTLINES = {
+  index: 'Nº 03',
   eyebrow: 'The next drop',
   name: 'Coastlines.',
   body: 'As seen at Swim Week 2026. Cut in small numbers. Join the waitlist to shop the collection first.',
