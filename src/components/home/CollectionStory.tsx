@@ -1,10 +1,10 @@
-import Image from 'next/image';
+import { Photo } from '@/components/ui/Photo';
 import Link from 'next/link';
 import { Icon } from '@/components/ui/Icon';
 import type { CollectionKey } from '@/data/catalog';
 import { COLLECTIONS } from '@/data/site';
 import { image, type ImageKey } from '@/lib/image';
-import styles from './CollectionStory.module.css';
+import './CollectionStory.css';
 
 const TILES: { key: CollectionKey; index: string; imageKey: ImageKey; alt: string }[] = [
   { key: 'sunchild', index: '01', imageKey: 'lifestyle/life-64.jpg', alt: 'The Sunchild print at the beach' },
@@ -16,13 +16,13 @@ const TILES: { key: CollectionKey; index: string; imageKey: ImageKey; alt: strin
 export function CollectionStory() {
   return (
     <section className="section on-sand" aria-labelledby="collection-title">
-      <ul className={`${styles.grid} container`}>
-        <li className={styles.lead} data-reveal="fade">
+      <ul className="collection-story container">
+        <li className="collection-story__lead" data-reveal="fade">
           <p className="label accent">The collection</p>
           <h2 id="collection-title" className="display display-lg">
             Meet <em>the collection.</em>
           </h2>
-          <p className={styles.leadBody}>Two prints and a family of solids. Every piece has a designed partner.</p>
+          <p className="collection-story__lead-body">Two prints and a family of solids. Every piece has a designed partner.</p>
           <Link href="/shop" className="text-link">
             Shop all swim
             <Icon name="arrow" />
@@ -33,23 +33,23 @@ export function CollectionStory() {
           const asset = image(tile.imageKey);
           const collection = COLLECTIONS[tile.key];
           return (
-            <li key={tile.key} className={styles.tile} data-reveal="fade" data-reveal-delay={index + 1}>
-              <Link href={`/shop?filter=${tile.key}`} className={styles.link}>
-                <span className={`${styles.frame} frame`}>
-                  <Image
+            <li key={tile.key} className="collection-story__tile" data-reveal="fade" data-reveal-delay={index + 1}>
+              <Link href={`/shop?filter=${tile.key}`} className="collection-story__link">
+                <span className="collection-story__frame frame">
+                  <Photo
                     src={asset.src}
                     alt={tile.alt}
                     width={asset.width}
                     height={asset.height}
                     sizes="(max-width: 719px) 100vw, 25vw"
                   />
-                  <span className={`${styles.index} label`}>{tile.index}</span>
+                  <span className="collection-story__index label">{tile.index}</span>
                 </span>
-                <span className={styles.row}>
-                  <span className={`${styles.title} display display-sm`}>{collection.title}</span>
-                  <Icon name="arrow" size={16} className={styles.arrow} />
+                <span className="collection-story__row">
+                  <span className="collection-story__title display display-sm">{collection.title}</span>
+                  <Icon name="arrow" size={16} className="collection-story__arrow" />
                 </span>
-                <span className={styles.blurb}>{collection.blurb}</span>
+                <span className="collection-story__blurb">{collection.blurb}</span>
               </Link>
             </li>
           );

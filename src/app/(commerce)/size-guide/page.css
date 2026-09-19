@@ -1,0 +1,139 @@
+.size-guide-page {
+  display: grid;
+  gap: var(--section-y-tight);
+  padding-block: clamp(3rem, 6vw, 5.5rem) var(--section-y);
+}
+
+.size-guide-page__head {
+  display: grid;
+  gap: 1rem;
+  max-width: 44rem;
+}
+
+.size-guide-page__intro,
+.size-guide-page__note {
+  max-width: 36rem;
+  font-size: var(--text-base);
+  line-height: 1.75;
+  color: var(--color-ink-soft);
+}
+
+.size-guide-page__measure {
+  display: grid;
+  gap: 3rem;
+}
+
+.size-guide-page__measure-copy {
+  display: grid;
+  gap: 1.25rem;
+  align-content: start;
+}
+
+.size-guide-page__steps {
+  display: grid;
+  border-top: 1px solid var(--color-line);
+}
+
+.size-guide-page__steps li {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  gap: 1rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.size-guide-page__steps p {
+  margin-top: 0.25rem;
+  font-size: var(--text-sm);
+  color: var(--color-ink-soft);
+}
+
+.size-guide-page__letter {
+  display: inline-grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--color-ember);
+  border-radius: 999px;
+  font-size: var(--text-xs);
+  color: var(--color-ember);
+}
+
+.size-guide-page__figure {
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+  border: 1px solid var(--color-line);
+  background: var(--color-sand);
+}
+
+.size-guide-page__figure img {
+  width: min(100%, 20rem);
+  height: auto;
+}
+
+.size-guide-page__chart {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.size-guide-page__chart-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.size-guide-page__match {
+  display: grid;
+  gap: 2rem;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  background: var(--color-sand);
+}
+
+.size-guide-page__match .size-guide-page__note {
+  margin-top: 1rem;
+}
+
+.size-guide-page__tips {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.size-guide-page__tip {
+  display: grid;
+  gap: 0.75rem;
+  padding: 2rem;
+  border: 1px solid var(--color-line);
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  color: var(--color-ink-soft);
+}
+
+.size-guide-page__quote {
+  display: grid;
+  justify-items: center;
+  gap: 1.25rem;
+  padding-top: var(--section-y-tight);
+  border-top: 1px solid var(--color-line);
+  text-align: center;
+}
+
+.size-guide-page__quote blockquote {
+  max-width: 24ch;
+}
+
+@media (min-width: 720px) {
+  .size-guide-page__tips {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  .size-guide-page__measure {
+    grid-template-columns: 1.1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+}

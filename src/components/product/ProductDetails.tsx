@@ -2,19 +2,19 @@ import Link from 'next/link';
 import { Icon } from '@/components/ui/Icon';
 import type { Product } from '@/data/catalog';
 import { SERVICE } from '@/data/site';
-import styles from './ProductDetails.module.css';
+import './ProductDetails.css';
 
 /** The published fit notes, fabric copy and service terms, as native disclosures. */
 export function ProductDetails({ product }: { product: Product }) {
   return (
-    <div className={styles.details}>
-      <details className={styles.item} open>
-        <summary className={styles.summary}>
+    <div className="product-details">
+      <details className="product-details__item" open>
+        <summary className="product-details__summary">
           The fit
-          <Icon name="plus" size={14} className={styles.icon} />
+          <Icon name="plus" size={14} className="product-details__icon" />
         </summary>
-        <div className={styles.body}>
-          <ul className={styles.list}>
+        <div className="product-details__body">
+          <ul className="product-details__list">
             {product.fitNotes.map((note) => (
               <li key={note}>{note}</li>
             ))}
@@ -22,13 +22,13 @@ export function ProductDetails({ product }: { product: Product }) {
         </div>
       </details>
 
-      <details className={styles.item}>
-        <summary className={styles.summary}>
+      <details className="product-details__item">
+        <summary className="product-details__summary">
           Fabric and care
-          <Icon name="plus" size={14} className={styles.icon} />
+          <Icon name="plus" size={14} className="product-details__icon" />
         </summary>
-        <div className={styles.body}>
-          <ul className={styles.list}>
+        <div className="product-details__body">
+          <ul className="product-details__list">
             {product.fabric.map((line) => (
               <li key={line}>{line}</li>
             ))}
@@ -37,12 +37,12 @@ export function ProductDetails({ product }: { product: Product }) {
         </div>
       </details>
 
-      <details className={styles.item}>
-        <summary className={styles.summary}>
+      <details className="product-details__item">
+        <summary className="product-details__summary">
           Shipping and exchanges
-          <Icon name="plus" size={14} className={styles.icon} />
+          <Icon name="plus" size={14} className="product-details__icon" />
         </summary>
-        <div className={styles.body}>
+        <div className="product-details__body">
           <p>{SERVICE.shipping}</p>
           <p>
             Easy exchanges. If the fit isn&rsquo;t right,{' '}

@@ -1,7 +1,7 @@
-import Image from 'next/image';
+import { Photo } from '@/components/ui/Photo';
 import { BRAND, REAL_WOMEN } from '@/data/site';
 import { image, type ImageKey } from '@/lib/image';
-import styles from './RealWomen.module.css';
+import './RealWomen.css';
 
 const FRAMES: { key: ImageKey; alt: string }[] = [
   { key: 'lifestyle/life-42.jpg', alt: 'Two friends in Piura mesh bottoms, photographed from behind on the sand' },
@@ -15,21 +15,21 @@ export function RealWomen() {
   return (
     <section className="section" aria-labelledby="real-women-title">
       <div className="container">
-        <div className={styles.head} data-reveal="fade">
+        <div className="real-women__head" data-reveal="fade">
           <p className="label accent">{REAL_WOMEN.eyebrow}</p>
-          <blockquote id="real-women-title" className={`${styles.quote} display display-lg`}>
+          <blockquote id="real-women-title" className="real-women__quote display display-lg">
             &ldquo;{REAL_WOMEN.quote[0]} <em>{REAL_WOMEN.quote[1]}</em> {REAL_WOMEN.quote[2]}&rdquo;
           </blockquote>
-          <p className={`${styles.caption} label`}>{REAL_WOMEN.caption}</p>
+          <p className="real-women__caption label">{REAL_WOMEN.caption}</p>
         </div>
 
-        <ul className={styles.strip}>
+        <ul className="real-women__strip">
           {FRAMES.map((frame, index) => {
             const asset = image(frame.key);
             return (
-              <li key={frame.key} className={styles.item} data-reveal="mask" data-reveal-delay={index}>
-                <div className={`${styles.frame} frame`}>
-                  <Image
+              <li key={frame.key} className="real-women__item" data-reveal="mask" data-reveal-delay={index}>
+                <div className="real-women__frame frame">
+                  <Photo
                     src={asset.src}
                     alt={frame.alt}
                     width={asset.width}
@@ -42,7 +42,7 @@ export function RealWomen() {
           })}
         </ul>
 
-        <p className={styles.note} data-reveal="fade">
+        <p className="real-women__note" data-reveal="fade">
           {REAL_WOMEN.note} Tag{' '}
           <a href={BRAND.instagram} target="_blank" rel="noopener noreferrer" className="inline-link">
             {BRAND.instagramHandle}

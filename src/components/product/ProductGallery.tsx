@@ -1,11 +1,11 @@
 'use client';
 
-import Image from 'next/image';
+import { Photo } from '@/components/ui/Photo';
 import { useEffect, useRef, useState } from 'react';
 import { Icon } from '@/components/ui/Icon';
 import type { Product } from '@/data/catalog';
 import { image } from '@/lib/image';
-import styles from './ProductGallery.module.css';
+import './ProductGallery.css';
 
 const pad = (value: number) => String(value).padStart(2, '0');
 
@@ -44,19 +44,19 @@ export function ProductGallery({ product }: { product: Product }) {
   }
 
   return (
-    <div className={styles.gallery}>
-      <div className={styles.stage}>
-        <div ref={stripRef} className={styles.strip} aria-roledescription="carousel" aria-label={`${product.title} images`}>
+    <div className="product-gallery">
+      <div className="product-gallery__stage">
+        <div ref={stripRef} className="product-gallery__strip" aria-roledescription="carousel" aria-label={`${product.title} images`}>
           {product.images.map((key, index) => {
             const asset = image(key);
             return (
               <figure
                 key={key}
-                className={`${styles.slide} frame`}
+                className="product-gallery__slide frame"
                 aria-roledescription="slide"
                 aria-label={`${index + 1} of ${total}`}
               >
-                <Image
+                <Photo
                   src={asset.src}
                   alt={`${product.title}, view ${index + 1}`}
                   width={asset.width}
@@ -72,13 +72,13 @@ export function ProductGallery({ product }: { product: Product }) {
 
         {total > 1 ? (
           <>
-            <button type="button" className={`${styles.arrow} ${styles.prev}`} onClick={() => scrollTo(active - 1)} aria-label="Previous image">
+            <button type="button" className="product-gallery__arrow product-gallery__prev" onClick={() => scrollTo(active - 1)} aria-label="Previous image">
               <Icon name="chevron-left" />
             </button>
-            <button type="button" className={`${styles.arrow} ${styles.next}`} onClick={() => scrollTo(active + 1)} aria-label="Next image">
+            <button type="button" className="product-gallery__arrow product-gallery__next" onClick={() => scrollTo(active + 1)} aria-label="Next image">
               <Icon name="chevron-right" />
             </button>
-            <p className={styles.counter} aria-live="polite">
+            <p className="product-gallery__counter" aria-live="polite">
               {pad(active + 1)} / {pad(total)}
             </p>
           </>
@@ -86,7 +86,7 @@ export function ProductGallery({ product }: { product: Product }) {
       </div>
 
       {total > 1 ? (
-        <div className={styles.thumbs} role="tablist" aria-label="Choose an image">
+        <div className="product-gallery__thumbs" role="tablist" aria-label="Choose an image">
           {product.images.map((key, index) => {
             const asset = image(key);
             return (
@@ -96,11 +96,11 @@ export function ProductGallery({ product }: { product: Product }) {
                 role="tab"
                 aria-selected={active === index}
                 aria-label={`Image ${index + 1}`}
-                className={`${styles.thumb} frame`}
-                data-active={active === index || undefined}
+                className="product-gallery__thumb frame"
+                data-active={active === index ? '' : undefined}
                 onClick={() => scrollTo(index)}
               >
-                <Image src={asset.src} alt="" width={asset.width} height={asset.height} sizes="72px" />
+                <Photo src={asset.src} alt="" width={asset.width} height={asset.height} sizes="72px" />
               </button>
             );
           })}

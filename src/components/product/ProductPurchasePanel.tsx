@@ -11,7 +11,7 @@ import { SERVICE } from '@/data/site';
 import { money } from '@/lib/utils';
 import { CompleteTheSet } from './CompleteTheSet';
 import { ProductDetails } from './ProductDetails';
-import styles from './ProductPurchasePanel.module.css';
+import './ProductPurchasePanel.css';
 
 export function ProductPurchasePanel({ product }: { product: Product }) {
   const pair = getPair(product);
@@ -58,8 +58,8 @@ export function ProductPurchasePanel({ product }: { product: Product }) {
   }
 
   return (
-    <div className={styles.panel}>
-      <nav className={styles.breadcrumb} aria-label="Breadcrumb">
+    <div className="purchase-panel">
+      <nav className="purchase-panel__breadcrumb" aria-label="Breadcrumb">
         <Link href="/shop">Shop</Link>
         <span aria-hidden="true">/</span>
         <Link href={`/shop?filter=${product.category}`}>{product.category === 'tops' ? 'Tops' : 'Bottoms'}</Link>
@@ -67,21 +67,21 @@ export function ProductPurchasePanel({ product }: { product: Product }) {
         <span aria-current="page">{product.title}</span>
       </nav>
 
-      <p className={styles.printRow}>
+      <p className="purchase-panel__print-row">
         <span className="label accent">{printLabel(product)}</span>
         {siblings.map((sibling) => (
-          <Link key={sibling.handle} href={`/product/${sibling.handle}`} className={styles.sibling}>
+          <Link key={sibling.handle} href={`/product/${sibling.handle}`} className="purchase-panel__sibling">
             Also in {printLabel(sibling).replace(/^The /, 'the ')}
           </Link>
         ))}
       </p>
-      <div className={styles.titleRow}>
+      <div className="purchase-panel__title-row">
         <h1 className="display display-md">{product.title}</h1>
-        <p className={styles.price}>{money(product.price)}</p>
+        <p className="purchase-panel__price">{money(product.price)}</p>
       </div>
-      <p className={styles.description}>{product.description}</p>
+      <p className="purchase-panel__description">{product.description}</p>
 
-      <dl className={styles.facts} aria-label="Fit at a glance">
+      <dl className="purchase-panel__facts" aria-label="Fit at a glance">
         {facts.map((fact) => (
           <div key={fact.label}>
             <dt>{fact.label}</dt>
@@ -90,25 +90,25 @@ export function ProductPurchasePanel({ product }: { product: Product }) {
         ))}
       </dl>
 
-      <div className={styles.sizeBlock}>
-        <div className={styles.sizeHead}>
+      <div className="purchase-panel__size-block">
+        <div className="purchase-panel__size-head">
           <span className="label" id="size-label">
             Size
           </span>
-          <FitGuideButton className={styles.guide}>Size guide</FitGuideButton>
+          <FitGuideButton className="purchase-panel__guide">Size guide</FitGuideButton>
         </div>
         <SizeChips label="Size" available={product.available} value={size} onChange={chooseSize} />
-        <p className={styles.sizeHint} role="status" data-visible={needsSize || undefined}>
+        <p className="purchase-panel__size-hint" role="status" data-visible={needsSize ? '' : undefined}>
           Please choose a size.
         </p>
-        {tip ? <p className={styles.sizeTip}>{tip}</p> : null}
+        {tip ? <p className="purchase-panel__size-tip">{tip}</p> : null}
       </div>
 
       <button ref={addButton} type="button" className="button button-block" onClick={addToBag}>
         {size ? `Add to bag · ${money(product.price)}` : 'Add to bag'}
         <Icon name="arrow" />
       </button>
-      <p className={styles.service}>
+      <p className="purchase-panel__service">
         {SERVICE.shipping} {SERVICE.exchanges}
       </p>
 
@@ -125,10 +125,10 @@ export function ProductPurchasePanel({ product }: { product: Product }) {
 
       <ProductDetails product={product} />
 
-      <div className={styles.stickyBar} data-visible={showStickyBar || undefined} aria-hidden={!showStickyBar}>
+      <div className="purchase-panel__sticky-bar" data-visible={showStickyBar ? '' : undefined} aria-hidden={!showStickyBar}>
         <div>
-          <p className={styles.stickyTitle}>{product.title}</p>
-          <p className={styles.stickyMeta}>
+          <p className="purchase-panel__sticky-title">{product.title}</p>
+          <p className="purchase-panel__sticky-meta">
             {money(product.price)}
             {size ? ` · Size ${size}` : ''}
           </p>

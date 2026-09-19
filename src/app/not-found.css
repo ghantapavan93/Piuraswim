@@ -1,0 +1,7 @@
+.not-found-page {
+  display: grid;
+  justify-items: start;
+  gap: 1.5rem;
+  padding-block: var(--section-y);
+  min-height: 60svh;
+}

@@ -2,7 +2,8 @@
 
 import type { Size } from '@/data/products';
 import { SIZES } from '@/data/catalog';
-import styles from './SizeChips.module.css';
+import './SizeChips.css';
+import { cx } from '@/lib/utils';
 
 type SizeChipsProps = {
   /** Accessible name for the group, e.g. "Top size". */
@@ -25,7 +26,7 @@ export function SizeChips({ label, available, value, onChange, compact = false, 
     <div
       role="radiogroup"
       aria-label={label}
-      className={[styles.group, compact && styles.compact, onDark && styles.onDark].filter(Boolean).join(' ')}
+      className={cx('size-chips', compact && 'size-chips--compact', onDark && 'size-chips--on-dark')}
     >
       {SIZES.map((size) => {
         const inStock = available.includes(size);
@@ -38,8 +39,8 @@ export function SizeChips({ label, available, value, onChange, compact = false, 
             aria-checked={selected}
             aria-disabled={!inStock || undefined}
             disabled={!inStock}
-            className={styles.chip}
-            data-selected={selected || undefined}
+            className="size-chips__chip"
+            data-selected={selected ? '' : undefined}
             onClick={() => onChange(size)}
           >
             {size}

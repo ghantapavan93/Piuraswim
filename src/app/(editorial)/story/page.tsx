@@ -1,12 +1,13 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
+import { Photo } from '@/components/ui/Photo';
 import Link from 'next/link';
 import { PageHero } from '@/components/layout/PageHero';
 import { Icon } from '@/components/ui/Icon';
 import { SunMark } from '@/components/ui/SunMark';
 import { MANIFESTO, STORY } from '@/data/site';
 import { image, type ImageKey } from '@/lib/image';
-import styles from './page.module.css';
+import './page.css';
+import { cx } from '@/lib/utils';
 
 export const metadata: Metadata = {
   title: 'Our story, Peru to Miami',
@@ -53,13 +54,13 @@ export default function StoryPage() {
         return (
           <section
             key={chapter.key}
-            className={[styles.chapter, index % 2 === 1 && styles.reversed, index === 1 && 'on-sand'].filter(Boolean).join(' ')}
+            className={cx('story-chapter', index % 2 === 1 && 'story-chapter--reversed', index === 1 && 'on-sand')}
             aria-labelledby={`chapter-${chapter.key}`}
           >
-            <div className={`${styles.chapterGrid} container`}>
-              <div className={styles.media}>
-                <div className={`${styles.lead} frame`} data-reveal="mask">
-                  <Image
+            <div className="story-chapter__grid container">
+              <div className="story-chapter__media">
+                <div className="story-chapter__lead frame" data-reveal="mask">
+                  <Photo
                     src={lead.src}
                     alt={art.leadAlt}
                     width={lead.width}
@@ -70,18 +71,18 @@ export default function StoryPage() {
                   />
                 </div>
                 {detail ? (
-                  <div className={`${styles.detail} frame`} data-reveal="mask" data-reveal-delay="2">
-                    <Image src={detail.src} alt={art.detailAlt ?? ''} width={detail.width} height={detail.height} sizes="(max-width: 899px) 45vw, 18vw" />
+                  <div className="story-chapter__detail frame" data-reveal="mask" data-reveal-delay="2">
+                    <Photo src={detail.src} alt={art.detailAlt ?? ''} width={detail.width} height={detail.height} sizes="(max-width: 899px) 45vw, 18vw" />
                   </div>
                 ) : null}
               </div>
 
-              <div className={styles.copy} data-reveal="fade" data-reveal-delay="1">
+              <div className="story-chapter__copy" data-reveal="fade" data-reveal-delay="1">
                 <p className="label accent">{chapter.label}</p>
                 <h2 id={`chapter-${chapter.key}`} className="display display-md">
                   {chapter.title[0]} <em>{chapter.title[1]}</em>
                 </h2>
-                <blockquote className={styles.quote}>
+                <blockquote className="story-chapter__quote">
                   {chapter.paragraphs.map((paragraph, paragraphIndex) => (
                     <p key={paragraphIndex}>
                       {paragraphIndex === 0 ? '“' : ''}
@@ -97,12 +98,12 @@ export default function StoryPage() {
         );
       })}
 
-      <section className={`${styles.close} container`} data-reveal="fade">
-        <SunMark size={36} className={styles.mark} />
+      <section className="story-page__close container" data-reveal="fade">
+        <SunMark size={36} className="story-page__mark" />
         <p className="display display-lg">
           {MANIFESTO.title[0]} <em>{MANIFESTO.title[1]}</em>
         </p>
-        <p className={styles.closeBody}>{MANIFESTO.body}</p>
+        <p className="story-page__close-body">{MANIFESTO.body}</p>
         <Link href="/shop" className="button">
           Wear the story
           <Icon name="arrow" />

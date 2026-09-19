@@ -14,6 +14,22 @@ const rays = Array.from({ length: RAYS }, (_, index) => {
   };
 });
 
+const SYMBOL_ID = 'sun-mark';
+
+/** Defines the emblem once per document; rendered in the root layout. */
+export function SunMarkSymbol() {
+  return (
+    <svg className="visually-hidden" aria-hidden="true" focusable="false">
+      <symbol id={SYMBOL_ID} viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeLinecap="round">
+        <circle cx="50" cy="50" r="15" />
+        {rays.map((ray) => (
+          <line key={ray.x2 + ray.y2} x1={ray.x1} y1={ray.y1} x2={ray.x2} y2={ray.y2} />
+        ))}
+      </symbol>
+    </svg>
+  );
+}
+
 type SunMarkProps = {
   size?: number;
   strokeWidth?: number;
@@ -21,27 +37,20 @@ type SunMarkProps = {
   title?: string;
 };
 
-/** Piura's sun emblem: a circle with sixteen short rays. Decorative unless a title is given. */
+/** Piura's sun emblem, a circle with sixteen short rays. Decorative unless a title is given. */
 export function SunMark({ size = 32, strokeWidth = 1.3, className, title }: SunMarkProps) {
   return (
     <svg
       className={className}
       width={size}
       height={size}
-      viewBox="0 0 100 100"
-      fill="none"
-      stroke="currentColor"
       strokeWidth={strokeWidth}
-      strokeLinecap="round"
       role={title ? 'img' : undefined}
       aria-hidden={title ? undefined : true}
       focusable="false"
     >
       {title ? <title>{title}</title> : null}
-      <circle cx="50" cy="50" r="15" />
-      {rays.map((ray) => (
-        <line key={ray.x2 + ray.y2} x1={ray.x1} y1={ray.y1} x2={ray.x2} y2={ray.y2} />
-      ))}
+      <use href={`#${SYMBOL_ID}`} />
     </svg>
   );
 }

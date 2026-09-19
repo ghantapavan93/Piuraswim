@@ -10,7 +10,7 @@ import { SunMark } from '@/components/ui/SunMark';
 import { BRAND, NAV } from '@/data/site';
 import { AnnouncementBar } from './AnnouncementBar';
 import { MobileMenu } from './MobileMenu';
-import styles from './SiteHeader.module.css';
+import './SiteHeader.css';
 
 type SiteHeaderProps = {
   /** Sit transparently over a full-bleed hero until the page scrolls. */
@@ -35,14 +35,14 @@ export function SiteHeader({ overlay = false }: SiteHeaderProps) {
     <>
       <AnnouncementBar />
       <header
-        className={styles.header}
-        data-overlay={overlay || undefined}
-        data-scrolled={scrolled || undefined}
+        className="site-header"
+        data-overlay={overlay ? '' : undefined}
+        data-scrolled={scrolled ? '' : undefined}
       >
-        <div className={`${styles.inner} container`}>
+        <div className="site-header__inner container">
           <button
             type="button"
-            className={styles.menuButton}
+            className="site-header__menu-button"
             onClick={() => setMenuOpen(true)}
             aria-label="Open menu"
             aria-expanded={menuOpen}
@@ -51,23 +51,23 @@ export function SiteHeader({ overlay = false }: SiteHeaderProps) {
             <Icon name="menu" />
           </button>
 
-          <Link href="/" className={styles.wordmark} aria-label={`${BRAND.name} home`}>
-            <SunMark size={15} strokeWidth={5} className={styles.mark} />
+          <Link href="/" className="site-header__wordmark" aria-label={`${BRAND.name} home`}>
+            <SunMark size={15} strokeWidth={5} className="site-header__mark" />
             <span>{BRAND.wordmark}</span>
             <small>{BRAND.descriptor}</small>
           </Link>
 
-          <nav className={styles.nav} aria-label="Primary">
+          <nav className="site-header__nav" aria-label="Primary">
             {NAV.map((item) =>
               item.action === 'fit-guide' ? (
-                <button key={item.label} type="button" className={styles.navItem} onClick={fitGuide.open}>
+                <button key={item.label} type="button" className="site-header__nav-item" onClick={fitGuide.open}>
                   {item.label}
                 </button>
               ) : (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={styles.navItem}
+                  className="site-header__nav-item"
                   aria-current={pathname === item.href ? 'page' : undefined}
                 >
                   {item.label}
@@ -78,13 +78,13 @@ export function SiteHeader({ overlay = false }: SiteHeaderProps) {
 
           <button
             type="button"
-            className={styles.bagButton}
+            className="site-header__bag-button"
             onClick={openBag}
             aria-label={`Open bag, ${count} ${count === 1 ? 'item' : 'items'}`}
           >
             <Icon name="bag" />
-            <span className={styles.bagLabel}>Bag</span>
-            {count > 0 ? <span className={styles.bagCount}>{count}</span> : null}
+            <span className="site-header__bag-label">Bag</span>
+            {count > 0 ? <span className="site-header__bag-count">{count}</span> : null}
           </button>
         </div>
       </header>

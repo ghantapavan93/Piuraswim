@@ -1,0 +1,70 @@
+.runway {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.runway__copy {
+  display: grid;
+  gap: 2.5rem;
+  align-content: center;
+}
+
+.runway__copy h2 {
+  margin-block: 1rem 1.5rem;
+  max-width: 8ch;
+}
+
+.runway__body {
+  max-width: 28rem;
+  margin-bottom: 1.75rem;
+  font-size: var(--text-base);
+  line-height: 1.75;
+  color: var(--color-ink-soft);
+}
+
+.runway__filmstrip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: var(--color-ink);
+}
+
+.runway__filmstrip li {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.runway__frame {
+  aspect-ratio: 3 / 4;
+  background: var(--color-tide-deep);
+}
+
+.runway__time {
+  font-family: var(--font-text);
+  font-size: 0.625rem;
+  letter-spacing: 0.14em;
+  color: var(--color-foam);
+  font-variant-numeric: tabular-nums;
+}
+
+.runway__caption {
+  margin-top: 1rem;
+  color: var(--color-muted);
+}
+
+@media (min-width: 900px) {
+  .runway {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .runway__film {
+    order: 1;
+  }
+
+  .runway__copy {
+    order: 2;
+  }
+}

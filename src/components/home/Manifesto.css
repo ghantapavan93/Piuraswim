@@ -1,0 +1,29 @@
+.manifesto {
+  padding-block: var(--section-y);
+  border-top: 1px solid var(--color-line);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.manifesto__inner {
+  display: grid;
+  justify-items: center;
+  gap: 1.5rem;
+  max-width: 46rem;
+  text-align: center;
+}
+
+.manifesto__mark {
+  color: var(--color-ember);
+}
+
+.manifesto__body {
+  max-width: 28rem;
+  font-size: var(--text-base);
+  line-height: 1.8;
+  color: var(--color-ink-soft);
+}
+
+.manifesto__origin {
+  margin-top: 0.5rem;
+  color: var(--color-muted);
+}

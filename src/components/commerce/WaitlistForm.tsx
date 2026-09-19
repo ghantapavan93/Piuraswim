@@ -2,7 +2,8 @@
 
 import { useId, useState, type FormEvent } from 'react';
 import { Icon } from '@/components/ui/Icon';
-import styles from './WaitlistForm.module.css';
+import './WaitlistForm.css';
+import { cx } from '@/lib/utils';
 
 type WaitlistFormProps = {
   /** `inline` puts the button beside the field; `stacked` is for full forms. */
@@ -35,7 +36,7 @@ export function WaitlistForm({
 
   if (sent) {
     return (
-      <p className={styles.confirmation} role="status">
+      <p className="waitlist-form__confirmation" role="status">
         <span className="label accent">You&rsquo;re on the list.</span>
         <span>Waitlist members receive private access one day before the collection goes live.</span>
       </p>
@@ -44,11 +45,11 @@ export function WaitlistForm({
 
   return (
     <form
-      className={[styles.form, styles[layout], onDark && styles.onDark].filter(Boolean).join(' ')}
+      className={cx('waitlist-form', `waitlist-form--${layout}`, onDark && 'waitlist-form--on-dark')}
       onSubmit={submit}
       noValidate
     >
-      <div className={styles.field}>
+      <div className="waitlist-form__field">
         <label htmlFor={`${id}-email`} className="visually-hidden">
           Email address
         </label>
@@ -60,12 +61,12 @@ export function WaitlistForm({
           autoComplete="email"
           placeholder="Email address"
           required
-          className={styles.input}
+          className="waitlist-form__input"
         />
       </div>
 
       {withPhone ? (
-        <div className={styles.field}>
+        <div className="waitlist-form__field">
           <label htmlFor={`${id}-phone`} className="visually-hidden">
             Phone number (optional)
           </label>
@@ -76,13 +77,13 @@ export function WaitlistForm({
             inputMode="tel"
             autoComplete="tel"
             placeholder="Phone number (optional)"
-            className={styles.input}
+            className="waitlist-form__input"
           />
         </div>
       ) : null}
 
       {layout === 'inline' ? (
-        <button type="submit" className={styles.inlineSubmit}>
+        <button type="submit" className="waitlist-form__inline-submit">
           Join
           <Icon name="arrow" size={14} />
         </button>

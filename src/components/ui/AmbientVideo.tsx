@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react';
 import type { ImageAsset } from '@/data/image-manifest';
-import styles from './AmbientVideo.module.css';
+import './AmbientVideo.css';
+import { cx } from '@/lib/utils';
 
 type Source = { src: string; poster: ImageAsset };
 
@@ -66,7 +67,7 @@ export function AmbientVideo({ desktop, mobile, alt, className }: AmbientVideoPr
   }, [desktop, mobile]);
 
   return (
-    <div className={[styles.root, className].filter(Boolean).join(' ')}>
+    <div className={cx('ambient-video', className)}>
       <picture>
         {mobile ? <source media={MOBILE_QUERY} srcSet={mobile.poster.src} /> : null}
         <img
@@ -76,13 +77,13 @@ export function AmbientVideo({ desktop, mobile, alt, className }: AmbientVideoPr
           height={desktop.poster.height}
           fetchPriority="high"
           decoding="async"
-          className={styles.poster}
+          className="ambient-video__poster"
         />
       </picture>
       <video
         ref={videoRef}
-        className={styles.video}
-        data-playing={playing || undefined}
+        className="ambient-video__video"
+        data-playing={playing ? '' : undefined}
         muted
         loop
         playsInline

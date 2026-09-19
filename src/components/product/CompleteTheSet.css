@@ -1,0 +1,58 @@
+.complete-the-set {
+  display: grid;
+  gap: 1.1rem;
+  padding: 1.25rem;
+  background: var(--color-sand);
+}
+
+.complete-the-set__pair {
+  display: grid;
+  grid-template-columns: 5rem minmax(0, 1fr);
+  gap: 1rem;
+}
+
+.complete-the-set__thumb {
+  aspect-ratio: 3 / 4;
+  background: var(--color-ivory);
+}
+
+.complete-the-set__body {
+  display: grid;
+  gap: 0.35rem;
+  align-content: start;
+}
+
+.complete-the-set__row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: baseline;
+}
+
+.complete-the-set__title {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: color var(--duration-ui) var(--ease-out);
+}
+
+.complete-the-set__title:hover {
+  color: var(--color-ember);
+}
+
+.complete-the-set__price {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+
+.complete-the-set__note {
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--color-ink-soft);
+}
+
+.complete-the-set__sizes {
+  display: grid;
+  gap: 0.6rem;
+}

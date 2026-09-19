@@ -1,10 +1,10 @@
-import Image from 'next/image';
+import { Photo } from '@/components/ui/Photo';
 import Link from 'next/link';
 import { Icon } from '@/components/ui/Icon';
 import { RUNWAY } from '@/data/site';
 import { image, type ImageKey } from '@/lib/image';
 import { RunwayFilm } from './RunwayFilm';
-import styles from './RunwayEditorial.module.css';
+import './RunwayEditorial.css';
 
 const FRAMES: { key: ImageKey; time: string; alt: string }[] = [
   { key: 'stills/runway-detail.jpg', time: '0:08', alt: 'A close frame of a yellow triangle top mid-walk' },
@@ -16,8 +16,8 @@ const FRAMES: { key: ImageKey; time: string; alt: string }[] = [
 export function RunwayEditorial() {
   return (
     <section className="section" aria-labelledby="runway-title">
-      <div className={`${styles.grid} container`}>
-        <div className={styles.film} data-reveal="mask">
+      <div className="runway container">
+        <div className="runway__film" data-reveal="mask">
           <RunwayFilm
             poster={image('stills/runway-backdrop.jpg')}
             src="/video/runway.mp4"
@@ -25,7 +25,7 @@ export function RunwayEditorial() {
           />
         </div>
 
-        <div className={styles.copy}>
+        <div className="runway__copy">
           <div data-reveal="fade">
             <p className="label accent">{RUNWAY.eyebrow}</p>
             <h2 id="runway-title" className="display display-xl">
@@ -33,7 +33,7 @@ export function RunwayEditorial() {
               <br />
               <em>{RUNWAY.title[1]}</em>
             </h2>
-            <p className={styles.body}>{RUNWAY.body}</p>
+            <p className="runway__body">{RUNWAY.body}</p>
             <Link href="/waitlist" className="text-link">
               Join the Coastlines waitlist
               <Icon name="arrow" />
@@ -41,20 +41,20 @@ export function RunwayEditorial() {
           </div>
 
           <div data-reveal="fade" data-reveal-delay="1">
-            <ol className={styles.filmstrip} aria-label="Frames from the runway film">
+            <ol className="runway__filmstrip" aria-label="Frames from the runway film">
               {FRAMES.map((frame) => {
                 const asset = image(frame.key);
                 return (
                   <li key={frame.key}>
-                    <div className={`${styles.frame} frame`}>
-                      <Image src={asset.src} alt={frame.alt} width={asset.width} height={asset.height} sizes="(max-width: 719px) 40vw, 12vw" />
+                    <div className="runway__frame frame">
+                      <Photo src={asset.src} alt={frame.alt} width={asset.width} height={asset.height} sizes="(max-width: 719px) 40vw, 12vw" />
                     </div>
-                    <span className={styles.time}>{frame.time}</span>
+                    <span className="runway__time">{frame.time}</span>
                   </li>
                 );
               })}
             </ol>
-            <p className={`${styles.caption} label`}>{RUNWAY.caption}</p>
+            <p className="runway__caption label">{RUNWAY.caption}</p>
           </div>
         </div>
       </div>

@@ -1,8 +1,8 @@
-import Image from 'next/image';
+import { Photo } from '@/components/ui/Photo';
 import { WaitlistForm } from '@/components/commerce/WaitlistForm';
 import { COASTLINES } from '@/data/site';
 import { image } from '@/lib/image';
-import styles from './CoastlinesWaitlist.module.css';
+import './CoastlinesWaitlist.css';
 
 type CoastlinesWaitlistProps = {
   /** The dedicated waitlist page asks for an optional phone number too. */
@@ -14,31 +14,31 @@ export function CoastlinesWaitlist({ withPhone = false }: CoastlinesWaitlistProp
   const finale = image('stills/runway-finale-wide.jpg');
 
   return (
-    <section className={`${styles.section} on-dark`} aria-labelledby="coastlines-title">
-      <div className={styles.copy} data-reveal="fade">
-        <p className={styles.index}>
+    <section className="coastlines on-dark" aria-labelledby="coastlines-title">
+      <div className="coastlines__copy" data-reveal="fade">
+        <p className="coastlines__index">
           <span className="label accent-soft">{COASTLINES.index}</span>
           <span className="label">{COASTLINES.eyebrow}</span>
         </p>
-        <h2 id="coastlines-title" className={`${styles.title} display display-xl`}>
+        <h2 id="coastlines-title" className="coastlines__title display display-xl">
           <em>{COASTLINES.name}</em>
         </h2>
-        <p className={styles.body}>{COASTLINES.body}</p>
-        <div className={styles.form}>
+        <p className="coastlines__body">{COASTLINES.body}</p>
+        <div className="coastlines__form">
           <WaitlistForm layout="stacked" onDark withPhone={withPhone} />
         </div>
-        <p className={styles.note}>{withPhone ? COASTLINES.formNote : COASTLINES.access}</p>
+        <p className="coastlines__note">{withPhone ? COASTLINES.formNote : COASTLINES.access}</p>
       </div>
 
-      <div className={styles.media}>
-        <Image
+      <div className="coastlines__media">
+        <Photo
           src={finale.src}
           alt="The Coastlines runway finale at Miami Swim Week 2026"
           width={finale.width}
           height={finale.height}
           sizes="(max-width: 899px) 100vw, 50vw"
           quality={85}
-          className={styles.image}
+          className="coastlines__image"
         />
       </div>
     </section>

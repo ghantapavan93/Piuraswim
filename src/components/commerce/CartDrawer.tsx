@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import { Photo } from '@/components/ui/Photo';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { Icon } from '@/components/ui/Icon';
@@ -10,7 +10,7 @@ import { image } from '@/lib/image';
 import { SERVICE } from '@/data/site';
 import { money } from '@/lib/utils';
 import { useCart, type CartLine } from './CartProvider';
-import styles from './CartDrawer.module.css';
+import './CartDrawer.css';
 
 const SIGNATURE_HANDLES = new Set([
   'sunchild-triangle-top',
@@ -52,24 +52,24 @@ export function CartDrawer() {
   const suggestion = findPairSuggestion(lines);
 
   return (
-    <div className={styles.shell} data-open={isOpen || undefined} inert={!isOpen}>
-      <button type="button" className={styles.scrim} onClick={close} aria-label="Close bag" tabIndex={-1} />
-      <aside className={styles.panel} role="dialog" aria-modal="true" aria-labelledby="bag-title">
-        <header className={styles.header}>
+    <div className="cart-drawer" data-open={isOpen ? '' : undefined} inert={!isOpen}>
+      <button type="button" className="cart-drawer__scrim" onClick={close} aria-label="Close bag" tabIndex={-1} />
+      <aside className="cart-drawer__panel" role="dialog" aria-modal="true" aria-labelledby="bag-title">
+        <header className="cart-drawer__header">
           <h2 id="bag-title" className="label">
-            Your bag{count > 0 ? <span className={styles.count}> · {count}</span> : null}
+            Your bag{count > 0 ? <span className="cart-drawer__count"> · {count}</span> : null}
           </h2>
-          <button ref={closeButton} type="button" onClick={close} aria-label="Close bag" className={styles.close}>
+          <button ref={closeButton} type="button" onClick={close} aria-label="Close bag" className="cart-drawer__close">
             <Icon name="close" size={20} />
           </button>
         </header>
 
         {lines.length === 0 ? (
-          <div className={styles.empty}>
+          <div className="cart-drawer__empty">
             <p className="display display-sm">
               Your bag is <em>empty.</em>
             </p>
-            <p className={styles.emptyNote}>Find your next piece.</p>
+            <p className="cart-drawer__empty-note">Find your next piece.</p>
             <Link href="/shop" className="button" onClick={close}>
               Shop the collection
               <Icon name="arrow" />
@@ -77,8 +77,8 @@ export function CartDrawer() {
           </div>
         ) : (
           <>
-            <div className={styles.body}>
-              <ul className={styles.lines}>
+            <div className="cart-drawer__body">
+              <ul className="cart-drawer__lines">
                 {lines.map((line) => (
                   <BagLine
                     key={`${line.product.handle}-${line.size}`}
@@ -99,14 +99,14 @@ export function CartDrawer() {
               ) : null}
             </div>
 
-            <footer className={styles.footer}>
-              <p className={styles.shipping}>
+            <footer className="cart-drawer__footer">
+              <p className="cart-drawer__shipping">
                 {remaining > 0
                   ? `${money(remaining)} away from free US shipping.`
                   : 'Free US shipping on this order.'}
               </p>
-              <progress className={styles.meter} value={Math.round(progress)} max={100} aria-hidden="true" />
-              <div className={styles.subtotal}>
+              <progress className="cart-drawer__meter" value={Math.round(progress)} max={100} aria-hidden="true" />
+              <div className="cart-drawer__subtotal">
                 <span className="label">Subtotal</span>
                 <strong>{money(subtotal)}</strong>
               </div>
@@ -114,7 +114,7 @@ export function CartDrawer() {
                 Checkout
                 <Icon name="arrow" />
               </button>
-              <p className={styles.footnote} role="status">
+              <p className="cart-drawer__footnote" role="status">
                 {checkoutNotice
                   ? 'Checkout is not connected in this concept; in production this hands off to the store.'
                   : 'Shipping and taxes calculated at checkout.'}
@@ -141,21 +141,21 @@ function BagLine({
   const asset = image(line.product.images[0]);
   const href = `/product/${line.product.handle}`;
   return (
-    <li className={styles.line}>
-      <Link href={href} onClick={onClose} className={`${styles.thumb} frame`}>
-        <Image src={asset.src} alt={line.product.title} width={asset.width} height={asset.height} sizes="88px" />
+    <li className="cart-drawer__line">
+      <Link href={href} onClick={onClose} className="cart-drawer__thumb frame">
+        <Photo src={asset.src} alt={line.product.title} width={asset.width} height={asset.height} sizes="88px" />
       </Link>
-      <div className={styles.lineBody}>
-        <p className={styles.linePrint}>{printLabel(line.product)}</p>
-        <div className={styles.lineHead}>
-          <Link href={href} onClick={onClose} className={styles.lineTitle}>
+      <div className="cart-drawer__line-body">
+        <p className="cart-drawer__line-print">{printLabel(line.product)}</p>
+        <div className="cart-drawer__line-head">
+          <Link href={href} onClick={onClose} className="cart-drawer__line-title">
             {line.product.title}
           </Link>
           <span>{money(line.product.price * line.quantity)}</span>
         </div>
-        <p className={styles.lineMeta}>Size {line.size}</p>
-        <div className={styles.lineControls}>
-          <div className={styles.quantity} role="group" aria-label={`Quantity for ${line.product.title}, size ${line.size}`}>
+        <p className="cart-drawer__line-meta">Size {line.size}</p>
+        <div className="cart-drawer__line-controls">
+          <div className="cart-drawer__quantity" role="group" aria-label={`Quantity for ${line.product.title}, size ${line.size}`}>
             <button type="button" onClick={() => onQuantity(line.quantity - 1)} aria-label="Decrease quantity">
               <Icon name="minus" size={12} />
             </button>
@@ -164,7 +164,7 @@ function BagLine({
               <Icon name="plus" size={12} />
             </button>
           </div>
-          <button type="button" className={styles.remove} onClick={onRemove}>
+          <button type="button" className="cart-drawer__remove" onClick={onRemove}>
             Remove
           </button>
         </div>
@@ -179,25 +179,25 @@ function PairSuggestion({ line, pair, onAdd }: { line: CartLine; pair: Product; 
   const designedAsOne = SIGNATURE_HANDLES.has(line.product.handle) && SIGNATURE_HANDLES.has(pair.handle);
 
   return (
-    <section className={styles.pair} aria-labelledby="bag-pair-title">
+    <section className="cart-drawer__pair" aria-labelledby="bag-pair-title">
       <p id="bag-pair-title" className="label accent">
         {designedAsOne ? 'Designed as one' : 'Complete the set'}
       </p>
-      <div className={styles.pairCard}>
-        <Link href={`/product/${pair.handle}`} className={`${styles.pairThumb} frame`}>
-          <Image src={asset.src} alt={pair.title} width={asset.width} height={asset.height} sizes="72px" />
+      <div className="cart-drawer__pair-card">
+        <Link href={`/product/${pair.handle}`} className="cart-drawer__pair-thumb frame">
+          <Photo src={asset.src} alt={pair.title} width={asset.width} height={asset.height} sizes="72px" />
         </Link>
-        <div className={styles.pairBody}>
-          <p className={styles.pairTitle}>
+        <div className="cart-drawer__pair-body">
+          <p className="cart-drawer__pair-title">
             {pair.title} <span>{money(pair.price)}</span>
           </p>
-          <p className={styles.pairNote}>
+          <p className="cart-drawer__pair-note">
             {pair.category === 'bottoms' ? 'The bottom' : 'The top'} of your {line.product.title}.
           </p>
           <SizeChips label={`${pair.title} size`} available={pair.available} value={size} onChange={setSize} compact />
           <button
             type="button"
-            className={`button button-outline ${styles.pairAdd}`}
+            className="button button-outline cart-drawer__pair-add"
             disabled={!size}
             onClick={() => size && onAdd(size)}
           >

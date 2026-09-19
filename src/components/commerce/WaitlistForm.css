@@ -1,0 +1,81 @@
+.waitlist-form {
+  display: grid;
+  gap: 1.25rem;
+  max-width: 28rem;
+}
+
+.waitlist-form--inline {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 1.5rem;
+}
+
+.waitlist-form__field {
+  min-width: 0;
+}
+
+.waitlist-form__input {
+  width: 100%;
+  padding: 0.7rem 0;
+  border: 0;
+  border-bottom: 1px solid var(--color-line-strong);
+  border-radius: 0;
+  background: transparent;
+  font-size: var(--text-base);
+  letter-spacing: 0.02em;
+  outline: none;
+  transition: border-color var(--duration-ui) var(--ease-out);
+}
+
+.waitlist-form__input::placeholder {
+  color: var(--color-muted);
+}
+
+.waitlist-form__input:focus {
+  border-color: var(--color-ember);
+}
+
+.waitlist-form__input:user-invalid {
+  border-color: var(--color-ember);
+}
+
+.waitlist-form__inline-submit {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 0 0.75rem;
+  border-bottom: 1px solid currentColor;
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: opacity var(--duration-ui) var(--ease-out);
+}
+
+.waitlist-form__inline-submit:hover {
+  opacity: 0.6;
+}
+
+.waitlist-form--on-dark .waitlist-form__input {
+  border-bottom-color: var(--color-line-on-dark);
+  color: var(--color-foam-strong);
+}
+
+.waitlist-form--on-dark .waitlist-form__input::placeholder {
+  color: var(--color-foam);
+}
+
+.waitlist-form--on-dark .waitlist-form__input:focus {
+  border-color: var(--color-foam-strong);
+}
+
+.waitlist-form__confirmation {
+  display: grid;
+  gap: 0.5rem;
+  max-width: 28rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--color-line);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+}

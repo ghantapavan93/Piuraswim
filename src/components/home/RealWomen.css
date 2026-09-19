@@ -1,0 +1,71 @@
+.real-women__head {
+  display: grid;
+  justify-items: center;
+  gap: 1.25rem;
+  max-width: 52rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.real-women__quote {
+  text-wrap: balance;
+}
+
+.real-women__caption {
+  color: var(--color-muted);
+}
+
+.real-women__strip {
+  display: flex;
+  gap: 1rem;
+  margin-top: 3.5rem;
+  margin-inline: calc(var(--gutter) * -1);
+  padding-inline: var(--gutter);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.real-women__strip::-webkit-scrollbar {
+  display: none;
+}
+
+.real-women__item {
+  flex: 0 0 62%;
+  scroll-snap-align: start;
+}
+
+.real-women__frame {
+  aspect-ratio: 3 / 4;
+}
+
+.real-women__note {
+  margin-top: 2.5rem;
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+
+@media (min-width: 720px) {
+  .real-women__strip {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 1.25rem;
+    margin-inline: 0;
+    padding-inline: 0;
+    overflow: visible;
+  }
+
+  .real-women__item {
+    flex: none;
+  }
+
+  .real-women__item:nth-child(2),
+  .real-women__item:nth-child(4) {
+    margin-top: 3rem;
+  }
+
+  .real-women__item:nth-child(3) .real-women__frame {
+    aspect-ratio: 3 / 4.4;
+  }
+}

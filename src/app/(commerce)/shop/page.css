@@ -1,0 +1,122 @@
+.shop-page {
+  padding-block: clamp(3rem, 6vw, 5.5rem) var(--section-y);
+}
+
+.shop-page__head {
+  display: grid;
+  gap: 1rem;
+  max-width: 44rem;
+}
+
+.shop-page__count {
+  margin-left: 0.35rem;
+  font-family: var(--font-text);
+  font-size: 0.32em;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: var(--color-muted);
+  vertical-align: super;
+}
+
+.shop-page__intro {
+  max-width: 34rem;
+  font-size: var(--text-base);
+  line-height: 1.7;
+  color: var(--color-ink-soft);
+}
+
+.shop-page__fit-line {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+
+.shop-page__filters {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  padding-block: 1.25rem;
+  border-top: 1px solid var(--color-line);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.shop-page__views,
+.shop-page__prints {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.75rem 1.75rem;
+}
+
+.shop-page__prints-label {
+  color: var(--color-muted);
+}
+
+.shop-page__filter {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid transparent;
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-muted);
+  transition:
+    color var(--duration-ui) var(--ease-out),
+    border-color var(--duration-ui) var(--ease-out);
+}
+
+.shop-page__filter sup {
+  font-size: 0.75em;
+  letter-spacing: 0.1em;
+}
+
+.shop-page__filter:hover {
+  color: var(--color-ink);
+}
+
+.shop-page__filter[aria-current='page'] {
+  color: var(--color-ink);
+  border-color: var(--color-ink);
+}
+
+.shop-page__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2.5rem 0.75rem;
+  margin-top: 2.5rem;
+}
+
+.shop-page__set-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 3rem 1.5rem;
+  margin-top: 2.5rem;
+}
+
+@media (min-width: 720px) {
+  .shop-page__filters {
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+  }
+
+  .shop-page__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 1.5rem;
+  }
+
+  .shop-page__set-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1100px) {
+  .shop-page__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .shop-page__set-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

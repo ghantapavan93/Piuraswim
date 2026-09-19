@@ -1,0 +1,110 @@
+.product-gallery {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.product-gallery__stage {
+  position: relative;
+}
+
+.product-gallery__strip {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.product-gallery__strip::-webkit-scrollbar {
+  display: none;
+}
+
+.product-gallery__slide {
+  flex: 0 0 100%;
+  aspect-ratio: 3 / 4;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.product-gallery__arrow {
+  position: absolute;
+  top: 50%;
+  display: none;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 999px;
+  background: rgba(250, 246, 238, 0.85);
+  color: var(--color-ink);
+  transform: translateY(-50%);
+  opacity: 0;
+  transition:
+    opacity var(--duration-ui) var(--ease-out),
+    background-color var(--duration-ui) var(--ease-out);
+}
+
+.product-gallery__stage:hover .product-gallery__arrow,
+.product-gallery__arrow:focus-visible {
+  opacity: 1;
+}
+
+.product-gallery__arrow:hover {
+  background: var(--color-ivory);
+}
+
+.product-gallery__prev {
+  left: 1rem;
+}
+
+.product-gallery__next {
+  right: 1rem;
+}
+
+.product-gallery__counter {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  padding: 0.35rem 0.6rem;
+  background: rgba(250, 246, 238, 0.85);
+  font-size: 0.625rem;
+  letter-spacing: 0.16em;
+  font-variant-numeric: tabular-nums;
+}
+
+.product-gallery__thumbs {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.product-gallery__thumbs::-webkit-scrollbar {
+  display: none;
+}
+
+.product-gallery__thumb {
+  flex: 0 0 3.75rem;
+  aspect-ratio: 3 / 4;
+  opacity: 0.55;
+  outline-offset: 2px;
+  transition: opacity var(--duration-ui) var(--ease-out);
+}
+
+.product-gallery__thumb:hover,
+.product-gallery__thumb[data-active] {
+  opacity: 1;
+}
+
+.product-gallery__thumb[data-active] {
+  box-shadow: inset 0 0 0 1px var(--color-ink);
+}
+
+@media (min-width: 900px) {
+  .product-gallery__arrow {
+    display: grid;
+  }
+
+  .product-gallery__thumb {
+    flex-basis: 4.5rem;
+  }
+}

@@ -44,7 +44,7 @@ src/components/product/  gallery, purchase panel, complete-the-set, cards, quick
 src/components/fit/      fit guide drawer, size chart, measurement matcher
 src/components/commerce/ bag provider and drawer, waitlist and contact forms
 src/components/layout/   announcement bar, header, mobile menu, footer, page hero
-src/components/ui/       icon, sun mark, reveal observer, ambient video, size chips
+src/components/ui/       icon, sun mark, photo, reveal observer, ambient video, size chips
 src/components/seo/      JSON-LD script
 src/data/                products.ts and image-manifest.ts (generated), fit.ts and site.ts (curated, verified copy)
 src/lib/                 bag store, structured data, image lookup, utils
@@ -53,7 +53,9 @@ docs/                    design thesis, source notes, raw reference research
 public/images/piura/     product, lifestyle and still photography; public/video/ the two hero loops and the runway film
 ```
 
-Component styles are CSS Modules next to each component; design tokens live once in `globals.css`. Scroll reveals are a `data-reveal` attribute on the semantic element itself, observed once from the layout: no wrapper elements, no inline styles, and nothing is hidden when JavaScript is off.
+Each component owns a plain stylesheet next to it (`SiteHeader.css` beside `SiteHeader.tsx`) using block__element--modifier class names, so what you see in the inspector is what you find in the source: `site-header__nav-item`, `product-card__media`, `size-chips--compact`. Design tokens live once in `globals.css`. State is expressed with bare data attributes (`data-open`, `data-selected`) rather than class toggles.
+
+Images go through `Photo`, which takes next/image's optimisation (responsive srcset, AVIF/WebP, lazy loading, priority hints) and renders a plain `<img>` with no inline styles or client-side load handlers. The sun emblem is one `<symbol>` in the layout, referenced with `<use>`. Scroll reveals are a `data-reveal` attribute on the semantic element itself, observed once from the layout: no wrapper elements, no inline styles, and nothing is hidden when JavaScript is off.
 
 ## Data
 

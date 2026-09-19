@@ -1,0 +1,129 @@
+.fit-guide {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  visibility: hidden;
+  transition: visibility var(--duration-drawer);
+}
+
+.fit-guide[data-open] {
+  visibility: visible;
+}
+
+.fit-guide__scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(17, 27, 30, 0.55);
+  opacity: 0;
+  transition: opacity var(--duration-drawer) var(--ease-out);
+}
+
+.fit-guide[data-open] .fit-guide__scrim {
+  opacity: 1;
+}
+
+.fit-guide__panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(100%, 34rem);
+  display: flex;
+  flex-direction: column;
+  background: var(--color-ivory);
+  color: var(--color-ink);
+  transform: translateX(100%);
+  transition: transform var(--duration-drawer) var(--ease-out);
+  box-shadow: -24px 0 60px rgba(17, 27, 30, 0.18);
+}
+
+.fit-guide[data-open] .fit-guide__panel {
+  transform: none;
+}
+
+.fit-guide__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.5rem var(--gutter) 1.25rem;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.fit-guide__header .label {
+  margin-bottom: 0.5rem;
+}
+
+.fit-guide__close {
+  flex-shrink: 0;
+  padding: 0.5rem;
+  margin: -0.5rem -0.5rem 0 0;
+}
+
+.fit-guide__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem var(--gutter) 2.5rem;
+  display: grid;
+  gap: 2.25rem;
+  align-content: start;
+}
+
+.fit-guide__intro {
+  font-size: var(--text-base);
+  line-height: 1.7;
+  color: var(--color-ink-soft);
+}
+
+.fit-guide__block {
+  display: grid;
+  gap: 1rem;
+}
+
+.fit-guide__note {
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--color-ink-soft);
+}
+
+.fit-guide__steps {
+  display: grid;
+  gap: 1rem;
+}
+
+.fit-guide__steps li {
+  display: grid;
+  grid-template-columns: 1.5rem 1fr;
+  gap: 0.9rem;
+  align-items: start;
+}
+
+.fit-guide__steps strong {
+  display: block;
+  font-size: var(--text-sm);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.fit-guide__steps p {
+  margin-top: 0.2rem;
+  font-size: var(--text-sm);
+  color: var(--color-ink-soft);
+}
+
+.fit-guide__letter {
+  display: inline-grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1px solid var(--color-ember);
+  border-radius: 999px;
+  font-size: 0.625rem;
+  color: var(--color-ember);
+}
+
+.fit-guide__help {
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--color-ink-soft);
+}

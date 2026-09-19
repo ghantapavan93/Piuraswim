@@ -3,7 +3,7 @@ import { WaitlistForm } from '@/components/commerce/WaitlistForm';
 import { Icon, type IconName } from '@/components/ui/Icon';
 import { SunMark } from '@/components/ui/SunMark';
 import { BRAND, FOOTER_CAPTURE, SERVICE_PILLARS } from '@/data/site';
-import styles from './SiteFooter.module.css';
+import './SiteFooter.css';
 
 const PILLAR_ICONS: IconName[] = ['ruler', 'waves', 'send', 'refresh'];
 
@@ -41,36 +41,36 @@ const COLUMNS = [
 
 export function SiteFooter() {
   return (
-    <footer className={styles.footer}>
-      <div className={styles.pillars}>
-        <ul className={`${styles.pillarList} container`}>
+    <footer className="site-footer">
+      <div className="site-footer__pillars">
+        <ul className="site-footer__pillar-list container">
           {SERVICE_PILLARS.map((pillar, index) => (
-            <li key={pillar.title} className={styles.pillar}>
-              <Icon name={PILLAR_ICONS[index]} size={18} className={styles.pillarIcon} />
+            <li key={pillar.title} className="site-footer__pillar">
+              <Icon name={PILLAR_ICONS[index]} size={18} className="site-footer__pillar-icon" />
               <div>
                 <p className="label">{pillar.title}</p>
-                <p className={styles.pillarText}>{pillar.text}</p>
+                <p className="site-footer__pillar-text">{pillar.text}</p>
               </div>
             </li>
           ))}
         </ul>
       </div>
 
-      <div className={`${styles.main} container`}>
-        <div className={styles.capture}>
+      <div className="site-footer__main container">
+        <div className="site-footer__capture">
           <p className="label accent">{FOOTER_CAPTURE.eyebrow}</p>
-          <h2 className={`${styles.captureTitle} display display-sm`}>
+          <h2 className="site-footer__capture-title display display-sm">
             {FOOTER_CAPTURE.title[0]} <em>{FOOTER_CAPTURE.title[1]}</em>
           </h2>
-          <p className={styles.captureNote}>{FOOTER_CAPTURE.note}</p>
+          <p className="site-footer__capture-note">{FOOTER_CAPTURE.note}</p>
           <WaitlistForm layout="inline" />
         </div>
 
-        <nav className={styles.columns} aria-label="Footer">
+        <nav className="site-footer__columns" aria-label="Footer">
           {COLUMNS.map((column) => (
             <div key={column.title}>
-              <p className={`${styles.columnTitle} label`}>{column.title}</p>
-              <ul className={styles.columnList}>
+              <p className="site-footer__column-title label">{column.title}</p>
+              <ul className="site-footer__column-list">
                 {column.links.map((link) => (
                   <li key={link.label}>
                     {'external' in link && link.external ? (
@@ -88,13 +88,13 @@ export function SiteFooter() {
         </nav>
       </div>
 
-      <div className={`${styles.bottom} container`}>
-        <p className={styles.brand}>
-          <SunMark size={16} strokeWidth={4} className={styles.brandMark} />
+      <div className="site-footer__bottom container">
+        <p className="site-footer__brand">
+          <SunMark size={16} strokeWidth={4} className="site-footer__brand-mark" />
           <span>{BRAND.name}</span>
         </p>
-        <p className={`${styles.origin} label`}>{BRAND.originLong}</p>
-        <p className={styles.copyright}>&copy; 2026 {BRAND.name}. All rights reserved.</p>
+        <p className="site-footer__origin label">{BRAND.originLong}</p>
+        <p className="site-footer__copyright">&copy; 2026 {BRAND.name}. All rights reserved.</p>
       </div>
     </footer>
   );

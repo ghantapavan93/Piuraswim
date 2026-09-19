@@ -3,7 +3,7 @@ import { ContactForm } from '@/components/commerce/ContactForm';
 import { PageHero } from '@/components/layout/PageHero';
 import { CONTACT, SERVICE } from '@/data/site';
 import { image } from '@/lib/image';
-import styles from './page.module.css';
+import './page.css';
 
 export const metadata: Metadata = {
   title: 'Contact',
@@ -35,15 +35,15 @@ export default function ContactPage() {
         title={CONTACT.title}
       />
 
-      <div className={`${styles.grid} container`}>
-        <div className={styles.copy} data-reveal="fade">
+      <div className="contact-page container">
+        <div className="contact-page__copy" data-reveal="fade">
           <p className="label accent">Contact us</p>
           <h2 className="display display-md">
             {CONTACT.heading[0]} <em>{CONTACT.heading[1]}</em>
           </h2>
-          <p className={styles.body}>{CONTACT.body}</p>
+          <p className="contact-page__body">{CONTACT.body}</p>
 
-          <dl className={styles.answers}>
+          <dl className="contact-page__answers">
             {ANSWERS.map((entry) => (
               <div key={entry.question}>
                 <dt>{entry.question}</dt>
@@ -53,7 +53,7 @@ export default function ContactPage() {
           </dl>
         </div>
 
-        <div className={styles.formColumn} data-reveal="fade" data-reveal-delay="1">
+        <div className="contact-page__form-column" data-reveal="fade" data-reveal-delay="1">
           <ContactForm />
         </div>
       </div>

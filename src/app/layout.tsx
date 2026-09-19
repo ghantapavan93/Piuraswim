@@ -7,6 +7,7 @@ import { FitGuideDrawer } from '@/components/fit/FitGuideDrawer';
 import { FitGuideProvider } from '@/components/fit/FitGuideProvider';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { RevealObserver } from '@/components/ui/RevealObserver';
+import { SunMarkSymbol } from '@/components/ui/SunMark';
 import { BRAND, SITE_URL } from '@/data/site';
 import { organizationJsonLd } from '@/lib/structured-data';
 import './globals.css';
@@ -52,6 +53,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
       <body>
         {/* Marks the document as scripted before first paint so reveals can hide safely. */}
         <Script id="scripted" strategy="beforeInteractive">{`document.documentElement.setAttribute('data-js','')`}</Script>
+        <SunMarkSymbol />
         <a href="#main" className="skip-link">
           Skip to content
         </a>

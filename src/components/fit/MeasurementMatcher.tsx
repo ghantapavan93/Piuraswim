@@ -3,7 +3,8 @@
 import { useId, useState } from 'react';
 import { BETWEEN_SIZES, MEASURING_STEPS, matchSize } from '@/data/fit';
 import type { Size } from '@/data/products';
-import styles from './MeasurementMatcher.module.css';
+import './MeasurementMatcher.css';
+import { cx } from '@/lib/utils';
 
 type Measure = (typeof MEASURING_STEPS)[number]['key'];
 
@@ -33,15 +34,15 @@ export function MeasurementMatcher({ compact = false }: { compact?: boolean }) {
   const approximate = Object.values(matches).some((match) => match && !match.exact);
 
   return (
-    <div className={[styles.root, compact && styles.compact].filter(Boolean).join(' ')} id="match">
-      <div className={styles.fields}>
+    <div className={cx('measurement-matcher', compact && 'measurement-matcher--compact')} id="match">
+      <div className="measurement-matcher__fields">
         {MEASURING_STEPS.map((step) => (
-          <div key={step.key} className={styles.field}>
-            <label htmlFor={`${id}-${step.key}`} className={styles.fieldLabel}>
-              <span className={styles.letter}>{step.letter}</span>
+          <div key={step.key} className="measurement-matcher__field">
+            <label htmlFor={`${id}-${step.key}`} className="measurement-matcher__field-label">
+              <span className="measurement-matcher__letter">{step.letter}</span>
               <span className="label">{step.name}</span>
             </label>
-            <div className={styles.inputWrap}>
+            <div className="measurement-matcher__input-wrap">
               <input
                 id={`${id}-${step.key}`}
                 type="number"
@@ -52,14 +53,14 @@ export function MeasurementMatcher({ compact = false }: { compact?: boolean }) {
                 placeholder="—"
                 value={values[step.key]}
                 onChange={(event) => setValues({ ...values, [step.key]: event.target.value })}
-                className={styles.input}
+                className="measurement-matcher__input"
                 aria-describedby={`${id}-${step.key}-match`}
               />
-              <span className={styles.unit} aria-hidden="true">
+              <span className="measurement-matcher__unit" aria-hidden="true">
                 in
               </span>
             </div>
-            <p id={`${id}-${step.key}-match`} className={styles.match} aria-live="polite">
+            <p id={`${id}-${step.key}-match`} className="measurement-matcher__match" aria-live="polite">
               {matches[step.key]
                 ? `${matches[step.key]!.exact ? 'Chart size' : 'Nearest'} ${matches[step.key]!.size}`
                 : 'Enter inches'}
@@ -68,13 +69,13 @@ export function MeasurementMatcher({ compact = false }: { compact?: boolean }) {
         ))}
       </div>
 
-      <div className={styles.result} aria-live="polite">
-        <div className={styles.resultSizes}>
+      <div className="measurement-matcher__result" aria-live="polite">
+        <div className="measurement-matcher__result-sizes">
           <div>
             <span className="label">Top</span>
             <strong className="display">{top ?? '—'}</strong>
           </div>
-          <span className={styles.plus} aria-hidden="true">
+          <span className="measurement-matcher__plus" aria-hidden="true">
             +
           </span>
           <div>
@@ -82,14 +83,14 @@ export function MeasurementMatcher({ compact = false }: { compact?: boolean }) {
             <strong className="display">{bottom ?? '—'}</strong>
           </div>
         </div>
-        <p className={styles.resultNote}>
+        <p className="measurement-matcher__result-note">
           {top || bottom
             ? `Matched against the size chart only. Tops follow your bust; bottoms take the larger of waist and hips.${
                 approximate ? ' A measurement sits between rows, so the nearest row is shown.' : ''
               }`
             : 'Matched against the size chart only. Tops and bottoms are sized separately.'}
         </p>
-        <p className={styles.betweenSizes}>{BETWEEN_SIZES}</p>
+        <p className="measurement-matcher__between-sizes">{BETWEEN_SIZES}</p>
       </div>
     </div>
   );

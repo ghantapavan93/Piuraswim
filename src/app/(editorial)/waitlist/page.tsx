@@ -6,7 +6,7 @@ import { Icon } from '@/components/ui/Icon';
 import { SunMark } from '@/components/ui/SunMark';
 import { COASTLINES } from '@/data/site';
 import { image } from '@/lib/image';
-import styles from './page.module.css';
+import './page.css';
 
 export const metadata: Metadata = {
   title: 'The waitlist, first access to the next drop',
@@ -24,20 +24,20 @@ export default function WaitlistPage() {
         size="tall"
         display="xl"
       >
-        <p className={styles.heroBody}>{COASTLINES.access}</p>
-        <Link href="#join" className={`${styles.heroLink} text-link`}>
+        <p className="waitlist-page__hero-body">{COASTLINES.access}</p>
+        <Link href="#join" className="waitlist-page__hero-link text-link">
           Join the waitlist
           <Icon name="arrow-down" />
         </Link>
       </PageHero>
 
-      <section className={`${styles.access} container`} data-reveal="fade">
-        <SunMark size={32} className={styles.mark} />
+      <section className="waitlist-page__access container" data-reveal="fade">
+        <SunMark size={32} className="waitlist-page__mark" />
         <p className="label accent">Waitlist access</p>
         <h2 className="display display-lg">
           {COASTLINES.earlyTitle[0]} <em>{COASTLINES.earlyTitle[1]}</em>
         </h2>
-        <p className={styles.accessBody}>{COASTLINES.accessLong}</p>
+        <p className="waitlist-page__access-body">{COASTLINES.accessLong}</p>
       </section>
 
       <div id="join">

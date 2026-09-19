@@ -1,0 +1,36 @@
+.waitlist-page__hero-body {
+  max-width: 26rem;
+  margin-top: 1.5rem;
+  font-size: var(--text-base);
+  line-height: 1.7;
+  color: var(--color-foam);
+}
+
+.waitlist-page__hero-link {
+  margin-top: 2rem;
+  color: var(--color-foam-strong);
+}
+
+.waitlist-page__access {
+  display: grid;
+  gap: 1rem;
+  padding-block: var(--section-y);
+  max-width: 48rem;
+  margin-inline: 0;
+}
+
+.waitlist-page__access h2 {
+  max-width: 14ch;
+}
+
+.waitlist-page__mark {
+  color: var(--color-ember);
+  margin-bottom: 0.5rem;
+}
+
+.waitlist-page__access-body {
+  max-width: 30rem;
+  font-size: var(--text-base);
+  line-height: 1.75;
+  color: var(--color-ink-soft);
+}

@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import { Photo } from '@/components/ui/Photo';
 import Link from 'next/link';
 import { useState } from 'react';
 import { useCart } from '@/components/commerce/CartProvider';
@@ -11,7 +11,7 @@ import { getFitFacts, requireProduct, type Size } from '@/data/catalog';
 import { SIGNATURE_SET } from '@/data/site';
 import { image } from '@/lib/image';
 import { money } from '@/lib/utils';
-import styles from './SignatureSet.module.css';
+import './SignatureSet.css';
 
 type Print = keyof typeof SIGNATURE_SET.topHandles;
 
@@ -48,12 +48,12 @@ export function SignatureSet() {
   }
 
   return (
-    <section className={styles.section} aria-labelledby="signature-title">
-      <div className={styles.media}>
+    <section className="signature-set" aria-labelledby="signature-title">
+      <div className="signature-set__media">
         {PRINTS.map(({ key }) => {
           const asset = image(requireProduct(SIGNATURE_SET.topHandles[key]).images[0]);
           return (
-            <Image
+            <Photo
               key={key}
               src={asset.src}
               alt={`The Signature Triangle set in the ${key === 'sunchild' ? 'Sunchild' : 'Moonchild'} print`}
@@ -61,22 +61,22 @@ export function SignatureSet() {
               height={asset.height}
               sizes="(max-width: 899px) 100vw, 50vw"
               quality={85}
-              className={styles.image}
-              data-active={print === key || undefined}
+              className="signature-set__image"
+              data-active={print === key ? '' : undefined}
             />
           );
         })}
-        <p className={`${styles.caption} label`}>{SIGNATURE_SET.tagline}</p>
+        <p className="signature-set__caption label">{SIGNATURE_SET.tagline}</p>
       </div>
 
-      <div className={styles.panel}>
+      <div className="signature-set__panel">
         <p className="label accent">{SIGNATURE_SET.eyebrow}</p>
         <h2 id="signature-title" className="display display-lg">
           {SIGNATURE_SET.title[0]} <em>{SIGNATURE_SET.title[1]}</em>
         </h2>
-        <p className={styles.body}>{SIGNATURE_SET.body}</p>
+        <p className="signature-set__body">{SIGNATURE_SET.body}</p>
 
-        <dl className={styles.facts}>
+        <dl className="signature-set__facts">
           {facts.map((fact) => (
             <div key={`${fact.label}-${fact.value}`}>
               <dt>{fact.label}</dt>
@@ -85,7 +85,7 @@ export function SignatureSet() {
           ))}
         </dl>
 
-        <div className={styles.print} role="radiogroup" aria-label="Print">
+        <div className="signature-set__print" role="radiogroup" aria-label="Print">
           {PRINTS.map(({ key, label }) => {
             const thumb = image(requireProduct(SIGNATURE_SET.bottomHandles[key]).images[0]);
             return (
@@ -94,12 +94,12 @@ export function SignatureSet() {
                 type="button"
                 role="radio"
                 aria-checked={print === key}
-                className={styles.printOption}
-                data-selected={print === key || undefined}
+                className="signature-set__print-option"
+                data-selected={print === key ? '' : undefined}
                 onClick={() => setPrint(key)}
               >
-                <span className={`${styles.printThumb} frame`}>
-                  <Image src={thumb.src} alt="" width={thumb.width} height={thumb.height} sizes="48px" />
+                <span className="signature-set__print-thumb frame">
+                  <Photo src={thumb.src} alt="" width={thumb.width} height={thumb.height} sizes="48px" />
                 </span>
                 <span>The {label} print</span>
               </button>
@@ -107,28 +107,28 @@ export function SignatureSet() {
           })}
         </div>
 
-        <fieldset className={styles.sizes}>
+        <fieldset className="signature-set__sizes">
           <legend className="visually-hidden">Choose a size for the top and a size for the bottom</legend>
-          <div className={styles.sizeGroup}>
-            <div className={styles.sizeHead}>
+          <div className="signature-set__size-group">
+            <div className="signature-set__size-head">
               <span className="label">Top size</span>
-              <FitGuideButton className={styles.guide}>Size guide</FitGuideButton>
+              <FitGuideButton className="signature-set__guide">Size guide</FitGuideButton>
             </div>
             <SizeChips label="Top size" available={top.available} value={topSize} onChange={setTopSize} />
           </div>
-          <div className={styles.sizeGroup}>
-            <div className={styles.sizeHead}>
+          <div className="signature-set__size-group">
+            <div className="signature-set__size-head">
               <span className="label">Bottom size</span>
             </div>
             <SizeChips label="Bottom size" available={bottom.available} value={bottomSize} onChange={setBottomSize} />
           </div>
         </fieldset>
 
-        <div className={styles.summary}>
-          <p className={styles.price}>
+        <div className="signature-set__summary">
+          <p className="signature-set__price">
             <span className="label">The full set</span>
             <strong className="display">{money(total)}</strong>
-            <span className={styles.priceNote}>
+            <span className="signature-set__price-note">
               {top.title} {money(top.price)} + {bottom.title} {money(bottom.price)}
             </span>
           </p>
@@ -138,7 +138,7 @@ export function SignatureSet() {
           </button>
         </div>
 
-        <p className={styles.links}>
+        <p className="signature-set__links">
           <Link href={`/product/${top.handle}`} className="text-link">
             Shop the top
           </Link>

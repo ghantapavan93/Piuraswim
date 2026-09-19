@@ -1,0 +1,65 @@
+.set-card {
+  display: grid;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.set-card__media {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.35rem;
+}
+
+.set-card__frame {
+  aspect-ratio: 3 / 4;
+}
+
+.set-card__frame img {
+  transition: transform 1.4s var(--ease-out);
+}
+
+.set-card__media:hover .set-card__frame img {
+  transform: scale(1.03);
+}
+
+.set-card__copy {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.set-card__print {
+  font-size: 0.625rem;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.set-card__row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: baseline;
+}
+
+.set-card__title {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.set-card__price {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.set-card__pieces {
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+}
+
+.set-card__cta {
+  margin-top: 0.5rem;
+  justify-self: start;
+}

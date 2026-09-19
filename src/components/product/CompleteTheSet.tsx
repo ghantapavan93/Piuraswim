@@ -1,13 +1,13 @@
 'use client';
 
-import Image from 'next/image';
+import { Photo } from '@/components/ui/Photo';
 import Link from 'next/link';
 import { Icon } from '@/components/ui/Icon';
 import { SizeChips } from '@/components/ui/SizeChips';
 import { isSignaturePiece, type Product, type Size } from '@/data/catalog';
 import { image } from '@/lib/image';
 import { money } from '@/lib/utils';
-import styles from './CompleteTheSet.module.css';
+import './CompleteTheSet.css';
 
 type CompleteTheSetProps = {
   product: Product;
@@ -29,30 +29,30 @@ export function CompleteTheSet({ product, pair, productSize, pairSize, onPairSiz
   const setPrice = product.price + pair.price;
 
   return (
-    <section className={styles.root} aria-labelledby="complete-set-title">
+    <section className="complete-the-set" aria-labelledby="complete-set-title">
       <p id="complete-set-title" className="label accent">
         {designedAsOne ? 'Designed as one' : 'Complete the set'}
       </p>
 
-      <div className={styles.pair}>
-        <Link href={`/product/${pair.handle}`} className={`${styles.thumb} frame`}>
-          <Image src={asset.src} alt={pair.title} width={asset.width} height={asset.height} sizes="96px" />
+      <div className="complete-the-set__pair">
+        <Link href={`/product/${pair.handle}`} className="complete-the-set__thumb frame">
+          <Photo src={asset.src} alt={pair.title} width={asset.width} height={asset.height} sizes="96px" />
         </Link>
-        <div className={styles.body}>
-          <div className={styles.row}>
-            <Link href={`/product/${pair.handle}`} className={styles.title}>
+        <div className="complete-the-set__body">
+          <div className="complete-the-set__row">
+            <Link href={`/product/${pair.handle}`} className="complete-the-set__title">
               {pair.title}
             </Link>
-            <span className={styles.price}>{money(pair.price)}</span>
+            <span className="complete-the-set__price">{money(pair.price)}</span>
           </div>
-          <p className={styles.note}>
+          <p className="complete-the-set__note">
             The {pair.category === 'bottoms' ? 'bottom' : 'top'} this {product.category === 'tops' ? 'top' : 'bottom'} was
             designed with. Choose its size separately.
           </p>
         </div>
       </div>
 
-      <div className={styles.sizes}>
+      <div className="complete-the-set__sizes">
         <span className="label">{pair.category === 'bottoms' ? 'Bottom size' : 'Top size'}</span>
         <SizeChips label={`${pair.title} size`} available={pair.available} value={pairSize} onChange={onPairSize} />
       </div>

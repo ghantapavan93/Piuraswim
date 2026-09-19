@@ -1,0 +1,32 @@
+.ambient-video {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--color-tide-deep);
+}
+
+.ambient-video picture,
+.ambient-video__poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.ambient-video__poster {
+  object-fit: cover;
+}
+
+.ambient-video__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 900ms var(--ease-out);
+}
+
+.ambient-video__video[data-playing] {
+  opacity: 1;
+}

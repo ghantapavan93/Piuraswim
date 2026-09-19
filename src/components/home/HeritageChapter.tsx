@@ -1,47 +1,47 @@
-import Image from 'next/image';
+import { Photo } from '@/components/ui/Photo';
 import Link from 'next/link';
 import { Icon } from '@/components/ui/Icon';
 import { BRAND, HERITAGE } from '@/data/site';
 import { image } from '@/lib/image';
-import styles from './HeritageChapter.module.css';
+import './HeritageChapter.css';
 
 export function HeritageChapter() {
   const lead = image('lifestyle/life-61.jpg');
   const detail = image('lifestyle/life-71.jpg');
 
   return (
-    <section className={`${styles.section} on-dark`} aria-labelledby="heritage-title">
-      <div className={`${styles.grid} container`}>
-        <ol className={styles.index} data-reveal="fade">
+    <section className="heritage on-dark" aria-labelledby="heritage-title">
+      <div className="heritage__grid container">
+        <ol className="heritage__index" data-reveal="fade">
           {HERITAGE.chapters.map((chapter) => (
             <li key={chapter.index}>
-              <span className={styles.numeral}>{chapter.index}</span>
+              <span className="heritage__numeral">{chapter.index}</span>
               <span>{chapter.place}</span>
             </li>
           ))}
         </ol>
 
-        <div className={styles.copy} data-reveal="fade" data-reveal-delay="1">
+        <div className="heritage__copy" data-reveal="fade" data-reveal-delay="1">
           <p className="label accent-soft">{HERITAGE.eyebrow}</p>
           <h2 id="heritage-title" className="display display-xl">
             {HERITAGE.title[0]}
             <br />
             <em>{HERITAGE.title[1]}</em>
           </h2>
-          <p className={styles.body}>{HERITAGE.body}</p>
-          <blockquote className={styles.quote}>
+          <p className="heritage__body">{HERITAGE.body}</p>
+          <blockquote className="heritage__quote">
             <p>&ldquo;{HERITAGE.quote}&rdquo;</p>
             <footer className="label">{HERITAGE.attribution}</footer>
           </blockquote>
-          <Link href="/story" className={`${styles.link} text-link`}>
+          <Link href="/story" className="heritage__link text-link">
             Read the story
             <Icon name="arrow" />
           </Link>
         </div>
 
-        <div className={styles.media}>
-          <div className={`${styles.lead} frame`} data-reveal="mask">
-            <Image
+        <div className="heritage__media">
+          <div className="heritage__lead frame" data-reveal="mask">
+            <Photo
               src={lead.src}
               alt="A Piura bikini worn above a cove of turquoise water"
               width={lead.width}
@@ -50,8 +50,8 @@ export function HeritageChapter() {
               quality={85}
             />
           </div>
-          <div className={`${styles.detail} frame`} data-reveal="mask" data-reveal-delay="2">
-            <Image
+          <div className="heritage__detail frame" data-reveal="mask" data-reveal-delay="2">
+            <Photo
               src={detail.src}
               alt="A quiet rocky cove at midday"
               width={detail.width}
@@ -59,7 +59,7 @@ export function HeritageChapter() {
               sizes="(max-width: 899px) 50vw, 16vw"
             />
           </div>
-          <p className={`${styles.coordinates} label`}>{BRAND.coordinates}</p>
+          <p className="heritage__coordinates label">{BRAND.coordinates}</p>
         </div>
       </div>
     </section>

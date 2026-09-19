@@ -1,0 +1,81 @@
+.coastlines {
+  display: grid;
+  overflow: hidden;
+}
+
+.coastlines__copy {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  align-content: center;
+  padding: clamp(3.5rem, 7vw, 6rem) var(--gutter);
+}
+
+.coastlines__index {
+  display: flex;
+  gap: 1rem;
+  color: var(--color-foam);
+}
+
+.coastlines__title {
+  margin-block: 1rem 1.5rem;
+}
+
+.coastlines__body {
+  max-width: 26rem;
+  margin-bottom: 2rem;
+  font-size: var(--text-base);
+  line-height: 1.75;
+  color: var(--color-foam);
+}
+
+.coastlines__form {
+  max-width: 26rem;
+}
+
+.coastlines__note {
+  max-width: 26rem;
+  margin-top: 1.25rem;
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  line-height: 1.6;
+  text-transform: uppercase;
+  color: var(--color-foam);
+}
+
+.coastlines__media {
+  position: relative;
+  min-height: 60vh;
+  background: var(--color-tide-deep);
+}
+
+.coastlines__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 30%;
+}
+
+@media (min-width: 900px) {
+  .coastlines {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    min-height: 88vh;
+  }
+
+  .coastlines__copy {
+    padding-inline: clamp(2.5rem, 5vw, 5rem) 0;
+  }
+
+  /* The drop name crosses into the photograph. */
+  .coastlines__title {
+    width: max-content;
+    max-width: 150%;
+    text-shadow: 0 2px 40px rgba(17, 27, 30, 0.45);
+  }
+
+  .coastlines__media {
+    min-height: 0;
+  }
+}

@@ -1,12 +1,13 @@
 import { SIZE_CHART } from '@/data/fit';
-import styles from './SizeChart.module.css';
+import './SizeChart.css';
+import { cx } from '@/lib/utils';
 
 const range = ([low, high]: readonly [number, number]) => `${low} – ${high}″`;
 
 /** The published body-measurement chart, in inches. */
 export function SizeChart({ compact = false }: { compact?: boolean }) {
   return (
-    <table className={[styles.table, compact && styles.compact].filter(Boolean).join(' ')}>
+    <table className={cx('size-chart', compact && 'size-chart--compact')}>
       <caption className="visually-hidden">Body measurements in inches</caption>
       <thead>
         <tr>

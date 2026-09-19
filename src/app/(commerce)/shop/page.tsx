@@ -6,7 +6,7 @@ import { SetCard } from '@/components/product/SetCard';
 import { ALL_PRODUCTS, getAllSets, type Product } from '@/data/catalog';
 import { COLLECTIONS } from '@/data/site';
 import { superscript } from '@/lib/utils';
-import styles from './page.module.css';
+import './page.css';
 
 const VIEWS = [
   { key: 'all', label: 'All swim' },
@@ -75,35 +75,35 @@ export default async function ShopPage({ searchParams }: PageProps<'/shop'>) {
   const count = active === 'sets' ? sets.length : products.length;
 
   return (
-    <main id="main" className={`${styles.main} container`}>
-      <header className={styles.head}>
+    <main id="main" className="shop-page container">
+      <header className="shop-page__head">
         <p className="label accent">The collection</p>
-        <h1 className={`${styles.title} display display-lg`}>
-          {TITLES[active]} <sup className={styles.count}>{superscript(count)}</sup>
+        <h1 className="shop-page__title display display-lg">
+          {TITLES[active]} <sup className="shop-page__count">{superscript(count)}</sup>
         </h1>
-        <p className={styles.intro}>{INTROS[active]}</p>
-        <p className={styles.fitLine}>
+        <p className="shop-page__intro">{INTROS[active]}</p>
+        <p className="shop-page__fit-line">
           Every piece runs true to size, Small through X-Large.{' '}
           <FitGuideButton className="inline-link">Find your Piura fit</FitGuideButton>
         </p>
       </header>
 
-      <nav className={styles.filters} aria-label="Filter the collection">
-        <ul className={styles.views}>
+      <nav className="shop-page__filters" aria-label="Filter the collection">
+        <ul className="shop-page__views">
           {VIEWS.map((view) => (
             <li key={view.key}>
-              <Link href={hrefFor(view.key)} className={styles.filter} aria-current={active === view.key ? 'page' : undefined}>
+              <Link href={hrefFor(view.key)} className="shop-page__filter" aria-current={active === view.key ? 'page' : undefined}>
                 {view.label}
                 <sup>{superscript(view.key === 'sets' ? sets.length : filterProducts(view.key).length)}</sup>
               </Link>
             </li>
           ))}
         </ul>
-        <ul className={styles.prints}>
-          <li className={`${styles.printsLabel} label`}>By print</li>
+        <ul className="shop-page__prints">
+          <li className="shop-page__prints-label label">By print</li>
           {PRINTS.map((print) => (
             <li key={print.key}>
-              <Link href={hrefFor(print.key)} className={styles.filter} aria-current={active === print.key ? 'page' : undefined}>
+              <Link href={hrefFor(print.key)} className="shop-page__filter" aria-current={active === print.key ? 'page' : undefined}>
                 {print.label}
                 <sup>{superscript(filterProducts(print.key).length)}</sup>
               </Link>
@@ -113,13 +113,13 @@ export default async function ShopPage({ searchParams }: PageProps<'/shop'>) {
       </nav>
 
       {active === 'sets' ? (
-        <div className={styles.setGrid}>
+        <div className="shop-page__set-grid">
           {sets.map((set, index) => (
             <SetCard key={set.top.handle} set={set} stagger={index % 3} />
           ))}
         </div>
       ) : (
-        <div className={styles.grid}>
+        <div className="shop-page__grid">
           {products.map((product, index) => (
             <ProductCard key={product.handle} product={product} priority={index < 4} stagger={index % 4} />
           ))}
