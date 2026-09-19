@@ -18,7 +18,7 @@ async function walk(dir) {
   for (const entry of entries) {
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) files.push(...(await walk(full)));
-    else if (/\.(jpe?g|png|webp|avif)$/i.test(entry.name)) files.push(full);
+    else if (/\.(jpe?g|png|webp|avif|svg)$/i.test(entry.name)) files.push(full);
   }
   return files;
 }

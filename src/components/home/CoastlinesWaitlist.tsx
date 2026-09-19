@@ -1,77 +1,46 @@
-"use client";
+import Image from 'next/image';
+import { WaitlistForm } from '@/components/commerce/WaitlistForm';
+import { Reveal } from '@/components/ui/Reveal';
+import { COASTLINES } from '@/data/site';
+import { image } from '@/lib/image';
+import styles from './CoastlinesWaitlist.module.css';
 
-import { FormEvent, useState } from "react";
-import { COASTLINES } from "@/data/site";
-import { Icon } from "@/components/ui/Icon";
-import { Reveal } from "@/components/ui/Reveal";
+type CoastlinesWaitlistProps = {
+  /** The dedicated waitlist page asks for an optional phone number too. */
+  withPhone?: boolean;
+};
 
-export function CoastlinesWaitlist() {
-  const [email, setEmail] = useState("");
-  const [sent, setSent] = useState(false);
-
-  function submit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (!email) return;
-    setSent(true);
-  }
+export function CoastlinesWaitlist({ withPhone = false }: CoastlinesWaitlistProps) {
+  const finale = image('stills/runway-finale-wide.jpg');
 
   return (
-    <section className="coastlines-split-section" aria-labelledby="coastlines-title">
-      <div className="coastlines-split-content">
-        <Reveal className="coastlines-split-copy">
-          <p className="label text-ember-soft">The next drop</p>
-          <h2 id="coastlines-title" className="display-xl coastlines-heading">
+    <section className={`${styles.section} on-dark`} aria-labelledby="coastlines-title">
+      <div className={styles.copy}>
+        <Reveal>
+          <p className="label" style={{ color: 'var(--color-ember-soft)' }}>
+            {COASTLINES.eyebrow}
+          </p>
+          <h2 id="coastlines-title" className="display display-xl">
             <em>{COASTLINES.name}</em>
           </h2>
-          <p className="coastlines-body">{COASTLINES.body}</p>
-
-          <form className="coastlines-form" onSubmit={submit}>
-            {sent ? (
-              <p className="form-success">
-                You’re on the list. We’ll notify you 24 hours before the drop.
-              </p>
-            ) : (
-              <div className="coastlines-input-group">
-                <label className="sr-only" htmlFor="waitlist-email">
-                  Email address
-                </label>
-                <input
-                  id="waitlist-email"
-                  name="email"
-                  type="email"
-                  required
-                  placeholder="Your email address"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="coastlines-input"
-                />
-                <button
-                  type="submit"
-                  aria-label="Join waitlist"
-                  className="coastlines-submit-btn"
-                >
-                  <Icon name="arrow" size={16} />
-                </button>
-              </div>
-            )}
-          </form>
-
-          <p className="label coastlines-note">{COASTLINES.access}</p>
+          <p className={styles.body}>{COASTLINES.body}</p>
+          <div className={styles.form}>
+            <WaitlistForm layout="stacked" onDark withPhone={withPhone} />
+          </div>
+          <p className={styles.note}>{withPhone ? COASTLINES.formNote : COASTLINES.access}</p>
         </Reveal>
       </div>
 
-      <div className="coastlines-split-media">
-        <video
-          className="coastlines-video"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="none"
-          poster="/video/runway-poster.jpg"
-        >
-          <source src="/video/runway.mp4" type="video/mp4" />
-        </video>
+      <div className={styles.media}>
+        <Image
+          src={finale.src}
+          alt="The Coastlines runway finale at Miami Swim Week 2026"
+          width={finale.width}
+          height={finale.height}
+          sizes="(max-width: 899px) 100vw, 50vw"
+          quality={85}
+          className={styles.image}
+        />
       </div>
     </section>
   );

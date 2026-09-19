@@ -1,60 +1,55 @@
-import Image from "next/image";
-import Link from "next/link";
-import { image } from "@/lib/image";
-import { Reveal } from "@/components/ui/Reveal";
+import Image from 'next/image';
+import { Reveal } from '@/components/ui/Reveal';
+import { BRAND, REAL_WOMEN } from '@/data/site';
+import { image, type ImageKey } from '@/lib/image';
+import styles from './RealWomen.module.css';
 
-const ugcPhotos = [
-  { key: "lifestyle/life-06.jpg", alt: "Real women wearing Piura Swim at golden hour", offset: "" },
-  { key: "lifestyle/life-13.jpg", alt: "Real women wearing Piura Swim at golden hour", offset: "ugc-offset-down" },
-  { key: "lifestyle/life-42.jpg", alt: "Real women wearing Piura Swim at golden hour", offset: "" },
-  { key: "lifestyle/life-52.jpg", alt: "Real women wearing Piura Swim at golden hour", offset: "ugc-offset-down" },
-  { key: "lifestyle/life-56.jpg", alt: "Real women wearing Piura Swim at golden hour", offset: "" },
-] as const;
+const FRAMES: { key: ImageKey; alt: string }[] = [
+  { key: 'lifestyle/life-42.jpg', alt: 'Two friends in Piura mesh bottoms, photographed from behind on the sand' },
+  { key: 'lifestyle/life-13.jpg', alt: 'Two women walking the shoreline in Piura bikinis' },
+  { key: 'lifestyle/life-52.jpg', alt: 'Friends at a beach club in the Sunchild and Moonchild prints' },
+  { key: 'lifestyle/life-56.jpg', alt: 'Two women lying on a sunbed in Piura swim' },
+  { key: 'lifestyle/life-06.jpg', alt: 'A beach afternoon between the parasols' },
+];
 
 export function RealWomen() {
   return (
-    <section className="section real-women-section" aria-labelledby="real-women-title">
+    <section className="section" aria-labelledby="real-women-title">
       <div className="container">
-        <Reveal className="real-women-header">
-          <p className="label text-ember">Worn by real women</p>
-          <blockquote id="real-women-title" className="font-display real-women-quote">
-            “I’ve never felt <em>this good</em> in a bikini.”
+        <Reveal className={styles.head}>
+          <p className="label accent">{REAL_WOMEN.eyebrow}</p>
+          <blockquote id="real-women-title" className={`${styles.quote} display display-lg`}>
+            &ldquo;{REAL_WOMEN.quote[0]} <em>{REAL_WOMEN.quote[1]}</em> {REAL_WOMEN.quote[2]}&rdquo;
           </blockquote>
-          <p className="label real-women-sublabel">The sentence we hear most</p>
+          <p className={`${styles.caption} label`}>{REAL_WOMEN.caption}</p>
         </Reveal>
 
-        <div className="ugc-mosaic-grid">
-          {ugcPhotos.map((photo, index) => {
-            const asset = image(photo.key);
+        <ul className={styles.strip}>
+          {FRAMES.map((frame, index) => {
+            const asset = image(frame.key);
             return (
-              <Reveal key={photo.key} delay={index * 80} className={photo.offset}>
-                <div className="ugc-frame">
+              <Reveal key={frame.key} as="li" variant="mask" delay={index * 90} className={styles.item}>
+                <div className={`${styles.frame} frame`}>
                   <Image
                     src={asset.src}
-                    alt={photo.alt}
+                    alt={frame.alt}
                     width={asset.width}
                     height={asset.height}
-                    sizes="(max-width: 640px) 50vw, 20vw"
-                    className="ugc-image"
+                    sizes="(max-width: 719px) 60vw, 22vw"
                   />
                 </div>
               </Reveal>
             );
           })}
-        </div>
+        </ul>
 
-        <Reveal className="ugc-footer-note" delay={200}>
+        <Reveal className={styles.note}>
           <p>
-            Golden hour, candid, never over-edited. Tag{" "}
-            <Link
-              href="https://www.instagram.com/piuraswim"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="ugc-instagram-link"
-            >
-              @piuraswim
-            </Link>{" "}
-            to be featured.
+            {REAL_WOMEN.note} Tag{' '}
+            <a href={BRAND.instagram} target="_blank" rel="noopener noreferrer" className="inline-link">
+              {BRAND.instagramHandle}
+            </a>{' '}
+            {REAL_WOMEN.tag}
           </p>
         </Reveal>
       </div>

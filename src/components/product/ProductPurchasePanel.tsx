@@ -1,238 +1,142 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { useState } from "react";
-import type { Product, Size } from "@/data/products";
-import { getFitFacts, getSet, isAvailable, printLabel, SIZES } from "@/data/catalog";
-import { SERVICE } from "@/data/site";
-import { money } from "@/lib/utils";
-import { useCart } from "@/components/commerce/CartProvider";
-import { Icon } from "@/components/ui/Icon";
-import { FitGuideDrawer } from "./FitGuideDrawer";
+import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
+import { useCart } from '@/components/commerce/CartProvider';
+import { FitGuideButton } from '@/components/fit/FitGuideButton';
+import { Icon } from '@/components/ui/Icon';
+import { SizeChips } from '@/components/ui/SizeChips';
+import { getFitFacts, getPair, getSiblings, isAvailable, printLabel, sizingTip, type Product, type Size } from '@/data/catalog';
+import { SERVICE } from '@/data/site';
+import { money } from '@/lib/utils';
+import { CompleteTheSet } from './CompleteTheSet';
+import { ProductDetails } from './ProductDetails';
+import styles from './ProductPurchasePanel.module.css';
 
 export function ProductPurchasePanel({ product }: { product: Product }) {
-  const pair = getSet(product);
-  const matching = pair ? (product.category === "tops" ? pair.bottom : pair.top) : undefined;
-  const [size, setSize] = useState<Size>(product.available[0] ?? "S");
-  const [matchingSize, setMatchingSize] = useState<Size>(matching?.available[0] ?? "S");
-  const [expanded, setExpanded] = useState<string | null>("details");
-  const [addedNotice, setAddedNotice] = useState(false);
+  const pair = getPair(product);
   const { add } = useCart();
+  const [size, setSize] = useState<Size | null>(null);
+  const [pairSize, setPairSize] = useState<Size | null>(null);
+  const [needsSize, setNeedsSize] = useState(false);
+  const [showStickyBar, setShowStickyBar] = useState(false);
+  const addButton = useRef<HTMLButtonElement>(null);
   const facts = getFitFacts(product);
+  const siblings = getSiblings(product);
+  const tip = sizingTip(product);
 
-  function handleAddSolo() {
-    add(product, size);
-    if (typeof navigator !== "undefined" && "vibrate" in navigator) {
-      navigator.vibrate(12);
-    }
-    setAddedNotice(true);
-    setTimeout(() => setAddedNotice(false), 2000);
+  // The sticky bar appears on phones once the main button has scrolled away.
+  useEffect(() => {
+    const button = addButton.current;
+    if (!button) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      setShowStickyBar(!entry.isIntersecting && entry.boundingClientRect.top < 0);
+    });
+    observer.observe(button);
+    return () => observer.disconnect();
+  }, []);
+
+  function chooseSize(next: Size) {
+    setSize(next);
+    setNeedsSize(false);
+    // Mirror the first chosen size onto the pair when that size exists for it.
+    if (pair && pairSize === null && isAvailable(pair, next)) setPairSize(next);
   }
 
-  function handleAddSet() {
-    if (!matching || !pair) return;
-    add(product, size);
-    add(matching, matchingSize);
-    if (typeof navigator !== "undefined" && "vibrate" in navigator) {
-      navigator.vibrate(12);
+  function addToBag() {
+    if (!size) {
+      setNeedsSize(true);
+      return;
     }
-    setAddedNotice(true);
-    setTimeout(() => setAddedNotice(false), 2000);
+    add(product, size);
+  }
+
+  function addSet() {
+    if (!size || !pair || !pairSize) return;
+    add(product, size);
+    add(pair, pairSize);
   }
 
   return (
-    <section className="purchase-panel">
-      {/* Breadcrumb */}
-      <nav className="breadcrumb">
+    <div className={styles.panel}>
+      <nav className={styles.breadcrumb} aria-label="Breadcrumb">
         <Link href="/shop">Shop</Link>
-        <span>/</span>
-        <span>{product.category === "tops" ? "Tops" : "Bottoms"}</span>
-        <span>/</span>
-        <span>{product.title}</span>
+        <span aria-hidden="true">/</span>
+        <Link href={`/shop?filter=${product.category}`}>{product.category === 'tops' ? 'Tops' : 'Bottoms'}</Link>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">{product.title}</span>
       </nav>
 
-      {/* Eyebrow & Title */}
-      <p className="label text-ember">{printLabel(product)}</p>
-      <div className="purchase-title">
+      <p className={styles.printRow}>
+        <span className="label accent">{printLabel(product)}</span>
+        {siblings.map((sibling) => (
+          <Link key={sibling.handle} href={`/product/${sibling.handle}`} className={styles.sibling}>
+            Also in {printLabel(sibling).replace(/^The /, 'the ')}
+          </Link>
+        ))}
+      </p>
+      <div className={styles.titleRow}>
         <h1 className="display display-md">{product.title}</h1>
-        <strong className="purchase-price-tag">{money(product.price)}</strong>
+        <p className={styles.price}>{money(product.price)}</p>
       </div>
+      <p className={styles.description}>{product.description}</p>
 
-      <p className="purchase-description">{product.description}</p>
+      <dl className={styles.facts} aria-label="Fit at a glance">
+        {facts.map((fact) => (
+          <div key={fact.label}>
+            <dt>{fact.label}</dt>
+            <dd>{fact.value}</dd>
+          </div>
+        ))}
+      </dl>
 
-      {/* Model Spec Badge */}
-      <div className="model-spec-badge">
-        <span className="model-spec-icon">✦</span>
-        <span><strong>Model Fit:</strong> Sofia is 5’9″ (175cm), 32C bust, wearing size <strong>Small</strong>.</span>
-      </div>
-
-      {/* Fit At a Glance Matrix */}
-      <div className="fit-strip">
-        <span className="label text-ember">Fit At A Glance</span>
-        <div className="fit-facts-row">
-          {facts.map((fact) => (
-            <div key={fact.label} className="fit-fact-box">
-              <b>{fact.label}</b>
-              <span>{fact.value}</span>
-            </div>
-          ))}
+      <div className={styles.sizeBlock}>
+        <div className={styles.sizeHead}>
+          <span className="label" id="size-label">
+            Size
+          </span>
+          <FitGuideButton className={styles.guide}>Size guide</FitGuideButton>
         </div>
+        <SizeChips label="Size" available={product.available} value={size} onChange={chooseSize} />
+        <p className={styles.sizeHint} role="status" data-visible={needsSize || undefined}>
+          Please choose a size.
+        </p>
+        {tip ? <p className={styles.sizeTip}>{tip}</p> : null}
       </div>
 
-      {/* Size Selector */}
-      <div className="variant-section">
-        <div className="variant-label">
-          <span className="label text-ink">Select Your Size</span>
-          <FitGuideDrawer />
-        </div>
-        <SizeChips product={product} value={size} onChange={setSize} />
-      </div>
-
-      {/* Primary Add Button */}
-      <button
-        type="button"
-        className={`button button-dark purchase-add-btn ${addedNotice ? "is-success" : ""}`}
-        onClick={handleAddSolo}
-      >
-        <span>{addedNotice ? "✓ Added to Bag" : `Add to Bag · ${money(product.price)}`}</span>
-        <Icon name="arrow" size={15} />
+      <button ref={addButton} type="button" className="button button-block" onClick={addToBag}>
+        {size ? `Add to bag · ${money(product.price)}` : 'Add to bag'}
+        <Icon name="arrow" />
       </button>
+      <p className={styles.service}>
+        {SERVICE.shipping} {SERVICE.exchanges}
+      </p>
 
-      {/* 4 Brand Assurances */}
-      <div className="purchase-assurances-grid">
-        <span>{SERVICE.sizes}</span>
-        <span>{SERVICE.fabric}</span>
-        <span>{SERVICE.shipping}</span>
-        <span>{SERVICE.exchanges}</span>
-      </div>
+      {pair ? (
+        <CompleteTheSet
+          product={product}
+          pair={pair}
+          productSize={size}
+          pairSize={pairSize}
+          onPairSize={setPairSize}
+          onAddSet={addSet}
+        />
+      ) : null}
 
-      {/* Complete the Set Bundle Module */}
-      {matching && pair && (
-        <div className="pair-studio-module">
-          <div className="pair-studio-header">
-            <span className="label text-ember">Curated Pairing</span>
-            <h3 className="font-display pair-studio-title">
-              Complete the <em>Signature Set.</em>
-            </h3>
-          </div>
+      <ProductDetails product={product} />
 
-          <div className="pair-product-row">
-            <Link href={`/product/${matching.handle}`} className="pair-product-link">
-              {matching.title}
-            </Link>
-            <strong className="pair-price-tag">{money(matching.price)}</strong>
-          </div>
-
-          <div className="variant-section">
-            <div className="variant-label">
-              <span className="label text-ink">
-                {matching.category === "tops" ? "Top Size" : "Bottom Size"}
-              </span>
-              <span className="pair-note-pill">Choose separately</span>
-            </div>
-            <SizeChips product={matching} value={matchingSize} onChange={setMatchingSize} />
-          </div>
-
-          <button
-            type="button"
-            className="button button-light pair-add-btn"
-            onClick={handleAddSet}
-          >
-            <span>Add Complete Set · {money(pair.price)}</span>
-            <Icon name="arrow" size={15} />
-          </button>
-
-          <p className="pair-reassurance-note">
-            Top and bottom sizes are customized independently for your best fit.
+      <div className={styles.stickyBar} data-visible={showStickyBar || undefined} aria-hidden={!showStickyBar}>
+        <div>
+          <p className={styles.stickyTitle}>{product.title}</p>
+          <p className={styles.stickyMeta}>
+            {money(product.price)}
+            {size ? ` · Size ${size}` : ''}
           </p>
         </div>
-      )}
-
-      {/* Accordions */}
-      <div className="product-accordions">
-        <Accordion id="details" title="Details & Construction" expanded={expanded === "details"} setExpanded={setExpanded}>
-          <p>{product.fitNotes.join(" · ")}</p>
-        </Accordion>
-
-        <Accordion id="fit" title="Fit & Sizing Advice" expanded={expanded === "fit"} setExpanded={setExpanded}>
-          <p>Runs true to size. If between sizes in bottoms, size up for more coverage or down for a cheekier look. Triangle tops feature sliding cups that adapt across a full cup size.</p>
-        </Accordion>
-
-        <Accordion id="fabric" title="Peruvian Fabric & Care" expanded={expanded === "fabric"} setExpanded={setExpanded}>
-          <ul className="accordion-bullet-list">
-            {product.fabric.map((line) => (
-              <li key={line}>{line}</li>
-            ))}
-          </ul>
-        </Accordion>
-
-        <Accordion id="shipping" title="Complimentary Shipping & 14-Day Exchanges" expanded={expanded === "shipping"} setExpanded={setExpanded}>
-          <p>{SERVICE.shipping}</p>
-          <p>{SERVICE.exchangesLong}</p>
-        </Accordion>
+        <button type="button" className="button" onClick={addToBag} tabIndex={showStickyBar ? 0 : -1}>
+          {size ? 'Add to bag' : 'Choose a size'}
+        </button>
       </div>
-    </section>
-  );
-}
-
-function SizeChips({
-  product,
-  value,
-  onChange,
-}: {
-  product: Product;
-  value: Size;
-  onChange: (size: Size) => void;
-}) {
-  return (
-    <div className="size-chips-grid">
-      {SIZES.map((s) => {
-        const available = isAvailable(product, s);
-        return (
-          <button
-            key={s}
-            type="button"
-            disabled={!available}
-            className={`size-chip-btn ${value === s ? "is-selected" : ""}`}
-            onClick={() => onChange(s)}
-          >
-            <span>{s}</span>
-            <small>{available ? "In Stock" : "Sold Out"}</small>
-          </button>
-        );
-      })}
     </div>
-  );
-}
-
-function Accordion({
-  id,
-  title,
-  expanded,
-  setExpanded,
-  children,
-}: {
-  id: string;
-  title: string;
-  expanded: boolean;
-  setExpanded: (value: string | null) => void;
-  children: React.ReactNode;
-}) {
-  return (
-    <section className="product-accordion-item">
-      <button
-        type="button"
-        aria-expanded={expanded}
-        aria-controls={`${id}-content`}
-        onClick={() => setExpanded(expanded ? null : id)}
-        className="accordion-trigger-btn"
-      >
-        <span>{title}</span>
-        <Icon name={expanded ? "minus" : "plus"} size={14} />
-      </button>
-      <div id={`${id}-content`} hidden={!expanded} className="accordion-content-panel">
-        {children}
-      </div>
-    </section>
   );
 }

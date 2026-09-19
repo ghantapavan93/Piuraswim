@@ -1,7 +1,8 @@
-import { IMAGES, type ImageKey } from "@/data/image-manifest";
+import { IMAGES, type ImageAsset, type ImageKey } from '@/data/image-manifest';
 
-export type PiuraImage = (typeof IMAGES)[ImageKey];
+export type { ImageAsset, ImageKey };
 
-export function image(key: ImageKey): PiuraImage {
+/** Resolves a manifest key to its public path and intrinsic size. */
+export function image(key: ImageKey): ImageAsset {
   return IMAGES[key];
 }

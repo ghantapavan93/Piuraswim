@@ -1,0 +1,111 @@
+.grid {
+  display: grid;
+  gap: 3rem;
+}
+
+.copy {
+  display: grid;
+  gap: 1.5rem;
+  align-content: start;
+}
+
+.copy h2 {
+  max-width: 14ch;
+}
+
+.body {
+  max-width: 30rem;
+  font-size: var(--text-base);
+  line-height: 1.75;
+  color: var(--color-ink-soft);
+}
+
+.steps {
+  display: grid;
+  border-top: 1px solid var(--color-line);
+}
+
+.steps li {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  gap: 1rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.steps p {
+  margin-top: 0.25rem;
+  font-size: var(--text-sm);
+  color: var(--color-ink-soft);
+}
+
+.letter {
+  display: inline-grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--color-ember);
+  border-radius: 999px;
+  font-size: var(--text-xs);
+  color: var(--color-ember);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem 2rem;
+}
+
+.aside {
+  display: grid;
+  gap: 1.5rem;
+  align-content: start;
+}
+
+.figure {
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+  border: 1px solid var(--color-line);
+  background: var(--color-sand);
+}
+
+.figure img {
+  width: min(100%, 18rem);
+  height: auto;
+}
+
+.universal {
+  display: grid;
+  gap: 1rem;
+}
+
+.universal > div {
+  display: grid;
+  gap: 0.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.universal dt {
+  color: var(--color-muted);
+}
+
+.universal dd {
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--color-ink-soft);
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: 7fr 5fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .aside {
+    padding-top: 2rem;
+  }
+}

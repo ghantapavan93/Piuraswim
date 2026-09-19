@@ -1,31 +1,152 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
-import { getProduct, SIZES } from "@/data/catalog";
-import { SIGNATURE_SET } from "@/data/site";
-import { image } from "@/lib/image";
-import { money } from "@/lib/utils";
-import { useCart } from "@/components/commerce/CartProvider";
-import { Icon } from "@/components/ui/Icon";
+import Image from 'next/image';
+import Link from 'next/link';
+import { useState } from 'react';
+import { useCart } from '@/components/commerce/CartProvider';
+import { FitGuideButton } from '@/components/fit/FitGuideButton';
+import { Icon } from '@/components/ui/Icon';
+import { SizeChips } from '@/components/ui/SizeChips';
+import { getFitFacts, requireProduct, type Size } from '@/data/catalog';
+import { SIGNATURE_SET } from '@/data/site';
+import { image } from '@/lib/image';
+import { money } from '@/lib/utils';
+import styles from './SignatureSet.module.css';
 
-const families = ["sunchild", "moonchild"] as const;
+type Print = keyof typeof SIGNATURE_SET.topHandles;
 
+const PRINTS: { key: Print; label: string }[] = [
+  { key: 'sunchild', label: 'Sunchild' },
+  { key: 'moonchild', label: 'Moonchild' },
+];
+
+/**
+ * The Signature Triangle as one shopping unit: choose the print, then a size
+ * for the top and a size for the bottom, and add both with one action. The
+ * price is the plain sum of the two pieces; nothing is discounted or invented.
+ */
 export function SignatureSet() {
-  const [family, setFamily] = useState<(typeof families)[number]>("sunchild");
-  const [topSize, setTopSize] = useState<(typeof SIZES)[number] | null>(null);
-  const [bottomSize, setBottomSize] = useState<(typeof SIZES)[number] | null>(null);
+  const [print, setPrint] = useState<Print>('sunchild');
+  const [topSize, setTopSize] = useState<Size | null>(null);
+  const [bottomSize, setBottomSize] = useState<Size | null>(null);
   const { add } = useCart();
-  const top = getProduct(SIGNATURE_SET.topHandles[family])!;
-  const bottom = getProduct(SIGNATURE_SET.bottomHandles[family])!;
-  const hero = image(top.images[0]);
-  const label = family === "sunchild" ? "Sunchild" : "Moonchild";
-  const total = money(top.price + bottom.price);
-  const isResolved = Boolean(topSize && bottomSize);
-  const threadState = isResolved ? "is-resolved" : topSize || bottomSize ? "is-started" : "";
-  const chooseSize = (setSize: (size: (typeof SIZES)[number]) => void, size: (typeof SIZES)[number]) => { setSize(size); if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(12); };
-  return <section className="signature-set"><div className="signature-image"><Image src={hero.src} alt={`${label} Triangle set`} width={hero.width} height={hero.height} sizes="(max-width: 900px) 100vw, 54vw" /><span className="signature-caption label">Designed as one</span></div><div className="signature-panel"><p className="label accent">{SIGNATURE_SET.eyebrow}</p><h2 className="display display-lg">{SIGNATURE_SET.title[0]}<br /><em>{SIGNATURE_SET.title[1]}</em></h2><p className="signature-body">The set that started it all. Top and bottom are designed as one, with a flattering, cheeky fit.</p><div className="print-switcher" aria-label="Choose print">{families.map((item) => <button key={item} type="button" className={family === item ? "is-selected" : ""} onClick={() => setFamily(item)}><span className={`print-dot print-dot-${item}`} />The {item === "sunchild" ? "Sunchild" : "Moonchild"} print</button>)}</div><fieldset className="set-string"><legend>Build your Signature Triangle</legend><div className="set-string-controls"><SizeSelect label="Top size" value={topSize} setValue={(size) => chooseSize(setTopSize, size)} /><div className={`string-thread ${threadState}`} aria-hidden="true"><span /><i /><span /></div><SizeSelect label="Bottom size" value={bottomSize} setValue={(size) => chooseSize(setBottomSize, size)} /></div><div className="set-assembly"><output aria-live="polite"><span className="label">{isResolved ? "Your set" : "Your set awaits"}</span><strong>{isResolved ? total : "—"}</strong><small>{isResolved ? `Top ${topSize} · Bottom ${bottomSize}` : "Choose a top and bottom size"}</small></output><button type="button" className="button button-dark signature-add" disabled={!isResolved} onClick={() => { if (!topSize || !bottomSize) return; add(top, topSize); add(bottom, bottomSize); }}>{isResolved ? `Add the set · ${total}` : "Choose your sizes"}<Icon name="arrow" size={16} /></button></div></fieldset><div className="set-fit"><span>Classic triangle</span><i /> <span>Adjustable ties</span><i /> <span>Minimal / cheeky</span></div><div className="signature-links"><Link href={`/product/${top.handle}`}>Shop top</Link><Link href={`/product/${bottom.handle}`}>Shop bottom</Link><Link href="/size-guide">Find your Piura fit</Link></div></div></section>;
-}
 
-function SizeSelect({ label, value, setValue }: { label: string; value: string | null; setValue: (value: "S" | "M" | "L" | "XL") => void }) { return <div className="size-select"><div><span className="label">{label}</span><Link href="/size-guide">Size guide</Link></div><div role="group" aria-label={label}>{SIZES.map((size) => <button key={size} type="button" aria-pressed={value === size} className={value === size ? "is-selected" : ""} onClick={() => setValue(size)}>{size}</button>)}</div></div>; }
+  const top = requireProduct(SIGNATURE_SET.topHandles[print]);
+  const bottom = requireProduct(SIGNATURE_SET.bottomHandles[print]);
+  const total = top.price + bottom.price;
+  const ready = Boolean(topSize && bottomSize);
+
+  // Fit facts published for the top and bottom, without repeating shared lines.
+  const facts = [...getFitFacts(top), ...getFitFacts(bottom)].filter(
+    (fact, index, all) => all.findIndex((other) => other.value === fact.value) === index,
+  );
+
+  function addSet() {
+    if (!topSize || !bottomSize) return;
+    add(top, topSize);
+    add(bottom, bottomSize);
+  }
+
+  return (
+    <section className={styles.section} aria-labelledby="signature-title">
+      <div className={styles.media}>
+        {PRINTS.map(({ key }) => {
+          const asset = image(requireProduct(SIGNATURE_SET.topHandles[key]).images[0]);
+          return (
+            <Image
+              key={key}
+              src={asset.src}
+              alt={`The Signature Triangle set in the ${key === 'sunchild' ? 'Sunchild' : 'Moonchild'} print`}
+              width={asset.width}
+              height={asset.height}
+              sizes="(max-width: 899px) 100vw, 50vw"
+              quality={85}
+              className={styles.image}
+              data-active={print === key || undefined}
+            />
+          );
+        })}
+        <p className={`${styles.caption} label`}>{SIGNATURE_SET.tagline}</p>
+      </div>
+
+      <div className={styles.panel}>
+        <p className="label accent">{SIGNATURE_SET.eyebrow}</p>
+        <h2 id="signature-title" className="display display-lg">
+          {SIGNATURE_SET.title[0]} <em>{SIGNATURE_SET.title[1]}</em>
+        </h2>
+        <p className={styles.body}>{SIGNATURE_SET.body}</p>
+
+        <dl className={styles.facts}>
+          {facts.map((fact) => (
+            <div key={`${fact.label}-${fact.value}`}>
+              <dt>{fact.label}</dt>
+              <dd>{fact.value}</dd>
+            </div>
+          ))}
+        </dl>
+
+        <div className={styles.print} role="radiogroup" aria-label="Print">
+          {PRINTS.map(({ key, label }) => {
+            const thumb = image(requireProduct(SIGNATURE_SET.bottomHandles[key]).images[0]);
+            return (
+              <button
+                key={key}
+                type="button"
+                role="radio"
+                aria-checked={print === key}
+                className={styles.printOption}
+                data-selected={print === key || undefined}
+                onClick={() => setPrint(key)}
+              >
+                <span className={`${styles.printThumb} frame`}>
+                  <Image src={thumb.src} alt="" width={thumb.width} height={thumb.height} sizes="48px" />
+                </span>
+                <span>The {label} print</span>
+              </button>
+            );
+          })}
+        </div>
+
+        <fieldset className={styles.sizes}>
+          <legend className="visually-hidden">Choose a size for the top and a size for the bottom</legend>
+          <div className={styles.sizeGroup}>
+            <div className={styles.sizeHead}>
+              <span className="label">Top size</span>
+              <FitGuideButton className={styles.guide}>Size guide</FitGuideButton>
+            </div>
+            <SizeChips label="Top size" available={top.available} value={topSize} onChange={setTopSize} />
+          </div>
+          <div className={styles.sizeGroup}>
+            <div className={styles.sizeHead}>
+              <span className="label">Bottom size</span>
+            </div>
+            <SizeChips label="Bottom size" available={bottom.available} value={bottomSize} onChange={setBottomSize} />
+          </div>
+        </fieldset>
+
+        <div className={styles.summary}>
+          <p className={styles.price}>
+            <span className="label">The full set</span>
+            <strong className="display">{money(total)}</strong>
+            <span className={styles.priceNote}>
+              {top.title} {money(top.price)} + {bottom.title} {money(bottom.price)}
+            </span>
+          </p>
+          <button type="button" className="button" disabled={!ready} onClick={addSet}>
+            {ready ? `Add the set · ${money(total)}` : 'Choose both sizes'}
+            <Icon name="arrow" />
+          </button>
+        </div>
+
+        <p className={styles.links}>
+          <Link href={`/product/${top.handle}`} className="text-link">
+            Shop the top
+          </Link>
+          <Link href={`/product/${bottom.handle}`} className="text-link">
+            Shop the bottom
+          </Link>
+        </p>
+      </div>
+    </section>
+  );
+}

@@ -1,0 +1,65 @@
+.section {
+  display: grid;
+}
+
+.copy {
+  display: grid;
+  align-content: center;
+  padding: clamp(3.5rem, 7vw, 6rem) var(--gutter);
+}
+
+.copy h2 {
+  margin-block: 1rem 1.5rem;
+}
+
+.body {
+  max-width: 26rem;
+  margin-bottom: 2rem;
+  font-size: var(--text-base);
+  line-height: 1.75;
+  color: var(--color-foam);
+}
+
+.form {
+  max-width: 26rem;
+}
+
+.note {
+  max-width: 26rem;
+  margin-top: 1.25rem;
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  line-height: 1.6;
+  text-transform: uppercase;
+  color: var(--color-foam);
+}
+
+.media {
+  position: relative;
+  min-height: 60vh;
+  background: var(--color-tide-deep);
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 30%;
+}
+
+@media (min-width: 900px) {
+  .section {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    min-height: 88vh;
+  }
+
+  .copy {
+    padding-inline: clamp(2.5rem, 5vw, 5rem);
+  }
+
+  .media {
+    min-height: 0;
+  }
+}

@@ -1,0 +1,26 @@
+.section {
+  padding-block: var(--section-y-tight) var(--section-y);
+  border-top: 1px solid var(--color-line);
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem 0.75rem;
+  margin-top: 2rem;
+}
+
+@media (min-width: 720px) {
+  .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: 1.5rem;
+  }
+}

@@ -1,82 +1,50 @@
-import Link from "next/link";
-import { HERO, BRAND } from "@/data/site";
-import { Icon } from "@/components/ui/Icon";
-import { Reveal } from "@/components/ui/Reveal";
+import Link from 'next/link';
+import { AmbientVideo } from '@/components/ui/AmbientVideo';
+import { Icon } from '@/components/ui/Icon';
+import { Reveal } from '@/components/ui/Reveal';
+import { BRAND, HERO } from '@/data/site';
+import { image } from '@/lib/image';
+import styles from './CampaignHero.module.css';
 
 export function CampaignHero() {
   return (
-    <section className="campaign-hero">
-      <div className="campaign-hero-media">
-        <video
-          className="hero-video hero-video-desktop"
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster="/video/piura-water-wide-poster.jpg"
-        >
-          <source src="/video/piura-water-wide.mp4" type="video/mp4" />
-        </video>
-        <video
-          className="hero-video hero-video-mobile"
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster="/video/piura-hero-water-01-poster.jpg"
-        >
-          <source src="/video/piura-hero-water-01.mp4" type="video/mp4" />
-        </video>
+    <section className={`${styles.hero} under-header`} aria-labelledby="hero-title">
+      <AmbientVideo
+        desktop={{ src: '/video/piura-water-wide.mp4', poster: image('stills/shoreline-wide-poster.jpg') }}
+        mobile={{ src: '/video/piura-hero-water-01.mp4', poster: image('stills/shoreline-portrait-poster.jpg') }}
+        alt="A woman in a Piura bikini sitting in shallow water at golden hour"
+      />
+      <div className={styles.scrim} aria-hidden="true" />
+
+      <div className={`${styles.meta} container`}>
+        <p className="label">{HERO.eyebrow}</p>
+        <p className={`${styles.coordinates} label`}>{BRAND.coordinates}</p>
       </div>
 
-      <div className="hero-scrim" />
-
-      <div className="campaign-hero-top container">
-        <p className="label">Nº 01 · Eternal Heat</p>
-        <p className="label hero-desktop-only">{BRAND.coordinates}</p>
-      </div>
-
-      <div className="campaign-hero-content container">
+      <div className={`${styles.content} container`}>
         <Reveal>
-          <h1 className="display-xl hero-heading">
-            <span className="hero-mobile-only">
-              A love letter <em>to the water.</em>
-            </span>
-            <span className="hero-desktop-only">
-              A love letter<br />
-              <em>to the water.</em>
-            </span>
+          <h1 id="hero-title" className={`${styles.title} display display-xl`}>
+            {HERO.title[0]}
+            <br />
+            <em>{HERO.title[1]}</em>
           </h1>
-
-          <p className="hero-body">{HERO.body}</p>
-
-          <div className="hero-actions">
-            <Link href={HERO.primary.href} className="cta-underline label hero-cta-primary">
+          <p className={styles.body}>{HERO.body}</p>
+          <div className={styles.actions}>
+            <Link href={HERO.primary.href} className="button button-light">
               {HERO.primary.label}
-              <Icon name="arrow" size={14} />
+              <Icon name="arrow" />
             </Link>
-            <Link href="/waitlist" className="cta-underline label hero-cta-secondary">
-              Join the waitlist
+            <Link href={HERO.secondary.href} className={`${styles.secondary} text-link`}>
+              {HERO.secondary.label}
+              <Icon name="arrow" />
             </Link>
           </div>
         </Reveal>
       </div>
 
-      <div className="hero-scroll-indicator" aria-hidden="true">
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M12 5v14" />
-          <path d="m19 12-7 7-7-7" />
-        </svg>
-      </div>
+      <p className={styles.scrollHint} aria-hidden="true">
+        <Icon name="arrow-down" size={16} />
+      </p>
     </section>
   );
 }

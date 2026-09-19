@@ -1,0 +1,70 @@
+.group {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.chip {
+  position: relative;
+  min-height: 3rem;
+  border: 1px solid var(--color-line);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--color-ink);
+  transition:
+    border-color var(--duration-ui) var(--ease-out),
+    background-color var(--duration-ui) var(--ease-out),
+    color var(--duration-ui) var(--ease-out);
+}
+
+.chip:hover:not(:disabled) {
+  border-color: var(--color-ink);
+}
+
+.chip[data-selected] {
+  background: var(--color-ink);
+  border-color: var(--color-ink);
+  color: var(--color-ivory);
+}
+
+.chip:disabled {
+  color: var(--color-muted);
+  cursor: not-allowed;
+  background: repeating-linear-gradient(
+    135deg,
+    transparent 0 6px,
+    rgba(36, 31, 25, 0.06) 6px 7px
+  );
+}
+
+.chip:disabled::after {
+  content: '';
+  position: absolute;
+  left: 30%;
+  right: 30%;
+  top: 50%;
+  height: 1px;
+  background: var(--color-muted);
+  transform: rotate(-20deg);
+}
+
+.compact .chip {
+  min-height: 2.25rem;
+  font-size: var(--text-xs);
+}
+
+.onDark .chip {
+  border-color: var(--color-line-on-dark);
+  color: var(--color-foam-strong);
+}
+
+.onDark .chip:hover:not(:disabled) {
+  border-color: var(--color-foam-strong);
+}
+
+.onDark .chip[data-selected] {
+  background: var(--color-ivory);
+  border-color: var(--color-ivory);
+  color: var(--color-ink);
+}

@@ -1,0 +1,265 @@
+{
+ "mechanism_library": [
+  {
+   "rank": 1,
+   "mechanism": "Pair module with independent size selectors and a single 'Add both' action",
+   "seen_at": [
+    "Triangl (Top Size + Bottom Size selectors in one buy box, 'Add bundle to cart')",
+    "Bāmba Swim (COMPLETE THE LOOK: matching bottom, own size selector, Add button, stock state)",
+    "Kulani Kinis (Complete The Look cards, each with own Quick Add sizes)",
+    "Bananhot ('pairs well with' rendered as a full card with size buttons)",
+    "SAME Los Angeles (Complete the Look + same-colorway carousel)",
+    "Blackbough Swim (reciprocal 'Pair with' copy + ADD TO BAG on recommendation cards)"
+   ],
+   "what_it_solves_for_piura": "Piura sells top and bottom separately ($42-$49) and already says 'Every Piura piece is designed as one half of a whole', but the PDP cross-sell is a 'View the bottom' link and an 'Add the set' control with no way to choose a different size for each half. Bodies are rarely the same size top and bottom; this is the main reason a set purchase stalls or returns.",
+   "concrete_implementation": "On every PDP, directly under 'Add to bag', build a section titled in Piura's voice (e.g. 'The other half'). Content: matching piece image (Sunchild Triangle Top -> Sunchild Triangle Bottom; Marina Tri Bandeau Top -> Marina Tri Bandeau Bottom), its name and price, its own S/M/L/XL chips with sold-out sizes disabled, a live total line ('Top M + Bottom L · $98'), and one button 'Add both' that adds two line items. Default the second size to the first's chosen size but let it change. Mirror the module on the bottom's PDP pointing to the top. Repeat the pair state in the sticky mobile bar ('Add both · $98'). Cart drawer groups the two lines under a 'Sunchild Triangle · set' header. Uses only real prices; no discount is implied since $49 + $49 = $98 already.",
+   "risk_of_looking_derivative": "low"
+  },
+  {
+   "rank": 2,
+   "mechanism": "Fixed 'fit at a glance' strip beside the size selector: coverage, support, adjustability, lining, model stats, between-sizes rule",
+   "seen_at": [
+    "Vitamin A (one-line 'Triangle top • Ties around neck and back • Removable cups • Model is wearing a size small')",
+    "LSPACE (model line 'Courtney is wearing size S | Height 5'8\", Bust 32\", Waist 25\"' + Runs Small / True to Size / Runs Large)",
+    "Frankies Bikinis (true-to-size statement + model height/bust/waist/hips in in/cm)",
+    "Kulani Kinis (one fit sentence in the same PDP slot on every product)",
+    "Sommer Swim ('Fit Scale: Runs Small' badge + 'Find My Fit' link at size buttons)",
+    "Gooseberry Intimates (construction-first description, 'suited to both small & fuller busts')"
+   ],
+   "what_it_solves_for_piura": "Both fact-checked PDPs give only 'Model wears size Small, fits true to size' with no height, bust, coverage tier, padding or cup info. The genuinely good advice ('Size up in bottoms for more coverage, down for extra cheeky. Triangle tops tie to you, so they flex a full size.') is buried on /size-guide, not at the size choice.",
+   "concrete_implementation": "Component 'FitStrip' rendered between the S/M/L/XL chips and 'Add to bag' on all 16 PDPs. Four short rows, same order everywhere: Coverage (bottoms: Piura's own three-step word, e.g. cheeky / moderate / full; tops: triangle / bandeau), Support & adjust (e.g. 'Ties at neck and back, flex a full size' for triangle; 'Side support, pull-on' for Marina bandeau), Lining (from real copy: 'Fully lined, no hardware against the skin'), Model ('wears S · height · bust · hips' once the brand supplies numbers; until then render the field only if data exists, never a placeholder number). Below the strip, one line: the existing 'Between sizes?' sentence relevant to the piece (bottoms line on bottoms, triangle line on triangle tops). 'Size guide' link sits on the same row as the Size label and opens a drawer, not a page.",
+   "risk_of_looking_derivative": "low"
+  },
+  {
+   "rank": 3,
+   "mechanism": "One shared fit vocabulary reused as filter chips, card labels, PDP strip and size-guide glossary",
+   "seen_at": [
+    "Frankies Bikinis (Bottom Coverage filter values reappear in PDP copy 'Skimpy triangle coverage')",
+    "Vitamin A (Coverage nav facet + 'Control Type: Classic Coverage' tag + body copy)",
+    "LSPACE (same coverage/style words in nav, fit guide definitions and PDP bullets)",
+    "Blackbough Swim ('Coverage - Tops' / 'Coverage - Bottoms' filters driven by tags)",
+    "Heavy Manners (coverage word in product name and first sentence)",
+    "Sommer Swim (coverage terms defined once on the guide, reused as feature bullets)"
+   ],
+   "what_it_solves_for_piura": "Piura's /shop has filters only as query params (tops/bottoms/sunchild/moonchild/classics), no coverage or cut axis, and the word 'cheeky' appears once on the home page. Shoppers choose by cut and coverage before print; without a shared vocabulary the 16 pieces cannot be compared.",
+   "concrete_implementation": "Define a tiny data model per SKU: piece (top/bottom), family (Sunchild/Moonchild/Classics), cut (Triangle/Bandeau/Mesh/Tri Bandeau), coverage (bottoms only, Piura's three words), support (tops only). On /shop render two horizontally scrollable chip rows above the grid: row 1 Tops / Bottoms / Sunchild / Moonchild / Classics; row 2 Triangle / Bandeau / Mesh / coverage words. Chips filter client-side instantly (16 items, no reload) and write to the existing ?filter= param so links still work. Each card shows one small label from the same data (e.g. 'Cheeky'). The size-guide drawer opens with a three-line glossary defining the same words. Exact words must be Piura's; 'cheeky' is already theirs, the other two need brand sign-off.",
+   "risk_of_looking_derivative": "medium"
+  },
+  {
+   "rank": 4,
+   "mechanism": "Size guide split into a Tops table (bust, underbust, suggested cup) and a Bottoms table (waist, hips), in/cm toggle, opened as a drawer from the PDP",
+   "seen_at": [
+    "Triangl (Tops vs Bottoms tabs, cup mapping, CM/IN toggle)",
+    "Bāmba Swim (Swim Tops table with Cup Size column; Swim Bottoms table with Waist/Hips)",
+    "Bananhot (Top chart with Cup Size per row; Bottom chart waist/hips cm+in)",
+    "Monday Swimwear (category-tabbed guide, Bust/Under Bust vs Waist/Hip)",
+    "Blackbough Swim ('VIEW SIZE GUIDE' on the same row as the SIZE label)",
+    "SAME Los Angeles (Size Chart accordion in inches/centimeters inside the buy panel)"
+   ],
+   "what_it_solves_for_piura": "The fact-checked chart is one table, inches only, with no underbust or cup guidance for tops and no per-cut notes beyond the triangle-tie line. Piura ships Peru-made product to a US market that mixes units, and separates are sized independently.",
+   "concrete_implementation": "Rebuild /size-guide and expose it as a right-side drawer ('SizeDrawer') from every PDP. Drawer order: (1) Piura's existing three measuring instructions A/B/C with a single line diagram; (2) tab 'Tops': S-XL rows with Bust (existing ranges), plus Underbust and Suggested cup columns only once the brand supplies them (render the two columns hidden until data exists); (3) tab 'Bottoms': S-XL rows with Waist and Hips (existing); (4) in / cm toggle that converts the existing inch ranges (2.54 factor, rounded to whole cm) - this is arithmetic, not invented data; (5) the existing 'Between sizes?' copy and 'Still unsure? Write to us' link. Keep it four rows per tab so it fits a phone screen without scrolling the table.",
+   "risk_of_looking_derivative": "low"
+  },
+  {
+   "rank": 5,
+   "mechanism": "Homepage as a router: one job and one CTA per section, prices held to the grid, family hero followed by that family's pieces",
+   "seen_at": [
+    "Vitamin A (zero product cards on home; tiles each with one Explore CTA)",
+    "Blackbough Swim (no prices on home; image tiles + carousels with SEE ALL)",
+    "Tropic of C (hero + grid per family, four times)",
+    "LSPACE (hero -> three-tile grid -> one-paragraph editorial -> hero)",
+    "Heavy Manners (five-block homepage, single CTA)"
+   ],
+   "what_it_solves_for_piura": "The UX thesis is 'fall in love with the world' before buying. The current home has ten sections including a four-card 'Just dropped' grid with prices above the collection doors and the heritage story. Prices arriving before the world is the interface getting louder than the product.",
+   "concrete_implementation": "Reorder the home to six sections, each with exactly one CTA: (1) Hero 'A love letter to the water.' with the existing 'Nº 01 · Eternal Heat' / '5°12′ S · Piura, Perú' eyebrow (optionally pair it with Miami's real latitude to state the two coasts; a geographic fact, not brand data); (2) Three doors: Sunchild / Moonchild / Classics, image-led, one line each, no prices; (3) The Signature Triangle: the one place a price appears on home ('The full set · $98'), with 'Shop the set'; (4) Two coasts: heritage block reusing the verbatim founder facts (Miami weekends, grandmother's bikinis, city of eternal heat) as a split Miami | Peru layout; (5) 'Worn by real women' UGC strip with the existing tag line; (6) 'Coastlines.' waitlist using only the facts on site ('As seen at Swim Week 2026. Cut in small numbers.'). Drop 'Just dropped' from home; a 'New' chip on /shop covers it.",
+   "risk_of_looking_derivative": "medium"
+  },
+  {
+   "rank": 6,
+   "mechanism": "Size chips on collection cards with quick add and sold-out sizes disabled",
+   "seen_at": [
+    "Kulani Kinis (Quick Add reveals per-size Add to bag)",
+    "Monday Swimwear (size row on card + Quick Add)",
+    "Bananhot (XS-XL buttons on every card, 'Variant sold out or unavailable')",
+    "Gooseberry Intimates (size dropdown on card)",
+    "SAME Los Angeles (size chips under image, Sold Out inline)",
+    "Tropic of C (size row + swatches + quick add badge)"
+   ],
+   "what_it_solves_for_piura": "Someone building a set from separates needs two adds; the current /shop grid is client-rendered with no stock signal and every add requires a PDP visit. Four sizes fit on one line even on a phone, so the pattern costs Piura nothing in density.",
+   "concrete_implementation": "Card anatomy: image, name, family label, price, then a four-chip row S M L XL. Chips are tap-to-add (adds that variant to the cart drawer with a two-second confirmation on the chip) and struck through when the variant is out of stock; a fully sold-out piece shows 'Notify me' in place of the chips. On the card, an 'Other half' text link opens the matching piece's card in place so both halves can be added from the grid. Cards otherwise stay quiet: no badges beyond a single 'New' when true, no ratings, no swatches.",
+   "risk_of_looking_derivative": "low"
+  },
+  {
+   "rank": 7,
+   "mechanism": "Fit guide as per-cut cards: every cut shot in one Classics solid, front and back, with a coverage scale and a support scale",
+   "seen_at": [
+    "Frankies Bikinis (each silhouette in black, front/back, Coverage and Support sliders)",
+    "Monday Swimwear (per-style cards with FRONT/BACK photos, coverage label, support label, cup-range note, Shop Now)",
+    "LSPACE (style definitions with one support/adjustability sentence each)",
+    "Vitamin A (support tier + adjustability per top style)"
+   ],
+   "what_it_solves_for_piura": "Piura has roughly six cuts across 16 pieces (Triangle top, Bandeau top, Triangle bottom, Mesh bottom, Tri Bandeau top/bottom, plus Bella/Bali/Sara). Prints hide shape; a shopper cannot tell a Mesh bottom's coverage from a Triangle bottom's on a Sunchild photo.",
+   "concrete_implementation": "Add a 'The cuts' section to the size-guide page (and a compact version inside the drawer). One card per cut: front and back photo shot in one Classics solid, cut name, a three-step coverage indicator for bottoms (Piura's words, rendered as three dots with one filled) and a two-step support indicator for tops, one sentence on adjustability, and the exact same mini-indicator reused on the PDP FitStrip so the guide and the PDP share one vocabulary. Link each card to /shop filtered by that cut. Do not use slider graphics or the Micro/Skimpy/Cheekiest/Tanga/Bitsy/Teeny words.",
+   "risk_of_looking_derivative": "medium"
+  },
+  {
+   "rank": 8,
+   "mechanism": "Trust lines under the CTA and a cart drawer with an honest free-shipping progress line",
+   "seen_at": [
+    "Blackbough Swim (two policy lines under size selector; cart repeats 'Free shipping over $100')",
+    "Bāmba Swim ('You're only $X away from free shipping')",
+    "Gooseberry Intimates (cart progress 'You're $150.00 away from free shipping')",
+    "Frankies Bikinis (same promise in promo bar, callout strip and cart drawer)",
+    "Triangl (shipping and returns repeated in cart drawer and near buy box)"
+   ],
+   "what_it_solves_for_piura": "Piura's true promises (free US shipping over $100, 14-day hassle-free exchanges, 'write to us and we'll make it right', Made in Peru) live in the footer trust row and one line under the CTA. Notably the Signature Triangle set is $98 and free shipping starts over $100, so a set buyer is $2 short and never told.",
+   "concrete_implementation": "Under 'Add to bag' render three fixed lines with links: 'Free US shipping over $100' -> shipping accordion; '14-day easy exchanges. If the fit isn't right, write to us.' -> /contact; 'Designed in Miami. Crafted in Peru.' -> /story. Cart drawer header shows a thin progress line computed from the real threshold ('$2 to free US shipping' for a $98 set) with the matching-piece suggestion beneath it. Surface the $98 vs $100 gap to the brand as a pricing decision; the concept must state the real threshold either way, never a fake one. No installment line unless a provider is actually enabled.",
+   "risk_of_looking_derivative": "low"
+  },
+  {
+   "rank": 9,
+   "mechanism": "Per-size 'Notify me' and preorder state, reusing Piura's existing waitlist system instead of scarcity badges",
+   "seen_at": [
+    "Kulani Kinis (per-size SOLD OUT + NOTIFY ME, 'Join the wait list')",
+    "Frankies Bikinis (CTA swaps to JOIN THE WAITLIST when sold out; Back in Stock badges)",
+    "Vitamin A ('Notify me when available' email capture on sold-out sizes)",
+    "Triangl (back-in-stock form replaces buy button)",
+    "Tropic of C (preorder badge on card + 'restocking soon' bar)",
+    "Bananhot ('Look who's back!' back-in-stock grid)"
+   ],
+   "what_it_solves_for_piura": "'Cut in small numbers' is Piura's real production story; sizes will sell through. Today a sold-out size would simply be unavailable, and the only capture is the site-wide Coastlines waitlist.",
+   "concrete_implementation": "Size chips carry three states: available, sold out (struck through, tap opens a one-field 'Tell me when M is back' form posting to the existing waitlist endpoint with piece+size), and preorder (chip shows 'Preorder', CTA becomes 'Preorder · ships [window]' only when the brand supplies a real window). The Coastlines waitlist page reuses the same form component. A 'Back' chip on /shop lists restocked pieces automatically from inventory. No 'low stock', 'only X left' or countdown anywhere; the fact-check confirms Piura currently has none, and that is a strength to keep.",
+   "risk_of_looking_derivative": "low"
+  },
+  {
+   "rank": 10,
+   "mechanism": "Fixed PDP content template: one hook line tied to place, then Details, Fit, Fabric & care, Shipping & exchanges accordions",
+   "seen_at": [
+    "Blackbough Swim (hook + pairing sentence, Details, Size & Fit, Shipping, Returns on every SKU)",
+    "Heavy Manners (three-sentence spec: adjustability, lining, origin)",
+    "Tropic of C (same order of coverage, adjustability, support, lining, fabric, origin on every product)",
+    "SAME Los Angeles (five terse spec bullets)",
+    "LSPACE (Description Details / Fit / Fabric & Care triad)"
+   ],
+   "what_it_solves_for_piura": "The fact-check flags PDP copy as generic ('designed to sculpt and support', 'accentuate and flatter') while the story page is specific and strong. Piura already has the right accordion labels; what is missing is a template that forces one concrete fact per line and links each piece back to Miami/Peru.",
+   "concrete_implementation": "Author all 16 PDPs from one schema: hook (one sentence naming the cut and a real place cue, e.g. the Peru-made fabric or a Miami water scene, using only facts on site); 'Pairs with' sentence naming the other half; Details (cut, ties/closure, padding if any, 'Fully lined, seamless construction, no hardware against the skin' where true); Fit (the FitStrip data in prose form + between-sizes rule); Fabric & care (existing 'Luxury nylon / spandex blend', 'Hand wash cold, lay flat to dry in the shade', 'Crafted in Peru'); Shipping & exchanges (real threshold, 14-day exchanges, contact route). Description stays open by default, the rest collapsed. Store fields as structured data so cards, FitStrip and accordions read from one source.",
+   "risk_of_looking_derivative": "low"
+  },
+  {
+   "rank": 11,
+   "mechanism": "Sibling print switcher on the PDP: same cut in Sunchild, Moonchild and Classics solids, one page per print",
+   "seen_at": [
+    "SAME Los Angeles (each colorway its own URL, swatches jump between siblings)",
+    "Bāmba Swim (colorway-as-product with swatch cross-links)",
+    "Vitamin A (YGroup tag surfaces siblings as a named selector)",
+    "Triangl ('More in this print' cross-sell)",
+    "Monday Swimwear (7-option print selector in the buy box)"
+   ],
+   "what_it_solves_for_piura": "Piura has no colorway selector; Sunchild Triangle Top and Moonchild Triangle Top are unconnected pages. A print-led shopper who loves the Triangle cut but wants the other print has no lateral path, and the Classics solids (Bella, Bali, Sara, Marina) are invisible from a print PDP.",
+   "concrete_implementation": "Above the size chips, a row labelled 'Also in' with three to five thumbnails of real fabric crops: the same cut in Sunchild, Moonchild, and any Classics solid where that cut exists. Tapping navigates to the sibling page (keeps separate URLs and SEO), preserving the chosen size in the query. Below the accordions, a second row 'More in Sunchild' lists the other pieces of the same print family (the pair module already covers the exact match, so this row excludes it). Data comes from the family + cut fields defined in mechanism 3.",
+   "risk_of_looking_derivative": "low"
+  },
+  {
+   "rank": 12,
+   "mechanism": "Fit line and guide link above every grid, and 'write to us' fit help placed at each decision point",
+   "seen_at": [
+    "Monday Swimwear ('Let's find your perfect fit.' + Explore the Fit Guide above every collection grid)",
+    "Blackbough Swim (sizing help email on the size guide)",
+    "Sommer Swim ('Find My Fit' link beside size buttons)",
+    "Tropic of C (size finder in empty cart drawer)"
+   ],
+   "what_it_solves_for_piura": "Piura's most human promise, 'we answer every fit question personally, usually the same day', appears only on the size guide and contact page. The /shop page has no intro line at all. Personal fit help is a real differentiator a 16-piece brand can afford; large brands substitute quizzes.",
+   "concrete_implementation": "Above the /shop chip rows, one sentence in Piura's voice plus a text link to the size drawer. In the size drawer footer, the empty cart drawer, and under the FitStrip: a single line 'Unsure between two sizes? Write to us, answered personally, usually the same day' linking to /contact with the piece name pre-filled in the message field. No quiz, no size calculator, no 'fit bestie' voice.",
+   "risk_of_looking_derivative": "low"
+  }
+ ],
+ "fit_language_patterns": [
+  "Fit verdict in three words at the size selector: 'Runs small / True to size / Runs large' (LSPACE, Frankies review scale, Sommer 'Fit Scale: Runs Small'). Piura already states 'fits true to size'; keep it as the verdict slot.",
+  "One directional between-sizes rule: 'If between sizes, size up' (Blackbough, SAME, Bāmba, Sommer) or preference-based 'size up or down depending on coverage preference' (Triangl). Piura's own version already exists and is better: 'Size up in bottoms for more coverage, down for extra cheeky.'",
+  "Adjustability stated as parts and actions: 'ties at the neck and back', 'adjustable ties', 'tie side', 'removable pads / removable cups', 'adjustable straps with sliders', 'ties to you' (Frankies, Vitamin A, Monday, SAME, Heavy Manners, LSPACE). Piura's 'Triangle tops tie to you, so they flex a full size' fits this pattern.",
+  "Support as a tier plus a mechanism: 'light support', 'minimal support', 'medium support', 'side support for lift and shape', 'halter support', 'wireless' (Vitamin A, LSPACE, Bananhot, Frankies, Gooseberry). Piura's Marina copy already has 'discreet side support for lift and shape'.",
+  "Coverage as a three-step ladder in plain words: minimal / moderate / full, or cheeky / classic / full (Triangl, Kulani, Frankies, Sommer, Vitamin A). Shoppers already understand 'cheeky' and 'full coverage'; Piura owns 'cheeky' on its home page.",
+  "Rise and placement for bottoms: 'low rise / mid rise / high rise', 'worn on your high hip', 'high-cut leg' (Frankies, Heavy Manners, Kulani, Bananhot).",
+  "Lining as a fact line: 'fully lined', 'double lined to prevent sheerness', 'lined with self fabric', 'unpadded' (Bāmba, Sommer, Tropic of C, SAME). Piura's 'Fully lined, seamless construction, no hardware against the skin' is already in this register.",
+  "Model reference in one line, both units: 'Model is 5'8\", 32\" bust, 25\" waist, 36\" hips, wears S' (Frankies, LSPACE, Vitamin A, Tropic of C, Bāmba, Kulani). Piura currently has only 'Model wears size Small'.",
+  "Cup range for tops: 'designed to best fit cup sizes A-C', 'flattering for all cup sizes', 'suited to both small & fuller busts' (Monday, Bāmba, Gooseberry) and a Cup column on the tops chart (Triangl, Bāmba, Bananhot).",
+  "How-to-measure in three short imperatives: bust at fullest part, waist at narrowest, hips at fullest with feet together (Kulani, Blackbough, Vitamin A, Bāmba). Piura's A/B/C instructions already match; keep the 'snug, never tight' line.",
+  "Fabric composition and stretch as spec: '78% recycled polyamide / 22% elastane', '4-way stretch', 'holds its shape in and out of the water' (Sommer, SAME, Tropic of C). Piura's 'Luxury nylon / spandex blend' would benefit from percentages if the brand has them.",
+  "Care as two short lines: 'hand wash cold, lay flat to dry in the shade' (Piura already; also Bāmba, SAME)."
+ ],
+ "set_ux_patterns": [
+  "Separate SKUs with a pair module on the PDP that shows the exact other half first, with its own size selector and an add control (Bāmba, Kulani, Bananhot, SAME, Blackbough). Piura should go one step further than all of them with a true 'Add both' that adds two line items in two sizes.",
+  "Independent top and bottom size selectors before a single add (Triangl). Applies to Piura's pair module and to the Signature Triangle set page.",
+  "Set price stated as a sum, not a discount, so the shopper never adds prices mentally ('$49 · the full set $98', Piura already; Tropic of C 'complete your set for $180 at checkout'). Show the live total in the pair module and the sticky bar.",
+  "Shared naming with the family word identical across the pair and a role suffix ('Sunchild Triangle Top' / 'Sunchild Triangle Bottom'), and the top card merchandised directly before its bottom card in every grid (Monday, Bananhot, Frankies, Heavy Manners, Vitamin A).",
+  "Reciprocal 'pairs with' sentence in both descriptions and a shared set tag in the data so the module is generated, not hand-placed (Blackbough, Vitamin A, Bananhot).",
+  "Cart drawer groups a completed pair under a set header and, when only one half is present, shows the missing half with a one-tap add and the shipping progress line (Sommer, Gooseberry, Bāmba).",
+  "Photograph every top on the model wearing its matching bottom and state both sizes worn when they differ (Vitamin A, Sommer 'size S top and size S bottom').",
+  "Optional set-as-single-SKU for the Signature Triangle only, with the same S-XL run, sitting beside the separates (Vitamin A Coast Cotton set; Piura already frames the Signature Triangle as one product). Do not bundle mesh/bandeau combinations into fixed SKUs.",
+  "Homepage entry by family, not by piece: three doors (Sunchild, Moonchild, Classics) then the set; 'Tops / Bottoms' chips live on /shop (Sommer leads with Tops/Bottoms tiles; Piura's identity is print-led so family doors come first).",
+  "Do not add a bundle-discount builder or 'save 10%' tile (Gooseberry) unless Piura decides to price sets below the sum; the concept must not imply a saving that does not exist."
+ ],
+ "do_not_copy_summary": [
+  "Any brand's coverage or size labels as literal words: Cheekiest, Teeny, Bitsy, Tanga, Skimpy, Micro, Minimal Cheeky, Y Cheeky, C+, ++bust, PP/P/V/VV/VVV. Piura defines its own three words for bottoms and two for tops.",
+  "Style, print, colorway and campaign names from every report (Nick, Kate, Quinn, Gia, Elle, Aspen, Malibu, Stella, Taormina, Petal Pop, Sage Jacquard, Ipanema, Afterglow, Sun Signs, Sommer Solaire, American Summer, The C collection, and the rest).",
+  "Proprietary fabric and program names: SoftSwim, RE-KINI, EcoLux/EcoShimmer, SOFTLUX, Sensual Solid, Paradise Pass, A-List, Beach Club, 'fit bestie'.",
+  "Brand voices and mannerisms: all-lowercase headings and CTAs (Tropic of C, Frankies), all-caps title conventions with Italian colour names (Sommer, Bananhot), tropical 'babes' tone (Blackbough), 'USA Girls Only' SMS tone (Kulani), 'BELOVED BY CELEBRITIES' (Gooseberry), 'Conscious Luxury' heritage line (Vitamin A).",
+  "Hardware and construction signatures: gold clasps and sliders, palm-tree micro-studs, oversized beads, purl edging, neoprene zip bags, cotton-over-swim and raw-edge stories.",
+  "Exact copy lines: 'The best kind of plus one: a matching fit', 'Let's find your perfect fit.', 'Complete the Look', 'Heatwave Hues', 'SUMMER NEVER ENDS', 'Your personal fit bestie', 'GET ME THE GOOD STUFF', 'Made in Portugal', announcement-bar wording and threshold amounts.",
+  "Photography, palettes, illustrated style-guide cards, slider graphics and the seven-slide hero.",
+  "Proof devices Piura does not have: press-logo rows, celebrity headlines, '1 Million Followers', 'Loved By Over a Million Fans', review counts and star ratings. Show nothing until it is real.",
+  "Structural scale that is not Piura's: mega menus with men's, kids, clothing, denim, activewear; 30-colour swatch strips; tiered sale menus; 119-505 product grids with pagination.",
+  "Specific price architecture and thresholds ($95-$378 pieces, $180 sets, $150/$200/$250 free-shipping lines, $50 off first order, 10-15% welcome popups).",
+  "Named models in fit lines (Eileen, Courtney, Candice); Piura's founder is also unnamed on site and must stay unnamed in the concept."
+ ],
+ "mobile_patterns": [
+  "Sticky bottom bar on the PDP with price and 'Add to bag' (LSPACE; Piura already has one). Extend it to show the pair total and 'Add both' once the other half is selected.",
+  "Sizes as tappable chips, never a dropdown (Sommer, Kulani, Monday, Bananhot, LSPACE). Four sizes fit one row at 375px, including on cards.",
+  "Size guide opened as a drawer or accordion from the size row instead of a page navigation (SAME accordion in in/cm; Blackbough 'VIEW SIZE GUIDE' on the SIZE row; Monday 'Size Chart +' under the selector).",
+  "Buy panel short, everything else in accordions with Description open by default (Sommer, Monday, LSPACE, Heavy Manners two-accordion PDP).",
+  "Chip filter rows that scroll horizontally above the grid rather than a filter drawer; with 16 pieces no 'SEE N ITEMS' drawer is needed (Frankies sidebar and Blackbough drawer are the heavier alternatives to avoid).",
+  "One- or two-column grid toggle on the shop page (Blackbough) so print detail can be seen at full width on a phone.",
+  "Separate mobile hero crops for campaign imagery (Frankies ships mobile and desktop versions).",
+  "Cart as a slide-in drawer with the progress line, grouped pair, and the missing-half suggestion, reachable from the sticky bar (Frankies, Gooseberry, Bāmba, Bananhot).",
+  "Gallery as a horizontally swipeable strip with thumbnails, no autoplay carousel, with the model line visible directly under the gallery (Frankies, Sommer, Kulani).",
+  "Per-size 'Notify me' inline on the chip, opening a one-field sheet, so a sold-out size never dead-ends on mobile (Kulani, Vitamin A).",
+  "One announcement bar, one message, never stacked or rotating (Tropic of C's three bars and Kulani/LSPACE's four rotating messages eat phone viewport). Piura's single bar is already right.",
+  "Quick add from cards must give feedback on the chip itself (state change) rather than a modal, so a shopper can add top then bottom without leaving the grid."
+ ],
+ "anti_patterns_observed": [
+  "Urgency badges next to quantity: 'ALMOST SOLD OUT!' (Monday), 'Hurry! This item is almost sold out' (Frankies), 'Low In Stock!' (Sommer). Piura currently has none; keep it that way. If a real count is ever shown, only below a true threshold.",
+  "Stacked or rotating announcement bars: three bars (Tropic of C), two bars (Monday), four rotating messages (Kulani, LSPACE, Vitamin A). Louder than the product.",
+  "Welcome popups with discounts and extra fields: 'unlock 15% off' with date of birth (Tropic of C), '$50 Off Your First Order' (Vitamin A), 10% off twice on one homepage (Bāmba).",
+  "Login-gated wishlist (Triangl) and rewards programs pushed into primary nav (LSPACE, Monday, Sommer, Kulani).",
+  "Image-only size guide with no readable text (SAME) and JS-only fit pages that return empty shells (Gooseberry quiz, bundle builder and calculator; Tropic of C size guide; Heavy Manners 404).",
+  "Client-rendered product grids with no server content (Monday, Vitamin A, Blackbough, Tropic of C, LSPACE). Piura's /shop has the same weakness today.",
+  "Homepage with no product entry at all (Heavy Manners) or a homepage that is a dense catalog of 12 category tiles plus 6 campaign blocks (Kulani).",
+  "Editorial and promo tiles inserted inside the product grid (Frankies, Gooseberry 'Build Your Bikini' tile).",
+  "Pairing modules that show the wrong thing: 'Complete the Look' displaying the same product (SAME) or an alternate top instead of the matching bottom (Bananhot); 'Want More' mixing apparel before the matching piece (Blackbough).",
+  "Sale state written into product titles (' FINAL SALE' suffix, Blackbough) and tiered sale menus 35/50/70% (Kulani) or 'ARCHIVE' at 70% off (Bananhot).",
+  "Press-logo strips and celebrity claims as substitutes for fit information (Sommer, Gooseberry, LSPACE, Bāmba).",
+  "Proprietary size vocabularies that require an explanation sentence (Monday PP-VVV, Tropic of C C+).",
+  "Incentivized reviews labelled inside the review feed (Frankies); no reviews at all is better than padded ones.",
+  "Generic PDP copy that works for any brand ('designed to sculpt and support', 'accentuate and flatter') - the fact-check flags Piura's own PDPs for this.",
+  "Set discount promises without a real price difference; Piura's set equals the sum, so no 'save' language."
+ ],
+ "piura_opportunities": [
+  "PDP model line: replace 'Model wears size Small, fits true to size' with the FitStrip (coverage, support/adjust, lining, model height/bust/hips, size worn). Fields render only once the brand supplies real numbers.",
+  "Move the size-guide 'Between sizes?' sentence inline under the size chips on every PDP, split by piece: the bottoms line on bottoms, the triangle-tie line on triangle tops. It is Piura's best fit copy and currently lives one page away.",
+  "Turn 'Complete the set' / 'View the bottom' / 'Add the set' into the pair module with independent S-XL selectors and a real two-line 'Add both'; repeat the pair total in the sticky bar. Applies to Sunchild/Moonchild Triangle pairs and Marina Tri Bandeau pairs.",
+  "Size guide: split into Tops and Bottoms tabs, add an in/cm toggle (converted from the existing inch ranges), add underbust and suggested cup columns for tops once supplied, and expose it as a drawer from the PDP size row. The fact-check confirms the chart is inches-only with no cup or torso guidance.",
+  "Shop page: server HTML currently has only 'The Collection' / 'All Swim ¹⁶'. Add a one-line fit sentence with a guide link, two chip rows (Tops/Bottoms/Sunchild/Moonchild/Classics; Triangle/Bandeau/Mesh/coverage) mapped to the existing ?filter= params, and size chips with quick add on cards. Server-render the 16 cards.",
+  "Catalog gap: the RSC payload names only 10 of the '16' pieces (Sunchild/Moonchild Triangle Top & Bottom, Bandeau Tops, Mesh Bottoms, Marina Tri Bandeau Top & Bottom). Bella, Bali and Sara pieces are named in the brief but not observed on site; the concept must get their real names, cuts and prices from the brand rather than invent them.",
+  "Coverage vocabulary: 'cheeky' already appears in Piura's Signature Triangle copy. Adopt it as the first of three Piura coverage words; the Mesh bottom and Marina bottom coverage tiers need brand confirmation before any label is shown.",
+  "Free-shipping arithmetic: the Signature Triangle set is $98 and free US shipping starts over $100. Show the honest progress line in the cart ('$2 to free US shipping') and flag the gap to the brand as a pricing or threshold decision. Never display a threshold other than the real one.",
+  "Contact and exchanges: exchanges are handled by 'write to us' but /contact gives no exchange steps. Add a three-line 'Exchanging a size' block on /contact and in the PDP Shipping & exchanges accordion using only the stated 14-day window; pre-fill the message with the piece name when arriving from a PDP.",
+  "Shipping timeframe, international shipping, returns/refund policy and duties are not stated anywhere fetched. The concept reserves labelled slots (dispatch window, ship-by line, return terms) that render only when the brand provides the text; no numbers are invented.",
+  "Waitlist page repeats the 24-hour message three times and never says what Coastlines is. Rewrite to one statement of the access mechanic plus the two facts already on site ('As seen at Swim Week 2026', 'Cut in small numbers'), and reuse the same form component for per-size 'Notify me'. Do not describe Coastlines pieces, prints or prices.",
+  "404s: /pages/about-us, /collections/all, /collections/top, /collections/bottom dead-end on a bare 404. Add redirects to /story, /shop, /shop?filter=tops, /shop?filter=bottoms, and give the 404 page the three family doors.",
+  "PDP copy: rewrite the 16 descriptions from the fixed template, with the hook line drawing on verified story facts (Peru-made, city of eternal heat, water) instead of stock phrases. The story page and hero prove Piura can write specifically; the PDPs do not yet.",
+  "Sibling switcher: Sunchild and Moonchild Triangle Tops are unlinked pages. Add the 'Also in' print row and a 'More in Sunchild' family row on each PDP, generated from family + cut fields.",
+  "Home: remove the priced 'Just dropped' grid from above the collection doors; keep the Signature Triangle as the only priced block on home; render heritage as a Miami | Peru split using the verbatim founder quotes and the existing '5°12′ S · Piura, Perú' eyebrow. Founder stays unnamed.",
+  "Trust row: move the four footer promises (True to size, Crafted in Peru, Free US shipping over $100, 14-day easy exchanges) to three lines directly under 'Add to bag' and into the cart drawer, in Piura's existing wording.",
+  "Keep what the fact-check already shows as strong and quiet: a single announcement bar, no stock or urgency badges, no reviews until real, the 'Golden hour, candid, never over-edited' UGC promise, and 'Read and answered personally, usually the same day' as the fit-help line at every decision point."
+ ]
+}

@@ -1,0 +1,29 @@
+.section {
+  padding-block: var(--section-y);
+  border-top: 1px solid var(--color-line);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.inner {
+  display: grid;
+  justify-items: center;
+  gap: 1.5rem;
+  max-width: 46rem;
+  text-align: center;
+}
+
+.mark {
+  color: var(--color-ember);
+}
+
+.body {
+  max-width: 28rem;
+  font-size: var(--text-base);
+  line-height: 1.8;
+  color: var(--color-ink-soft);
+}
+
+.origin {
+  margin-top: 0.5rem;
+  color: var(--color-muted);
+}

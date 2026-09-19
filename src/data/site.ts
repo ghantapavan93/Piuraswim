@@ -17,12 +17,20 @@ export const BRAND = {
   instagramHandle: '@piuraswim',
 } as const;
 
-export const NAV = [
+export type NavItem = {
+  href: string;
+  label: string;
+  /** Items with an action open a drawer instead of navigating. */
+  action?: 'fit-guide';
+};
+
+export const NAV: NavItem[] = [
   { href: '/shop', label: 'Shop' },
   { href: '/shop?filter=sets', label: 'Sets' },
+  { href: '/size-guide', label: 'Fit', action: 'fit-guide' },
   { href: '/story', label: 'Story' },
   { href: '/waitlist', label: 'Waitlist' },
-] as const;
+];
 
 export const SERVICE = {
   freeShippingThreshold: 100,
@@ -30,8 +38,15 @@ export const SERVICE = {
   exchanges: 'Easy exchanges. 14-day, hassle-free.',
   exchangesLong: "Easy exchanges. If the fit isn't right, write to us and we'll make it right.",
   sizes: 'True to size, Small through X-Large.',
-  fabric: 'Luxury fabric, crafted in Peru.',
+  contactNote: 'Read and answered personally, usually the same day.',
 } as const;
+
+export const SERVICE_PILLARS = [
+  { title: 'True to size', text: 'Fits Small – X-Large' },
+  { title: 'Luxury fabric', text: 'Crafted in Peru' },
+  { title: 'Free US shipping', text: 'On orders over $100' },
+  { title: 'Easy exchanges', text: '14-day, hassle-free' },
+] as const;
 
 export const HERO = {
   eyebrow: 'Nº 01 · Eternal Heat',
@@ -39,6 +54,12 @@ export const HERO = {
   body: 'Timeless, flattering bikinis for the women who feel most alive near the water. Designed in Miami. Crafted in Peru.',
   primary: { href: '/shop', label: 'Shop the collection' },
   secondary: { href: '/product/sunchild-triangle-top', label: 'The Signature Triangle' },
+} as const;
+
+export const NEW_ARRIVALS = {
+  eyebrow: 'Nº 02 · New arrivals',
+  title: ['Just', 'dropped.'],
+  body: 'The Sunchild and Moonchild prints, in the triangle cut. Four pieces, two sets, sold as separates so top and bottom can each be your size.',
 } as const;
 
 export const COLLECTIONS: Record<CollectionKey, { title: string; short: string; blurb: string }> = {
@@ -68,52 +89,59 @@ export const SIGNATURE_SET = {
   bottomHandles: { sunchild: 'sunchild-triangle-bottom', moonchild: 'moonchild-triangle-bottom' },
 } as const;
 
+export const FIT_CONFIDENCE = {
+  eyebrow: 'Fit is everything',
+  title: ['Three measurements,', 'one perfect fit.'],
+  body: "Swimwear is personal, so we make it simple. Take three measurements, match them to the chart, and you're set. Every Piura piece runs true to size, Small through X-Large.",
+} as const;
+
 export const HERITAGE = {
   eyebrow: 'Our heritage',
   title: ['The city of', 'eternal heat.'],
   body: "Every piece is crafted in Peru, where our founder's story begins. The bikinis her grandmother sent from Peru were flattering, unlike anything she could find in the U.S. Every Piura piece carries that inheritance: warmth, the ocean, and the endless-summer feeling of living by the water.",
+  quote:
+    'My favorite bikinis were always the ones my grandma would bring me from Peru. They were flattering, unique, and unlike anything I could find in the U.S.',
+  attribution: 'The founder',
+  chapters: [
+    { index: 'I', place: 'Miami' },
+    { index: 'II', place: 'Piura, Perú' },
+    { index: 'III', place: 'Eternal heat' },
+  ],
+} as const;
+
+export const STORY = {
+  eyebrow: 'Our story',
+  title: ['Where it', 'all started.'],
+  attribution: 'The founder',
   chapters: [
     {
       key: 'miami',
-      index: 'I',
-      place: 'Miami',
-      title: 'Practically raised in a bikini.',
-      quote:
+      label: 'Chapter one · Miami',
+      title: ['Practically raised', 'in a bikini.'],
+      paragraphs: [
         'Growing up in Miami, my family spent almost every weekend at the beach, so I practically grew up in a bikini. My favorite bikinis were always the ones my grandma would bring me from Peru. They were flattering, unique, and unlike anything I could find in the U.S.',
+        "As I got older, I realized I still couldn't find bikinis that felt timeless, feminine, and flattering in the way I wanted. Most styles felt too bulky or simply weren't my style, so I always found myself ordering swimwear from overseas. That's when I knew one day I wanted to create my own.",
+        'Years later, after building a following on social media and helping promote so many other brands, I realized it was finally time to bet on myself. I saved up the money I earned bartending and poured everything into starting Piura, despite having no idea what I was doing. I just knew the only way to make my dream happen was to start.',
+      ],
     },
     {
       key: 'peru',
-      index: 'II',
-      place: 'Piura, Perú',
-      title: 'Piura, the city of eternal heat.',
-      quote:
+      label: 'Chapter two · Peru',
+      title: ['Piura, the city of', 'eternal heat.'],
+      paragraphs: [
         "Piura is a coastal city in northern Peru known as the 'City of Eternal Heat.' Since my bikinis were inspired by Peru and originally made there, the name felt like the perfect fit.",
+        "To me, Piura represents warmth, the ocean, and that endless summer feeling I wanted the brand to capture. It reminds me of where I come from while representing the life I've always loved, living by the water. The name always felt like it was meant to be.",
+      ],
     },
     {
       key: 'now',
-      index: 'III',
-      place: 'Between two coasts',
-      title: 'More than a swimwear brand.',
-      quote:
+      label: 'Chapter three · Now',
+      title: ['More than', 'a swimwear brand.'],
+      paragraphs: [
         "Inspired by my roots in Peru and life in Miami, Piura became more than a swimwear brand. It's a celebration of endless summers, iconic coastlines, and the confidence that comes from putting on a bikini you truly feel amazing in.",
+        'My hope is that every woman who wears Piura feels confident, beautiful, and ready to collect memories and embrace every adventure.',
+      ],
     },
-  ],
-  attribution: 'The founder',
-} as const;
-
-export const STORY_LONGFORM = {
-  miami: [
-    'Growing up in Miami, my family spent almost every weekend at the beach, so I practically grew up in a bikini. My favorite bikinis were always the ones my grandma would bring me from Peru. They were flattering, unique, and unlike anything I could find in the U.S.',
-    "As I got older, I realized I still couldn't find bikinis that felt timeless, feminine, and flattering in the way I wanted. Most styles felt too bulky or simply weren't my style, so I always found myself ordering swimwear from overseas. That's when I knew one day I wanted to create my own.",
-    'Years later, after building a following on social media and helping promote so many other brands, I realized it was finally time to bet on myself. I saved up the money I earned bartending and poured everything into starting Piura, despite having no idea what I was doing. I just knew the only way to make my dream happen was to start.',
-  ],
-  peru: [
-    "Piura is a coastal city in northern Peru known as the 'City of Eternal Heat.' Since my bikinis were inspired by Peru and originally made there, the name felt like the perfect fit.",
-    "To me, Piura represents warmth, the ocean, and that endless summer feeling I wanted the brand to capture. It reminds me of where I come from while representing the life I've always loved, living by the water. The name always felt like it was meant to be.",
-  ],
-  now: [
-    "Inspired by my roots in Peru and life in Miami, Piura became more than a swimwear brand. It's a celebration of endless summers, iconic coastlines, and the confidence that comes from putting on a bikini you truly feel amazing in.",
-    'My hope is that every woman who wears Piura feels confident, beautiful, and ready to collect memories and embrace every adventure.',
   ],
 } as const;
 
@@ -122,13 +150,14 @@ export const REAL_WOMEN = {
   quote: ["I've never felt", 'this good', 'in a bikini.'],
   caption: 'The sentence we hear most',
   note: 'Golden hour, candid, never over-edited.',
-  tag: 'Tag @piuraswim to be featured.',
+  tag: 'to be featured.',
 } as const;
 
 export const RUNWAY = {
   eyebrow: 'Miami Swim Week',
   title: ['Piura on', 'the runway.'],
   caption: 'Swim Week 2026 · Miami',
+  body: 'Coastlines, the next drop, walked first. Cut in small numbers, it opens to the waitlist a day before anyone else.',
 } as const;
 
 export const MANIFESTO = {
@@ -143,9 +172,20 @@ export const COASTLINES = {
   access: '24-hour early access to preorder the next drop before it goes live.',
   accessLong: 'Waitlist members receive private access one day before the collection goes live.',
   formNote: "Add your number if you'd like a text when access opens.",
+  pageTitle: ['Your next', 'destination.'],
+  earlyTitle: ['Shop Coastlines', '24 hours early.'],
 } as const;
 
 export const FOOTER_CAPTURE = {
   eyebrow: 'The waitlist',
   title: ['First access to new drops,', 'before anyone else.'],
+  note: '24-hour early access to preorder the next drop before it goes live.',
+} as const;
+
+export const CONTACT = {
+  eyebrow: 'Contact',
+  title: ['Get', 'in touch.'],
+  heading: ["We're here", 'to help.'],
+  body: "Questions about sizing, orders, or collaborations? Send us a message and we'll get back to you as soon as possible.",
+  note: 'Read and answered personally, usually the same day.',
 } as const;

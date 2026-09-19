@@ -1,0 +1,267 @@
+.shell {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  visibility: hidden;
+  transition: visibility var(--duration-drawer);
+}
+
+.shell[data-open] {
+  visibility: visible;
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(17, 27, 30, 0.55);
+  opacity: 0;
+  transition: opacity var(--duration-drawer) var(--ease-out);
+}
+
+.shell[data-open] .scrim {
+  opacity: 1;
+}
+
+.panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(100%, 30rem);
+  display: flex;
+  flex-direction: column;
+  background: var(--color-ivory);
+  color: var(--color-ink);
+  transform: translateX(100%);
+  transition: transform var(--duration-drawer) var(--ease-out);
+  box-shadow: -24px 0 60px rgba(17, 27, 30, 0.18);
+}
+
+.shell[data-open] .panel {
+  transform: none;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-height);
+  padding-inline: var(--gutter);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.count {
+  color: var(--color-muted);
+}
+
+.close {
+  padding: 0.5rem;
+  margin-right: -0.5rem;
+}
+
+.empty {
+  flex: 1;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 1rem;
+  padding: 2rem var(--gutter);
+  text-align: center;
+}
+
+.emptyNote {
+  font-size: var(--text-sm);
+  color: var(--color-ink-soft);
+}
+
+.body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 var(--gutter) 1.5rem;
+}
+
+.lines {
+  display: grid;
+}
+
+.line {
+  display: grid;
+  grid-template-columns: 5.5rem minmax(0, 1fr);
+  gap: 1.1rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.thumb {
+  aspect-ratio: 3 / 4;
+}
+
+.lineBody {
+  display: grid;
+  gap: 0.35rem;
+  align-content: start;
+}
+
+.linePrint {
+  font-size: 0.625rem;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-ember);
+}
+
+.lineHead {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.lineTitle {
+  transition: color var(--duration-ui) var(--ease-out);
+}
+
+.lineTitle:hover {
+  color: var(--color-ember);
+}
+
+.lineMeta {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+
+.lineControls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.quantity {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--color-line);
+}
+
+.quantity button {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  transition: background-color var(--duration-ui) var(--ease-out);
+}
+
+.quantity button:hover {
+  background: var(--color-sand);
+}
+
+.quantity span {
+  min-width: 2rem;
+  font-size: var(--text-sm);
+  text-align: center;
+}
+
+.remove {
+  font-size: 0.625rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+  transition: color var(--duration-ui) var(--ease-out);
+}
+
+.remove:hover {
+  color: var(--color-ember);
+}
+
+.pair {
+  display: grid;
+  gap: 0.9rem;
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+  background: var(--color-sand);
+}
+
+.pairCard {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  gap: 1rem;
+}
+
+.pairThumb {
+  aspect-ratio: 3 / 4;
+  background: var(--color-ivory);
+}
+
+.pairBody {
+  display: grid;
+  gap: 0.6rem;
+  align-content: start;
+}
+
+.pairTitle {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.pairNote {
+  font-size: var(--text-sm);
+  color: var(--color-ink-soft);
+}
+
+.pairAdd {
+  min-height: 2.75rem;
+  margin-top: 0.25rem;
+}
+
+.footer {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1.25rem var(--gutter) 1.5rem;
+  border-top: 1px solid var(--color-line);
+}
+
+.shipping {
+  font-size: var(--text-sm);
+  color: var(--color-ink-soft);
+}
+
+.meter {
+  height: 2px;
+  background: var(--color-line);
+}
+
+.meter span {
+  display: block;
+  height: 100%;
+  background: var(--color-ember);
+  transition: width 600ms var(--ease-out);
+}
+
+.subtotal {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+}
+
+.subtotal strong {
+  font-family: var(--font-display);
+  font-variation-settings: 'wdth' 112;
+  font-size: 1.375rem;
+  font-weight: 600;
+}
+
+.footnote {
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+  text-align: center;
+}

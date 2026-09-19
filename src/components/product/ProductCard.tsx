@@ -1,102 +1,65 @@
-"use client";
+import Image from 'next/image';
+import Link from 'next/link';
+import { Reveal } from '@/components/ui/Reveal';
+import { printLabel, type Product } from '@/data/catalog';
+import { image } from '@/lib/image';
+import { money } from '@/lib/utils';
+import { QuickAdd } from './QuickAdd';
+import styles from './ProductCard.module.css';
 
-import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
-import type { Product, Size } from "@/data/products";
-import { image } from "@/lib/image";
-import { money } from "@/lib/utils";
-import { useCart } from "@/components/commerce/CartProvider";
-import { isAvailable } from "@/data/catalog";
-
-const QUICK_SIZES: Size[] = ["S", "M", "L", "XL"];
+type ProductCardProps = {
+  product: Product;
+  delay?: number;
+  priority?: boolean;
+  sizes?: string;
+};
 
 export function ProductCard({
   product,
+  delay = 0,
   priority = false,
-}: {
-  product: Product;
-  priority?: boolean;
-}) {
-  const { add } = useCart();
-  const [addingSize, setAddingSize] = useState<Size | null>(null);
+  sizes = '(max-width: 719px) 50vw, (max-width: 1099px) 33vw, 25vw',
+}: ProductCardProps) {
   const primary = image(product.images[0]);
-  const alternate = product.images[1] ? image(product.images[1]) : primary;
-
-  function handleQuickAdd(e: React.MouseEvent, size: Size) {
-    e.preventDefault();
-    e.stopPropagation();
-    setAddingSize(size);
-    add(product, size);
-    if (typeof navigator !== "undefined" && "vibrate" in navigator) {
-      navigator.vibrate(12);
-    }
-    setTimeout(() => setAddingSize(null), 600);
-  }
+  const alternate = product.images[1] ? image(product.images[1]) : null;
+  const href = `/product/${product.handle}`;
 
   return (
-    <article className="product-card group">
-      <div className="product-card-media-wrapper">
-        <Link className="product-card-media" href={`/product/${product.handle}`}>
+    <Reveal as="article" delay={delay} className={styles.card}>
+      <div className={styles.media}>
+        <Link href={href} className={`${styles.link} frame`} aria-label={product.title}>
           <Image
             src={primary.src}
-            alt={product.title}
+            alt={`${product.title}, front`}
             width={primary.width}
             height={primary.height}
+            sizes={sizes}
             priority={priority}
-            sizes="(max-width: 700px) 50vw, (max-width: 1100px) 33vw, 25vw"
-            className="product-img-primary"
+            className={styles.primary}
           />
-          <Image
-            className="product-card-alt"
-            src={alternate.src}
-            alt={`${product.title} alternate view`}
-            width={alternate.width}
-            height={alternate.height}
-            sizes="(max-width: 700px) 50vw, (max-width: 1100px) 33vw, 25vw"
-          />
-          <span className="product-card-arrow" aria-hidden="true">
-            ↗
-          </span>
+          {alternate ? (
+            <Image
+              src={alternate.src}
+              alt=""
+              width={alternate.width}
+              height={alternate.height}
+              sizes={sizes}
+              className={styles.alternate}
+            />
+          ) : null}
         </Link>
-
-        {/* Quick Add Slide-up Ribbon on Hover */}
-        <div className="quick-add-ribbon" aria-label={`Quick add ${product.title}`}>
-          <span className="quick-add-label">Quick Add</span>
-          <div className="quick-size-chips">
-            {QUICK_SIZES.map((size) => {
-              const available = isAvailable(product, size);
-              const isSelected = addingSize === size;
-              return (
-                <button
-                  key={size}
-                  type="button"
-                  disabled={!available}
-                  onClick={(e) => handleQuickAdd(e, size)}
-                  className={`quick-size-btn ${isSelected ? "is-added" : ""}`}
-                  aria-label={`Add size ${size}`}
-                >
-                  {isSelected ? "✓" : size}
-                </button>
-              );
-            })}
-          </div>
-        </div>
+        <QuickAdd product={product} />
       </div>
 
-      <div className="product-card-copy">
-        <p className="product-card-collection">
-          {product.collection === "classics"
-            ? "The Classics"
-            : `The ${product.collection[0].toUpperCase()}${product.collection.slice(1)} Print`}
-        </p>
-        <div className="product-card-title-row">
-          <Link href={`/product/${product.handle}`} className="product-card-title-link">
+      <div className={styles.copy}>
+        <p className={styles.print}>{printLabel(product)}</p>
+        <div className={styles.row}>
+          <Link href={href} className={styles.title}>
             {product.title}
           </Link>
-          <span className="product-card-price">{money(product.price)}</span>
+          <span className={styles.price}>{money(product.price)}</span>
         </div>
       </div>
-    </article>
+    </Reveal>
   );
 }

@@ -1,11 +1,37 @@
-# Piura: Eternal summer between two coasts
+# Piura: eternal summer between two coasts
 
-Piura’s advantage is not a larger catalog. It is a specific point of view: Miami gives the brand energy; Peru gives it memory; water connects both. The redesign makes that premise visible as a continuous day by the water: High Noon, Sunchild / Moonchild, the Signature Triangle, fit, Miami, Piura, Golden Hour, After Dark, and Coastlines at dawn.
+Piura's advantage is not a bigger catalog. It is a point of view the brand already owns: Miami gives it energy, Peru gives it memory, and water connects the two. The bikini is the physical expression of that world. This concept makes the premise legible and then gets out of the way of the product.
 
-The home page treats product families as chapters, not a generic storefront grid. Sunchild and Moonchild arrive as two changing atmospheres. The Signature Triangle becomes the commerce centre: one product relationship, two independent sizes, an honest $98 total, and no invented discount. The Waterline recurs only where it has meaning: a hero horizon, a print transition, the line between top and bottom, the fit scale, the Miami-to-Peru passage, and Coastlines.
+The customer problem is confidence. A woman cannot try the suit on through a screen, so the interface has to answer, before checkout, the questions she would ask in a fitting room: how much coverage, how adjustable, will it hold, what size, and which top belongs with which bottom. The UX thesis follows: fall in love with the world, understand how the suit fits, build the right set, and buy without the interface ever getting louder than the photography.
 
-Fit is the conversion system. Each product exposes the published facts before the customer needs to hunt for them: silhouette, adjustability, lining or coverage when verified, true-to-size guidance, and a short path into the real size chart. The complete-set module preserves independent top and bottom sizing. It makes the relationship clear without pretending a set has a discount or hiding the separate pieces.
+## How the home page reads
 
-The visual system samples Piura’s existing imagery: sun-washed ivory, warm sand, wet-ink navy, golden hour, and a restrained terracotta ember. Photography carries the color; UI remains plain, legible, and intentional. Motion is limited to image swaps, drawers, and gentle reveal transitions, with reduced-motion support.
+1. **Campaign hero.** Piura's own line, "A love letter to the water", over the shoreline film. The film is an enhancement: the poster is an art-directed still and the loop only loads once it is on screen, never for people who prefer reduced motion or asked to save data. The main action is a single button.
+2. **Just dropped.** The four new triangle pieces as a collection moment: one editorial photograph beside four honest product cards with names and prices. Nothing hides commerce.
+3. **The Signature Triangle.** The strategic centre. Print, top size and bottom size are chosen on one panel, and one action adds both pieces. The set price is the two prices added; there is no invented discount. Fit facts on the panel are the ones Piura publishes.
+4. **Fit is everything.** The three measurements, the between-sizes guidance and a button into the fit guide, which is reachable from the header on every page.
+5. **Meet the collection.** Sunchild, Moonchild and the Classics as three staggered photographs, each linking to a filtered shop.
+6. **The city of eternal heat.** Heritage as an editorial chapter on deep water: a chapter index (Miami, Piura, Eternal heat), the founder's own words, one lead photograph and one small one.
+7. **Worn by real women.** Piura's line and its candid golden-hour images as a contact strip rather than a widget.
+8. **Piura on the runway.** Miami Swim Week as a filmstrip of real frames from the runway film, with the film itself behind an explicit play control.
+9. **Confident. Effortless. Free.** The brand's closing sentence, then the Coastlines waitlist.
 
-This concept does not invent reviews, stock counts, materials, sustainability claims, press, founder details, shipping dates, or fit intelligence. It makes the existing facts easier to see, better to compare, and easier to buy.
+## Fit as a system
+
+Every product page opens with *Fit at a glance*: silhouette, coverage, adjustability, support and lining, taken from the fit notes Piura already writes, plus the two facts stated on every page (true to size, model wears S). Sizes that are sold out stay visible and struck through so the range of the piece is never in doubt. The fit guide drawer carries the published chart, how to measure, and a measurement matcher that only looks numbers up in that chart: tops follow the bust row, bottoms take the larger of waist and hips. It is the size chart made quicker to read, not a recommendation engine.
+
+## Sets as the shopping unit
+
+Every piece has a designed partner. The product page shows it with its own size selector and one *Add the set* action; the bag drawer suggests the partner of whatever was just added, pre-set to the same size when that size exists. Only the four Signature Triangle pieces are labelled *Designed as one*, because that is what Piura says about them.
+
+## Visual system
+
+The palette is sampled from Piura's photography: sun-washed ivory, warm sand, wet-ink brown, a deep-water tone for dark chapters and a restrained ember for accents. Photography carries the colour. Two type families: Archivo, wide and with a true italic, for display; Instrument Sans for labels, body and interface. Section structures alternate on purpose: full bleed, split panel, staggered tiles, contact strip, filmstrip, centred manifesto. Motion is limited to reveals, image masks, hover crossfades and drawers, and it is switched off under reduced motion.
+
+## What was refused
+
+No invented model measurements, founder name, fabric engineering, shipping times, stock counts, reviews, awards or discounts. No urgency copy. No autoplaying 26 MB video. No animation or UI libraries. Where the site does not publish a fact, the interface stays quiet.
+
+## Engineering
+
+Next.js 16 with server components by default and small client islands (bag, fit guide, gallery, set builder). Design tokens in one global stylesheet; component styles as CSS Modules. Catalog and image manifest are generated by scripts from the storefront snapshot so hand-written copy and data never mix. Semantic landmarks, native disclosures, radio-group size selection, focus management in drawers and a skip link.

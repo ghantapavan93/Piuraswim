@@ -116,8 +116,9 @@ export const MEASURING_STEPS = [
 
 export const MEASURING_NOTE = 'Use a soft tape measure over bare skin or fitted underwear, keep it snug, never tight.';
 
-export const BETWEEN_SIZES =
-  'Size up in bottoms for more coverage, down for extra cheeky. Triangle tops tie to you, so they flex a full size.';
+export const BETWEEN_SIZES_BOTTOMS = 'Size up in bottoms for more coverage, down for extra cheeky.';
+export const BETWEEN_SIZES_TRIANGLE_TOPS = 'Triangle tops tie to you, so they flex a full size.';
+export const BETWEEN_SIZES = `${BETWEEN_SIZES_BOTTOMS} ${BETWEEN_SIZES_TRIANGLE_TOPS}`;
 
 export const SIZE_RANGE_NOTE = 'Every Piura piece runs true to size, Small through X-Large.';
 

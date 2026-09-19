@@ -1,225 +1,212 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
-import { SERVICE } from "@/data/site";
-import { image } from "@/lib/image";
-import { money } from "@/lib/utils";
-import { useCart } from "./CartProvider";
-import { Icon } from "@/components/ui/Icon";
-import { ALL_PRODUCTS } from "@/data/catalog";
+import Image from 'next/image';
+import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
+import { Icon } from '@/components/ui/Icon';
+import { SizeChips } from '@/components/ui/SizeChips';
+import { getPair, isAvailable, printLabel, type Product, type Size } from '@/data/catalog';
+import { image } from '@/lib/image';
+import { SERVICE } from '@/data/site';
+import { money } from '@/lib/utils';
+import { useCart, type CartLine } from './CartProvider';
+import styles from './CartDrawer.module.css';
+
+const SIGNATURE_HANDLES = new Set([
+  'sunchild-triangle-top',
+  'sunchild-triangle-bottom',
+  'moonchild-triangle-top',
+  'moonchild-triangle-bottom',
+]);
+
+/** The designed partner of the most recent line that is not in the bag yet. */
+function findPairSuggestion(lines: CartLine[]): { line: CartLine; pair: Product } | null {
+  for (let index = lines.length - 1; index >= 0; index -= 1) {
+    const line = lines[index];
+    const pair = getPair(line.product);
+    if (!pair) continue;
+    const alreadyInBag = lines.some((other) => other.product.handle === pair.handle);
+    if (!alreadyInBag) return { line, pair };
+  }
+  return null;
+}
 
 export function CartDrawer() {
-  const { lines, isOpen, close, remove, setQuantity, add } = useCart();
-  const [giftWrap, setGiftWrap] = useState(true);
-  const [checkoutMessage, setCheckoutMessage] = useState(false);
+  const { lines, count, subtotal, isOpen, close, add, remove, setQuantity } = useCart();
+  const closeButton = useRef<HTMLButtonElement>(null);
+  const [checkoutNotice, setCheckoutNotice] = useState(false);
+  const [wasOpen, setWasOpen] = useState(isOpen);
 
-  const subtotal = lines.reduce((sum, line) => sum + line.product.price * line.quantity, 0);
+  // Clear the checkout notice whenever the drawer closes (state adjusted during render).
+  if (wasOpen !== isOpen) {
+    setWasOpen(isOpen);
+    if (!isOpen) setCheckoutNotice(false);
+  }
+
+  useEffect(() => {
+    if (isOpen) closeButton.current?.focus();
+  }, [isOpen]);
+
   const remaining = Math.max(0, SERVICE.freeShippingThreshold - subtotal);
   const progress = Math.min(100, (subtotal / SERVICE.freeShippingThreshold) * 100);
-  const isUnlocked = subtotal >= SERVICE.freeShippingThreshold;
-
-  // Find an upsell recommendation not currently in cart
-  const upsellProduct = ALL_PRODUCTS.find(
-    (p) => !lines.some((l) => l.product.handle === p.handle)
-  ) ?? ALL_PRODUCTS[0];
-  const upsellAsset = image(upsellProduct.images[0]);
+  const suggestion = findPairSuggestion(lines);
 
   return (
-    <div className={`drawer-shell ${isOpen ? "drawer-visible" : ""}`} aria-hidden={!isOpen}>
-      <button type="button" className="drawer-scrim" onClick={close} aria-label="Close bag" />
-      <aside className="cart-drawer" aria-label="Shopping bag">
-        {/* Header */}
-        <header className="cart-header">
-          <div>
-            <span className="label text-ember">Your Bag</span>
-            <h2 className="display display-sm cart-title">The Good Stuff.</h2>
-          </div>
-          <button type="button" onClick={close} className="cart-close-btn" aria-label="Close bag">
+    <div className={styles.shell} data-open={isOpen || undefined} inert={!isOpen}>
+      <button type="button" className={styles.scrim} onClick={close} aria-label="Close bag" tabIndex={-1} />
+      <aside className={styles.panel} role="dialog" aria-modal="true" aria-labelledby="bag-title">
+        <header className={styles.header}>
+          <h2 id="bag-title" className="label">
+            Your bag{count > 0 ? <span className={styles.count}> · {count}</span> : null}
+          </h2>
+          <button ref={closeButton} type="button" onClick={close} aria-label="Close bag" className={styles.close}>
             <Icon name="close" size={20} />
           </button>
         </header>
 
-        {/* Dynamic Free Shipping Progress Bar */}
-        <div className={`shipping-progress-banner ${isUnlocked ? "is-unlocked" : ""}`}>
-          <div className="shipping-progress-info">
-            {isUnlocked ? (
-              <p className="shipping-unlocked-text">
-                <span className="shipping-sparkle">✦</span> Complimentary US Priority Shipping Unlocked!
-              </p>
-            ) : (
-              <p className="shipping-away-text">
-                Add <strong>{money(remaining)}</strong> to unlock Free US Priority Shipping
-              </p>
-            )}
-          </div>
-          <div className="shipping-meter-track">
-            <div className="shipping-meter-fill" style={{ width: `${progress}%` }} />
-          </div>
-        </div>
-
-        {/* Empty State vs Item List */}
         {lines.length === 0 ? (
-          <div className="cart-empty">
-            <p className="display display-sm">Your bag is waiting.</p>
-            <p className="cart-empty-sub">
-              Find the pieces that follow you into the water this season.
+          <div className={styles.empty}>
+            <p className="display display-sm">
+              Your bag is <em>empty.</em>
             </p>
-            <Link href="/shop" onClick={close} className="button button-dark cart-empty-btn">
-              Explore All Swim <Icon name="arrow" size={15} />
+            <p className={styles.emptyNote}>Find your next piece.</p>
+            <Link href="/shop" className="button" onClick={close}>
+              Shop the collection
+              <Icon name="arrow" />
             </Link>
           </div>
         ) : (
-          <div className="cart-scroll-area">
-            <ul className="cart-lines-list">
-              {lines.map((line) => {
-                const asset = image(line.product.images[0]);
-                return (
-                  <li key={`${line.product.handle}-${line.size}`} className="cart-line-card">
-                    <Link
-                      href={`/product/${line.product.handle}`}
-                      onClick={close}
-                      className="cart-line-thumb"
-                    >
-                      <Image
-                        src={asset.src}
-                        alt={line.product.title}
-                        width={asset.width}
-                        height={asset.height}
-                      />
-                    </Link>
+          <>
+            <div className={styles.body}>
+              <ul className={styles.lines}>
+                {lines.map((line) => (
+                  <BagLine
+                    key={`${line.product.handle}-${line.size}`}
+                    line={line}
+                    onClose={close}
+                    onRemove={() => remove(line.product.handle, line.size)}
+                    onQuantity={(quantity) => setQuantity(line.product.handle, line.size, quantity)}
+                  />
+                ))}
+              </ul>
 
-                    <div className="cart-line-details">
-                      <div className="cart-line-head">
-                        <Link
-                          href={`/product/${line.product.handle}`}
-                          onClick={close}
-                          className="cart-line-title"
-                        >
-                          {line.product.title}
-                        </Link>
-                        <span className="cart-line-size-pill">Size {line.size}</span>
-                      </div>
-
-                      <strong className="cart-line-price">
-                        {money(line.product.price * line.quantity)}
-                      </strong>
-
-                      <div className="cart-line-qty-row">
-                        <div className="cart-qty-control">
-                          <button
-                            type="button"
-                            onClick={() =>
-                              setQuantity(line.product.handle, line.size, line.quantity - 1)
-                            }
-                            aria-label="Decrease quantity"
-                          >
-                            <Icon name="minus" size={12} />
-                          </button>
-                          <span>{line.quantity}</span>
-                          <button
-                            type="button"
-                            onClick={() =>
-                              setQuantity(line.product.handle, line.size, line.quantity + 1)
-                            }
-                            aria-label="Increase quantity"
-                          >
-                            <Icon name="plus" size={12} />
-                          </button>
-                        </div>
-
-                        <button
-                          type="button"
-                          className="cart-line-remove"
-                          onClick={() => remove(line.product.handle, line.size)}
-                        >
-                          Remove
-                        </button>
-                      </div>
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
-
-            {/* Quick Add Pairing Upsell */}
-            {upsellProduct && (
-              <div className="cart-upsell-module">
-                <span className="label text-ember">Pairs Flawlessly With</span>
-                <div className="cart-upsell-card">
-                  <div className="cart-upsell-thumb">
-                    <Image
-                      src={upsellAsset.src}
-                      alt={upsellProduct.title}
-                      width={upsellAsset.width}
-                      height={upsellAsset.height}
-                    />
-                  </div>
-                  <div className="cart-upsell-info">
-                    <strong>{upsellProduct.title}</strong>
-                    <span>{money(upsellProduct.price)}</span>
-                  </div>
-                  <button
-                    type="button"
-                    className="cart-upsell-add-btn"
-                    onClick={() => add(upsellProduct, "S")}
-                  >
-                    + Add S
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {/* Gift Packaging Toggle */}
-            <div className="cart-gift-toggle">
-              <label className="cart-gift-label">
-                <input
-                  type="checkbox"
-                  checked={giftWrap}
-                  onChange={(e) => setGiftWrap(e.target.checked)}
-                  className="cart-gift-checkbox"
+              {suggestion ? (
+                <PairSuggestion
+                  line={suggestion.line}
+                  pair={suggestion.pair}
+                  onAdd={(size) => add(suggestion.pair, size)}
                 />
-                <span className="cart-gift-text">
-                  <strong>Complimentary Linen Dust Bag</strong>
-                  <small>Eco-friendly Peruvian cotton travel pouch included with your order.</small>
-                </span>
-              </label>
-            </div>
-          </div>
-        )}
-
-        {/* Footer */}
-        {lines.length > 0 && (
-          <footer className="cart-footer-panel">
-            <div className="cart-subtotal-row">
-              <span>Estimated Subtotal</span>
-              <strong className="cart-subtotal-val">{money(subtotal)}</strong>
+              ) : null}
             </div>
 
-            <p className="cart-shipping-note">
-              {isUnlocked
-                ? "Free Priority US Shipping applied at checkout."
-                : "Taxes and shipping calculated at checkout."}
-            </p>
-
-            <button
-              type="button"
-              className="button button-dark cart-checkout-btn"
-              onClick={() => setCheckoutMessage(true)}
-            >
-              <span>Proceed to Checkout</span>
-              <Icon name="arrow" size={15} />
-            </button>
-
-            {checkoutMessage && (
-              <p className="cart-demo-notice">
-                ✦ Concept Showcase: Thank you for testing Piura Swim!
+            <footer className={styles.footer}>
+              <p className={styles.shipping}>
+                {remaining > 0
+                  ? `${money(remaining)} away from free US shipping.`
+                  : 'Free US shipping on this order.'}
               </p>
-            )}
-          </footer>
+              <div className={styles.meter} aria-hidden="true">
+                <span style={{ width: `${progress}%` }} />
+              </div>
+              <div className={styles.subtotal}>
+                <span className="label">Subtotal</span>
+                <strong>{money(subtotal)}</strong>
+              </div>
+              <button type="button" className="button button-block" onClick={() => setCheckoutNotice(true)}>
+                Checkout
+                <Icon name="arrow" />
+              </button>
+              <p className={styles.footnote} role="status">
+                {checkoutNotice
+                  ? 'Checkout is not connected in this concept; in production this hands off to the store.'
+                  : 'Shipping and taxes calculated at checkout.'}
+              </p>
+            </footer>
+          </>
         )}
       </aside>
     </div>
+  );
+}
+
+function BagLine({
+  line,
+  onClose,
+  onRemove,
+  onQuantity,
+}: {
+  line: CartLine;
+  onClose: () => void;
+  onRemove: () => void;
+  onQuantity: (quantity: number) => void;
+}) {
+  const asset = image(line.product.images[0]);
+  const href = `/product/${line.product.handle}`;
+  return (
+    <li className={styles.line}>
+      <Link href={href} onClick={onClose} className={`${styles.thumb} frame`}>
+        <Image src={asset.src} alt={line.product.title} width={asset.width} height={asset.height} sizes="88px" />
+      </Link>
+      <div className={styles.lineBody}>
+        <p className={styles.linePrint}>{printLabel(line.product)}</p>
+        <div className={styles.lineHead}>
+          <Link href={href} onClick={onClose} className={styles.lineTitle}>
+            {line.product.title}
+          </Link>
+          <span>{money(line.product.price * line.quantity)}</span>
+        </div>
+        <p className={styles.lineMeta}>Size {line.size}</p>
+        <div className={styles.lineControls}>
+          <div className={styles.quantity} role="group" aria-label={`Quantity for ${line.product.title}, size ${line.size}`}>
+            <button type="button" onClick={() => onQuantity(line.quantity - 1)} aria-label="Decrease quantity">
+              <Icon name="minus" size={12} />
+            </button>
+            <span aria-live="polite">{line.quantity}</span>
+            <button type="button" onClick={() => onQuantity(line.quantity + 1)} aria-label="Increase quantity">
+              <Icon name="plus" size={12} />
+            </button>
+          </div>
+          <button type="button" className={styles.remove} onClick={onRemove}>
+            Remove
+          </button>
+        </div>
+      </div>
+    </li>
+  );
+}
+
+function PairSuggestion({ line, pair, onAdd }: { line: CartLine; pair: Product; onAdd: (size: Size) => void }) {
+  const [size, setSize] = useState<Size | null>(isAvailable(pair, line.size) ? line.size : null);
+  const asset = image(pair.images[0]);
+  const designedAsOne = SIGNATURE_HANDLES.has(line.product.handle) && SIGNATURE_HANDLES.has(pair.handle);
+
+  return (
+    <section className={styles.pair} aria-labelledby="bag-pair-title">
+      <p id="bag-pair-title" className="label accent">
+        {designedAsOne ? 'Designed as one' : 'Complete the set'}
+      </p>
+      <div className={styles.pairCard}>
+        <Link href={`/product/${pair.handle}`} className={`${styles.pairThumb} frame`}>
+          <Image src={asset.src} alt={pair.title} width={asset.width} height={asset.height} sizes="72px" />
+        </Link>
+        <div className={styles.pairBody}>
+          <p className={styles.pairTitle}>
+            {pair.title} <span>{money(pair.price)}</span>
+          </p>
+          <p className={styles.pairNote}>
+            {pair.category === 'bottoms' ? 'The bottom' : 'The top'} of your {line.product.title}.
+          </p>
+          <SizeChips label={`${pair.title} size`} available={pair.available} value={size} onChange={setSize} compact />
+          <button
+            type="button"
+            className={`button button-outline ${styles.pairAdd}`}
+            disabled={!size}
+            onClick={() => size && onAdd(size)}
+          >
+            {size ? `Add size ${size} · ${money(pair.price)}` : 'Choose a size'}
+          </button>
+        </div>
+      </div>
+    </section>
   );
 }

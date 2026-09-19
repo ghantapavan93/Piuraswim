@@ -1,33 +1,33 @@
-import { CartDrawer } from "@/components/commerce/CartDrawer";
-import { CampaignHero } from "@/components/home/CampaignHero";
-import { CoastlinesWaitlist } from "@/components/home/CoastlinesWaitlist";
-import { BodyFit } from "@/components/home/BodyFit";
-import { HeritagePassage } from "@/components/home/HeritagePassage";
-import { PrintAtmospheres } from "@/components/home/PrintAtmospheres";
-import { RealWomen } from "@/components/home/RealWomen";
-import { RunwayEditorial } from "@/components/home/RunwayEditorial";
-import { SignatureSet } from "@/components/home/SignatureSet";
-import { Manifesto } from "@/components/home/Manifesto";
-import { SiteFooter } from "@/components/layout/SiteFooter";
-import { SiteHeader } from "@/components/layout/SiteHeader";
+import { CampaignHero } from '@/components/home/CampaignHero';
+import { CoastlinesWaitlist } from '@/components/home/CoastlinesWaitlist';
+import { CollectionStory } from '@/components/home/CollectionStory';
+import { FitConfidence } from '@/components/home/FitConfidence';
+import { HeritageChapter } from '@/components/home/HeritageChapter';
+import { Manifesto } from '@/components/home/Manifesto';
+import { NewArrivals } from '@/components/home/NewArrivals';
+import { RealWomen } from '@/components/home/RealWomen';
+import { RunwayEditorial } from '@/components/home/RunwayEditorial';
+import { SignatureSet } from '@/components/home/SignatureSet';
+import { SiteFooter } from '@/components/layout/SiteFooter';
+import { SiteHeader } from '@/components/layout/SiteHeader';
 
-export default function Home() {
+export default function HomePage() {
   return (
     <>
       <SiteHeader overlay />
-      <main>
+      <main id="main">
         <CampaignHero />
-        <PrintAtmospheres />
+        <NewArrivals />
         <SignatureSet />
-        <BodyFit />
-        <HeritagePassage />
+        <FitConfidence />
+        <CollectionStory />
+        <HeritageChapter />
         <RealWomen />
         <RunwayEditorial />
         <Manifesto />
         <CoastlinesWaitlist />
       </main>
       <SiteFooter />
-      <CartDrawer />
     </>
   );
 }

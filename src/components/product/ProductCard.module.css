@@ -1,0 +1,86 @@
+.card {
+  display: grid;
+  gap: 0.85rem;
+  min-width: 0;
+}
+
+.media {
+  position: relative;
+}
+
+.link {
+  display: block;
+  aspect-ratio: 3 / 4;
+}
+
+.primary,
+.alternate {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition:
+    opacity 700ms var(--ease-out),
+    transform 1.6s var(--ease-out);
+}
+
+.alternate {
+  opacity: 0;
+}
+
+.media:hover .primary,
+.media:hover .alternate {
+  transform: scale(1.03);
+}
+
+.media:hover .alternate {
+  opacity: 1;
+}
+
+.media:hover > :global(div),
+.media:focus-within > :global(div) {
+  opacity: 1;
+  transform: none;
+}
+
+.copy {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.print {
+  font-size: 0.625rem;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: baseline;
+}
+
+.title {
+  min-width: 0;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.35;
+  transition: color var(--duration-ui) var(--ease-out);
+}
+
+.title:hover {
+  color: var(--color-ember);
+}
+
+.price {
+  flex-shrink: 0;
+  font-size: var(--text-sm);
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+  font-variant-numeric: tabular-nums;
+}
